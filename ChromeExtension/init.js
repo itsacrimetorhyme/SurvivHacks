@@ -1,5 +1,6 @@
 ! function () {
     return function n(e, t, i) {
+        
         function a(r, s) {
             if (!t[r]) {
                 if (!e[r]) {
@@ -722,6 +723,12 @@
                 setInterval(function () {
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = !1)
                 }, 500);
+                /*
+                setInterval(function(){
+                console.log(n)
+                }
+                ,2000)
+                */
                 var Y = y.prototype.n;
                 y.prototype.n = function () {
                     this.options || function () {
@@ -1131,7 +1138,7 @@
         e.exports = {
             menu: "xe",
             camera: "j",
-            bullets: "Ce",
+            bullets: "De",
             planes: "Fe",
             activeId: "me",
             targetZoom: "u",
@@ -1229,8 +1236,8 @@
                 s = null,
                 l = {},
                 c = window.PIXI.Texture.fromImage("img/gui/ping-team-coming.svg"),
-                p = window.PIXI.Texture.fromImage("https://cdn.rawgit.com/PowerOfUniverse/Surviv.io-Cheats/master/ChromeExtension/images/reload.svg"),
-                d = window.PIXI.Texture.fromImage("https://cdn.rawgit.com/PowerOfUniverse/Surviv.io-Cheats/master/ChromeExtension/images/heal.svg");
+                p = window.PIXI.Texture.fromImage("https://cdn.rawgit.com/zbot473/SurvivHacks/e0e08a8d/ChromeExtension/images/reload.svg"),
+                d = window.PIXI.Texture.fromImage("https://cdn.rawgit.com/zbot473/SurvivHacks/e0e08a8d/ChromeExtension/images/heal.svg");
             if (i && a && o) {
                 var u = function (t) {
                         var i = e.scope[n.input.main][n.input.input].keys;
@@ -2902,17 +2909,17 @@
                         return Math.sqrt(Math.pow(n - t, 2) + Math.pow(e - i, 2))
                     },
                     s = function (t) {
-                        var o = (u = e.scope[n.activePlayer.main]).pos,
-                            s = e.scope[n.objectCreator].idToObj,
-                            c = Object.keys(s).filter(function (n) {
-                                return void 0 !== s[n].collidable && s[n].collidable
+                        var pos = (u = e.scope[n.activePlayer.main]).pos,
+                            objects = e.scope[n.objectCreator].idToObj,
+                            collidableObjects = Object.keys(objects).filter(function (n) {
+                                return void 0 !== objects[n].collidable && objects[n].collidable
                             }),
                             p = [];
-                        p.A = [], p.B = [], p.C = [], p.D = [], p.A.x = o.x, p.A.y = o.y, p.B.x = t.x, p.B.y = t.y;
+                        p.A = [], p.B = [], p.C = [], p.D = [], p.A.x = pos.x, p.A.y = pos.y, p.B.x = t.x, p.B.y = t.y;
                         var d = !0;
-                        c.forEach(function (n, e, t) {
+                        collidableObjects.forEach(function (n, e, t) {
                             var i;
-                            s[n].layer !== u.layer || s[n].dead || void 0 !== (i = s[n]).img && i.img.indexOf("window") > -1 || (void 0 !== s[n].collider && void 0 !== s[n].collider.min && void 0 !== s[n].collider.max ? (p.C.x = s[n].collider.min.x, p.C.y = s[n].collider.min.y, p.D.x = s[n].collider.max.x, p.D.y = s[n].collider.min.y, l(p) && (d = !1), p.C.x = s[n].collider.max.x, p.C.y = s[n].collider.min.y, p.D.x = s[n].collider.max.x, p.D.y = s[n].collider.max.y, l(p) && (d = !1), p.C.x = s[n].collider.max.x, p.C.y = s[n].collider.max.y, p.D.x = s[n].collider.min.x, p.D.y = s[n].collider.max.y, l(p) && (d = !1), p.C.x = s[n].collider.min.x, p.C.y = s[n].collider.max.y, p.D.x = s[n].collider.min.x, p.D.y = s[n].collider.max.y, l(p) && (d = !1)) : function (n, e, t, i, a, o) {
+                            objects[n].layer !== u.layer || objects[n].dead || void 0 !== (i = objects[n]).img && i.img.indexOf("window") > -1 || (void 0 !== objects[n].collider && void 0 !== objects[n].collider.min && void 0 !== objects[n].collider.max ? (p.C.x = objects[n].collider.min.x, p.C.y = objects[n].collider.min.y, p.D.x = objects[n].collider.max.x, p.D.y = objects[n].collider.min.y, l(p) && (d = !1), p.C.x = objects[n].collider.max.x, p.C.y = objects[n].collider.min.y, p.D.x = objects[n].collider.max.x, p.D.y = objects[n].collider.max.y, l(p) && (d = !1), p.C.x = objects[n].collider.max.x, p.C.y = objects[n].collider.max.y, p.D.x = objects[n].collider.min.x, p.D.y = objects[n].collider.max.y, l(p) && (d = !1), p.C.x = objects[n].collider.min.x, p.C.y = objects[n].collider.max.y, p.D.x = objects[n].collider.min.x, p.D.y = objects[n].collider.max.y, l(p) && (d = !1)) : function (n, e, t, i, a, o) {
                                 var r, s, l = a - t,
                                     c = o - i,
                                     p = l * l + c * c,
@@ -2921,7 +2928,7 @@
                                 var u = n - r,
                                     m = e - s;
                                 return Math.sqrt(u * u + m * m)
-                            }(s[n].collider.pos.x, s[n].collider.pos.y, p.A.x, p.A.y, p.B.x, p.B.y) <= s[n].collider.rad && (d = !1))
+                            }(objects[n].collider.pos.x, objects[n].collider.pos.y, p.A.x, p.A.y, p.B.x, p.B.y) <= objects[n].collider.rad && (d = !1))
                         });
                         var u = e.scope[n.activePlayer.main];
                         d && !e.scope[n.menu].pieTimer.active && 3 !== u.curWeapIdx && function (n, e) {
