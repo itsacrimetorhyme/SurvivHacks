@@ -1,6 +1,6 @@
 {
 	"name": "Surviv.io-Cheats",
-	"version": "1.0.72",
+	"version": "1.0.73",
 	"author": "https://github.com/PowerOfUniverse/Surviv.io-Cheats",
 	"description": "Surviv.io-Cheats chrome extension",
 	"manifest_version": 2,
@@ -18,7 +18,7 @@
   			"*://*.surviv.io/",
   			"*://*.surviv2.io/",
   			"*://*.2dbattleroyale.com/",
-  			"*://*.2dbattleroyale.org/"
+			"*://*.2dbattleroyale.com/"  
   		]
 	},
 

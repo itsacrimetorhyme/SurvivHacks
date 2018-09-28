@@ -728,7 +728,7 @@
                 console.log(n)
                 }
                 ,2000)
-                */
+                //*/
                 var Y = y.prototype.n;
                 y.prototype.n = function () {
                     this.options || function () {
@@ -747,7 +747,7 @@
                         n.alpha = s.ceilingTransparency
                     })
                 }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
-                    s.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
+                    s.particlesTransparency = n, p. p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
                 }, z = function (n) {
                     s.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
                         p[e].ceiling && p[e].ceiling.imgs.forEach(function (e) {
@@ -1219,7 +1219,7 @@
                             a = t.length;
                         if (a > 0) {
                             for (var o = 0; o < a; o++) r(t[o]);
-                            t[a - 1].id != i.lastPlaneId && (i.lastPlaneId = t[a - 1].id, notifications.create("info", "Attention, the next plane is comming!", "OK", 5e3))
+                            t[a - 1].id != i.lastPlaneId && (i.lastPlaneId = t[a - 1].id, notifications.create("info", "Attention, the next plane is coming!", "OK", 5e3))
                         }
                     }())
                 }
@@ -2912,8 +2912,13 @@
                         var pos = (u = e.scope[n.activePlayer.main]).pos,
                             objects = e.scope[n.objectCreator].idToObj,
                             collidableObjects = Object.keys(objects).filter(function (n) {
-                                return void 0 !== objects[n].collidable && objects[n].collidable
-                            }),
+                                if(typeof objects[n].img=="string"){
+                                return void 0 !== objects[n].collidable && objects[n].collidable || objects[n].img.includes("door")  || objects[n].img.includes("stair") 
+                                }
+                                else {
+                                    return void 0 !== objects[n].collidable && objects[n].collidable
+                                }
+                            },),
                             p = [];
                         p.A = [], p.B = [], p.C = [], p.D = [], p.A.x = pos.x, p.A.y = pos.y, p.B.x = t.x, p.B.y = t.y;
                         var d = !0;
