@@ -686,11 +686,11 @@
                     f = e["989ad62a"].exports.bagSizes,
                     b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius),
                     A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.Qe,
-                    g = e.a508b62a.exports.Ce,
-                    v = e.a48f3bb2.exports.Ve,
-                    h = e.c73dee75.exports.Ae,
-                    x = e.d3da5587.exports.Ye,
+                    y = e.e5d16b4d.exports.Je,
+                    g = e.a508b62a.exports.Te,
+                    v = e.a48f3bb2.exports.Ge,
+                    h = e.c73dee75.exports.Ie,
+                    x = e.d3da5587.exports.Ze,
                     T = e["4b8d140f"].exports.Key;
                 setInterval(function () {
                     n.scope
@@ -716,19 +716,26 @@
                     X = null,
                     V = null,
                     G = !1;
-                if (!(p && m && d && f && g && v && b && A === obfuscate.protocolVersion)) return console.log("Error: Variable not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                var Q = function () {
+                    if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(m)) return console.log("Error: Variable m not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(d)) return console.log("Error: Variable d not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(f)) return console.log("Error: Variable f not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(g)) return console.log("Error: Variable g not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(v)) return console.log("Error: Variable v not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(b)) return console.log("Error: Variable b not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    if (!(A === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    var Q = function () {
                     return !(!isset(n.scope) || !n.scope.initialized || null == n.scope[obfuscate.activePlayer.main] || null == n.scope[obfuscate.input.main] || n.scope.spectating)
                 };
                 setInterval(function () {
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = !1)
                 }, 500);
-                /*
                 setInterval(function(){
-                console.log(n)
-                }
-                ,2000)
-                //*/
+                    console.log(n)
+                    console.log(e)
+                    }
+                    ,2000)
+                    //*/
                 var Y = y.prototype.n;
                 y.prototype.n = function () {
                     this.options || function () {
@@ -1138,12 +1145,12 @@
         e.exports = {
             menu: "xe",
             camera: "j",
-            bullets: "De",
-            planes: "Fe",
+            bullets: "Ce",
+            planes: "Le",
             activeId: "me",
             targetZoom: "u",
-            objectCreator: "ot",
-            pieTimer: "Ke",
+            objectCreator: "rt",
+            pieTimer: "He",
             map: "ze",
             input: {
                 main: "he",
@@ -1151,18 +1158,18 @@
                 mousePressed: "J"
             },
             activePlayer: {
-                main: "st",
+                main: "nt",
                 netData: "N",
                 localData: "q"
             },
             playerBarn: {
-                main: "Te",
-                players: "zt"
+                main: "Pe",
+                players: "kt"
             },
             lootBarn: {
-                main: "Ge",
-                itemf: "kt",
-                lootPool: "tt",
+                main: "Ue",
+                itemf: "vt",
+                lootPool: "et",
                 pool: "de"
             },
             version: "1.0.72",
@@ -1848,7 +1855,7 @@
                         var t, i, a, o
                     },
                     m = function () {
-                        var t, i, o = e.scope[n.lootBarn.main][n.lootBarn.itemf](),
+                        var t, i, o = e.scope[n.lootBarn.main][n.lootBarn.itemf],
                             r = e.scope[n.activePlayer.main][n.activePlayer.netData],
                             s = e.scope[n.activePlayer.main][n.activePlayer.localData];
                         if (o && o.active && function (t) {
