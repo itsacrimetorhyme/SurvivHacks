@@ -604,6 +604,7 @@
                 autoDodge: n("./plugins/autoDodge.js"),
                 autoFire: n("./plugins/autoFire.js"),
                 autoHeal: n("./plugins/autoHeal.js"),
+                autoSwitch: n("./plugins/autoSwitch.js"),
                 autoLoot: n("./plugins/autoLoot.js"),
                 autoAim: n("./plugins/autoAim.js"),
                 menu: n("./plugins/menu.js")
@@ -679,6 +680,10 @@
                         enabled: !1
                     }
                 }), r.scope = s.smokeGrenadeAlpha, o.scope = function () {};
+                //*************** ADD NEW VARIABLES HERE ***************\\
+                s.autoSwitch = {}
+                s.autoSwitch.enabled = !0
+                //*************** END VARIABLES HERE ***************\\
                 var p = e.ceee80d9.exports.Defs,
                     d = e["989ad62a"].exports.bullets,
                     u = e["989ad62a"].exports.player,
@@ -731,8 +736,9 @@
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = !1)
                 }, 500);
                 setInterval(function(){
-                    console.log(n)
-                    console.log(e)
+                    console.log(s)
+                    // console.log(n)
+                    // console.log(e)
                     }
                     ,2000)
                     //*/
@@ -865,6 +871,9 @@
                     nn = i.autoHeal(obfuscate, n, {
                         key: T
                     }),
+                    jn = i.autoSwitch(obfuscate, n, {
+                        items: m
+                    }),
                     en = i.autoOpeningDoors(obfuscate, n, o, t),
                     tn = i.bigMapManager(obfuscate, n),
                     an = i.grenadeTimer(obfuscate, n),
@@ -894,20 +903,20 @@
                     fn = function (e) {
                         var t = n.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind()) : e.which == i && _.isBinded() && J()
+                        16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind() ) : e.which == i && _.isBinded() && J()
                     },
                     bn = function (e) {
                         var t = n.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
+                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
                     },
                     An = function () {
-                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
+                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
                             smokeAlpha: s.smokeGrenadeAlpha
                         }), s.fpsCounter.enabled && !pn.isBinded() && pn.bind(), s.airDropTracking.enabled && !dn.isBinded() && dn.bind(), s.tiggerBot.enabled && !un.isBinded() && un.bind(), s.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
                     },
                     yn = function () {
-                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
+                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
                     },
                     gn = function () {
                         return !n.scope || !!n.scope.gameOver
@@ -946,6 +955,9 @@
                     },
                     autoHealEnableCb: function () {
                         s.autoHeal.enabled ? (q(nn) && nn.unbind(), s.autoHeal.enabled = !1) : s.autoHeal.enabled || (!q(nn) && Q() && nn.bind(), s.autoHeal.enabled = !0)
+                    },
+                    autoSwitchEnableCb: function () {
+                        s.autoSwitch.enabled ? (q(jn) && jn.unbind(), s.autoSwitch.enabled = !1) : s.autoSwitch.enabled || (!q(jn) && Q() && jn.bind(), s.autoSwitch.enabled = !0)
                     },
                     autoOpeningDoorsEnableCb: function () {
                         s.autoOpeningDoors.enabled ? (q(en) && en.unbind(), s.autoOpeningDoors.enabled = !1) : s.autoOpeningDoors.enabled || (!q(en) && Q() && en.bind(), s.autoOpeningDoors.enabled = !0)
@@ -1013,6 +1025,7 @@
         "./plugins/smokeAlphaManager.js": 26,
         "./plugins/tiggerBot.js": 27,
         "./plugins/zoomRadiusManager.js": 28,
+        "./plugins/autoSwitch.js":29,
         iziToast: 2,
         "stats-js": 3
     }],
@@ -1143,7 +1156,7 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "xe",
+            menu: "fe",
             camera: "j",
             bullets: "Ce",
             planes: "Le",
@@ -2256,6 +2269,16 @@
                         value: "autoHealEnableCb"
                     },
                     tabId: 0
+                },  {
+                    type: "checkbox",
+                    description: "Auto Switch enabled",
+                    inputProps: {
+                        value: "autoSwitch.enabled"
+                    },
+                    callbacks: {
+                        value: "autoSwitchEnableCb"
+                    },
+                    tabId: 0
                 }, {
                     type: "checkbox",
                     description: "AutoDodge enabled",
@@ -3023,6 +3046,26 @@
                 }
             }
             console.log("Cannot init zoom radius manager")
+        }
+    }, {}],
+    29: [function (n, e, t) {
+        "use strict";
+        e.exports = function (n, e, t) {
+        var isBinded = false;    
+        setInterval(function(){
+            console.log("Autoswitch started")
+        },2000)    
+        return {
+            bind: function () {
+                isBinded = true
+            },
+            unbind: function () {
+                isBinded = false
+            },
+            isBinded: function () {
+                return isBinded
+            }
+        }
         }
     }, {}]
 }, {}, [6]);
