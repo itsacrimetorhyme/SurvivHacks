@@ -1143,7 +1143,7 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "xe",
+            menu: "fe",
             camera: "j",
             bullets: "Ce",
             planes: "Le",
