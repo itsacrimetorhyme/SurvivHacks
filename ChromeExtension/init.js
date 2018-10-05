@@ -684,7 +684,7 @@
                     u = e["989ad62a"].exports.player,
                     m = e["989ad62a"].exports.items,
                     f = e["989ad62a"].exports.bagSizes,
-                    b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius),
+                    b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = e["989ad62a"].exports.protocolVersion,
                     y = e.e5d16b4d.exports.Je,
                     g = e.a508b62a.exports.Te,
@@ -1164,16 +1164,16 @@
             },
             playerBarn: {
                 main: "Pe",
-                players: "kt"
+                players: "zt"
             },
             lootBarn: {
                 main: "Ue",
-                itemf: "vt",
+                itemf: "St",
                 lootPool: "et",
                 pool: "de"
             },
             version: "1.0.72",
-            protocolVersion: 34
+            protocolVersion: 35
         }
     }, {}],
     13: [function (n, e, t) {
