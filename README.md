@@ -19,6 +19,7 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 * Auto fire(Just press the left mouse button)
 * Planes tracking + visibility of air drop on minimap has been extended
 * AutoDodge [beta]
+* AutoSwitch [beta] Use the autoswitch branch
 * Triggerbot
 
 ### :information_source: Instructions
