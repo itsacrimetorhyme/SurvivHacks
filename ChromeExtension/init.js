@@ -826,15 +826,19 @@
                     f = e["989ad62a"].exports.bagSizes,
                     b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.Je,
-                    g = e.a508b62a.exports.Te,
-                    v = e.a48f3bb2.exports.Ge,
-                    h = e.c73dee75.exports.Ie,
-                    x = e.d3da5587.exports.Ze,
+                    y = e.e5d16b4d.exports.Qe,
+                    g = e.a508b62a.exports.Ce,
+                    v = e.a48f3bb2.exports.Ve,
+                    h = e.c73dee75.exports.Ae,
+                    x = e.d3da5587.exports.Ye,
                     T = e["4b8d140f"].exports.Key;
                 setInterval(function () {
                     n.scope
                 }, 2e3);
+                setInterval(function () {
+                    console.log(n)
+
+                }, 2000)
                 var w = null,
                     z = null,
                     k = null,
@@ -870,11 +874,8 @@
                 setInterval(function () {
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = !1)
                 }, 500);
-                /*
-                setInterval(function () {
-                    console.log(n)
-
-                }, 2000)
+                
+                
                     //*/
                 var Y = y.prototype.n;
                 y.prototype.n = function () {
@@ -1295,12 +1296,12 @@
         e.exports = {
             menu: "fe",
             camera: "j",
-            bullets: "Ce",
-            planes: "Le",
-            activeId: "me",
+            bullets: "De",
+            planes: "Fe",
+            activeId: "nt",
             targetZoom: "u",
-            objectCreator: "rt",
-            pieTimer: "He",
+            objectCreator: "ot",
+            pieTimer: "Ke",
             map: "ze",
             input: {
                 main: "he",
@@ -1308,18 +1309,18 @@
                 mousePressed: "J"
             },
             activePlayer: {
-                main: "nt",
+                main: "st",
                 netData: "N",
                 localData: "q"
             },
             playerBarn: {
-                main: "Pe",
-                players: "zt"
+                main: "Te",
+                players: "Mt"
             },
             lootBarn: {
-                main: "Ue",
-                itemf: "St",
-                lootPool: "et",
+                main: "Ge",
+                itemf: "kt",
+                lootPool: "tt",
                 pool: "de"
             },
             version: "1.0.72",
@@ -3271,15 +3272,23 @@
 
                         //true / false if we can reload or not
                         var needtoReloadL = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo < gunR.maxReload,
-                            needtoReloadR = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo < gunR.maxReload
+                            needtoReloadR = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo < gunR.maxReload,
+                            reloading = false
                         // if (no enemy, not doing anything, not shooting and need to reload) then reload
-                        if (enemy == undefined && curAction == 0 && !mouseDown && needtoReloadR && e.scope[n.activePlayer.main][n.activePlayer.localData].inventory[gunR.bulletType] > 0) {
+                        if (enemy == undefined && curAction == 0 && !reloading && !mouseDown && needtoReloadR && e.scope[n.activePlayer.main][n.activePlayer.localData].inventory[gunR.bulletType] > 0) {
                             pressKey("49")
                             pressKey("82")
+                            reloading =  true
+                            setTimeout(function(){
+                                reloading = false
+                            },gunR.reloadTime*1000)
                         }
-                        if (enemy == undefined && curAction == 0 && !mouseDown && needtoReloadL && e.scope[n.activePlayer.main][n.activePlayer.localData].inventory[gunL.bulletType] > 0) {
+                        if (enemy == undefined && curAction == 0 && !reloading && !mouseDown && needtoReloadL && e.scope[n.activePlayer.main][n.activePlayer.localData].inventory[gunL.bulletType] > 0) {
                             pressKey("50")
                             pressKey("82")
+                            setTimeout(function(){
+                                reloading = false
+                            },gunL.reloadTime*1000)
                         }
                         var bulletR = bullets[gunR.bulletType],
                             bulletL = bullets[gunL.bulletType]
@@ -3306,7 +3315,8 @@
                                 }
 
                             }
-                        } else if (gunR != undefined) {
+
+                        } else if (gunR != undefined&&!(e.scope[n.activePlayer.main].curWeapIdx ==3||4)) {
                             pressKey("50")
                         } else if (gunL != undefined) {
                             pressKey("49");
@@ -3316,7 +3326,6 @@
             return {
                 bind: function () {
                     window.addEventListener("mousemove", getMousePos)
-
                         ! function n() {
                             switchWeapon(), o = setTimeout(n, 5e2)
                         }()
