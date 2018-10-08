@@ -1,5 +1,5 @@
 ![alt text](http://i67.tinypic.com/357hs47.png "Survivio Banner")
-# Welcome to Surviv.io-Cheats(Actual working on client: 0.6.1)!
+# Welcome to Surviv.io-Cheats(Actual working on client: 0.6.21)!
 This is a Surviv.io cheat loaded as a Chrome extension. It was originally developed by w3x731 and I've decided to continue the development of the code.
 
 
@@ -44,3 +44,4 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 
 ## Warning!
 All actions you take at your own risk. The author is not responsible for the consequences of your actions.
+Hippity hoppity it's your own responsibility!
