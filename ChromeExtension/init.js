@@ -817,7 +817,7 @@
                 }), r.scope = s.smokeGrenadeAlpha, o.scope = function () {};
                 //*************** ADD NEW VARIABLES HERE ***************\\
                 s.autoSwitch = {}
-                s.autoSwitch.enabled = !1
+                s.autoSwitch.enabled = true
                 //*************** END VARIABLES HERE ***************\\
                 var p = e.ceee80d9.exports.Defs,
                     d = e["989ad62a"].exports.bullets,
@@ -870,12 +870,11 @@
                 setInterval(function () {
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = !1)
                 }, 500);
-                
-                setInterval(function(){
-                     console.log(e)
+                /*
+                setInterval(function () {
+                    console.log(n)
 
-                    }
-                    ,2000)
+                }, 2000)
                     //*/
                 var Y = y.prototype.n;
                 y.prototype.n = function () {
@@ -1010,7 +1009,8 @@
                         key: T,
                         bullets: d,
                         items: m,
-                        playerBarn: g
+                        playerBarn: g,
+                        options: s
                     }),
                     en = i.autoOpeningDoors(obfuscate, n, o, t),
                     tn = i.bigMapManager(obfuscate, n),
@@ -2471,7 +2471,7 @@
                     tabId: 0
                 }, {
                     type: "checkbox",
-                    description: "Repeat fire enabled",
+                    description: "Bump fire enabled",
                     inputProps: {
                         value: "autoFire.enabled"
                     },
@@ -3192,9 +3192,13 @@
         e.exports = function (n, e, t) {
             var isBinded = false,
                 o = null,
-                realMousePos = null,
+                realMousePos = {
+                    x: 0,
+                    y: 0
+                },
                 items = t.items,
                 bullets = t.bullets,
+                options = t.options,
                 getEnemies = function () {
                     var result = [],
                         curTeamId = e.scope[n.playerBarn.main][n.playerBarn.players][e.scope[n.activeId]].teamId,
@@ -3234,22 +3238,32 @@
                     var enemies = getEnemies(),
                         distanceArray = []
                     if (enemies) {
-                        enemies = enemies.filter(function(e){return e}); 
-                        for(var i = 0; i < enemies.length; i++){
-                            distanceArray[i] = calculateDistance(realMousePos.x,realMousePos.y,enemies[i].pos.x,enemies[i].pos.y)
+                        enemies = enemies.filter(function (e) {
+                            return e
+                        });
+                        for (var i = 0; i < enemies.length; i++) {
+                            distanceArray[i] = calculateDistance(realMousePos.x, realMousePos.y, enemies[i].pos.x, enemies[i].pos.y)
                         }
                         var min = Math.min.apply(null, distanceArray)
-                        if (min != Infinity){
-                            var minIndex = distanceArray.findIndex(function(e){
+                        if (min != Infinity) {
+                            var minIndex = distanceArray.findIndex(function (e) {
                                 return e == min
                             })
-                        return enemies[minIndex]
+                            return enemies[minIndex]
+                        }
+                    }
+                },
+                sleep = function (milliseconds) {
+                    var start = new Date().getTime();
+                    for (var i = 0; i < 1e7; i++) {
+                        if ((new Date().getTime() - start) > milliseconds) {
+                            break;
                         }
                     }
                 },
                 switchWeapon = function () {
-                    var gunR = items[e.scope[n.activePlayer.main].q.weapons["1"].name],
-                        gunL = items[e.scope[n.activePlayer.main].q.weapons["0"].name],
+                    var gunL = items[e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].name],
+                        gunR = items[e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].name],
                         distanceToEnemy = null,
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
@@ -3257,31 +3271,39 @@
                     window.onmousedown = function () {
                         mouseDown = true
                     }
-                    selectEnemy()
                     if (gunR != undefined && gunL != undefined) {
+
+                        var needtoReloadL = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo < gunR.maxReload, 
+                            needtoReloadR = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo < gunR.maxReload
+                        
+                        if (enemy == undefined && e.scope[n.activePlayer.main].N.actionType == 0 && !mouseDown && needtoReloadR) {
+                            pressKey("49")
+                            pressKey("82")
+                            sleep(gunR.reloadTime)
+                        }
+                        if (enemy == undefined && e.scope[n.activePlayer.main].N.actionType == 0 && !mouseDown && needtoReloadL) {
+                            pressKey("50")
+                            pressKey("82")
+                            sleep(gunL.reloadTime)
+                        }
                         var bulletR = bullets[gunR.bulletType],
                             bulletL = bullets[gunL.bulletType]
-
-
-                        if (enemy && curPos && bullets && items && !mouseDown) {
-                            distanceToEnemy = calculateDistance(curPos.x,curPos.y,enemy.pos.x,enemy.pos.y)
+                        if (enemy != undefined && curPos && bullets && items && e.scope[n.activePlayer.main].N.actionType == 0 && !mouseDown) {
+                            distanceToEnemy = calculateDistance(curPos.x, curPos.y, enemy.pos.x, enemy.pos.y)
                             var RPref = (((gunR.bulletCount * bulletR.damage - Math.pow(distanceToEnemy, bulletR.falloff)) / gunR.fireDelay) / gunR.shotSpread),
                                 LPref = (((gunL.bulletCount * bulletL.damage - Math.pow(distanceToEnemy, bulletL.falloff)) / gunL.fireDelay) / gunL.shotSpread)
-                            if (distanceToEnemy > bulletR.distance) {
-                                console.log("rpref 0")
-                                RPref = 0
+                            if (distanceToEnemy > bulletR.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo == 0) {
+                                RPref = -100000
                             }
-                            if (distanceToEnemy > bulletL.distance) {
-                                console.log("lpref 0")
-                                LPref = 0
+                            if (distanceToEnemy > bulletL.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo == 0) {
+                                LPref = -100000
                             }
-
                             if (RPref == LPref) {
                                 return null
                             } else if (RPref > LPref) {
-                                pressKey("49")
+                                pressKey("50")
                             } else {
-                                pressKey("50");
+                                pressKey("49");
                             }
 
                         }
@@ -3289,11 +3311,11 @@
                 }
             return {
                 bind: function () {
-                    window.addEventListener("mousemove", getMousePos) 
+                    window.addEventListener("mousemove", getMousePos)
 
-                    ! function n() {
-                        switchWeapon(), o = setTimeout(n, 1e3)
-                    }()
+                        ! function n() {
+                            switchWeapon(), o = setTimeout(n, 1e3)
+                        }()
 
                     isBinded = true
                 },
