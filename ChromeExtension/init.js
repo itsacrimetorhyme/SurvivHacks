@@ -686,11 +686,11 @@
                     f = e["989ad62a"].exports.bagSizes,
                     b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.Je,
-                    g = e.a508b62a.exports.Te,
-                    v = e.a48f3bb2.exports.Ge,
-                    h = e.c73dee75.exports.Ie,
-                    x = e.d3da5587.exports.Ze,
+                    y = e.e5d16b4d.exports.Qe,
+                    g = e.a508b62a.exports.Ce,
+                    v = e.a48f3bb2.exports.Ve,
+                    h = e.c73dee75.exports.Ae,
+                    x = e.d3da5587.exports.Ye,
                     T = e["4b8d140f"].exports.Key;
                 setInterval(function () {
                     n.scope
@@ -1145,12 +1145,12 @@
         e.exports = {
             menu: "fe",
             camera: "j",
-            bullets: "Ce",
-            planes: "Le",
-            activeId: "me",
+            bullets: "De",
+            planes: "Fe",
+            activeId: "nt",
             targetZoom: "u",
-            objectCreator: "rt",
-            pieTimer: "He",
+            objectCreator: "ot",
+            pieTimer: "Ke",
             map: "ze",
             input: {
                 main: "he",
@@ -1158,18 +1158,18 @@
                 mousePressed: "J"
             },
             activePlayer: {
-                main: "nt",
+                main: "st",
                 netData: "N",
                 localData: "q"
             },
             playerBarn: {
-                main: "Pe",
-                players: "zt"
+                main: "Te",
+                players: "Mt"
             },
             lootBarn: {
-                main: "Ue",
-                itemf: "St",
-                lootPool: "et",
+                main: "Ge",
+                itemf: "kt",
+                lootPool: "tt",
                 pool: "de"
             },
             version: "1.0.72",
