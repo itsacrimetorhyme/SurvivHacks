@@ -1009,8 +1009,7 @@
                         key: T,
                         bullets: d,
                         items: m,
-                        playerBarn: g,
-                        options: s
+                        playerBarn: g
                     }),
                     en = i.autoOpeningDoors(obfuscate, n, o, t),
                     tn = i.bigMapManager(obfuscate, n),
@@ -3196,9 +3195,9 @@
                     x: 0,
                     y: 0
                 },
+                curAction = null,
                 items = t.items,
                 bullets = t.bullets,
-                options = t.options,
                 getEnemies = function () {
                     var result = [],
                         curTeamId = e.scope[n.playerBarn.main][n.playerBarn.players][e.scope[n.activeId]].teamId,
@@ -3214,6 +3213,7 @@
 
                 },
                 calculateDistance = function (x1, y1, x2, y2) {
+                    //√((x1-x2)^2+(y1-y2)^2)2
                     return (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)))
                 },
                 getCurPos = function () {
@@ -3237,6 +3237,7 @@
                 selectEnemy = function () {
                     var enemies = getEnemies(),
                         distanceArray = []
+
                     if (enemies) {
                         enemies = enemies.filter(function (e) {
                             return e
@@ -3253,14 +3254,6 @@
                         }
                     }
                 },
-                sleep = function (milliseconds) {
-                    var start = new Date().getTime();
-                    for (var i = 0; i < 1e7; i++) {
-                        if ((new Date().getTime() - start) > milliseconds) {
-                            break;
-                        }
-                    }
-                },
                 switchWeapon = function () {
                     var gunL = items[e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].name],
                         gunR = items[e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].name],
@@ -3268,44 +3261,55 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    window.onmousedown = function () {
-                        mouseDown = true
-                    }
+                    curAction = e.scope[n.activePlayer.main].N.actionType,
+                        window.onmousedown = function () {
+                            mouseDown = true
+                        }
+
                     if (gunR != undefined && gunL != undefined) {
 
-                        var needtoReloadL = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo < gunR.maxReload, 
-                            needtoReloadR = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo < gunR.maxReload
-                        
-                        if (enemy == undefined && e.scope[n.activePlayer.main].N.actionType == 0 && !mouseDown && needtoReloadR) {
+
+                        //true / false if we can reload or not
+                        var needtoReloadL = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo < gunR.maxReload,
+                            needtoReloadR = e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo < gunR.maxReload
+                        // if (no enemy, not doing anything, not shooting and need to reload) then reload
+                        if (enemy == undefined && curAction == 0 && !mouseDown && needtoReloadR && e.scope[n.activePlayer.main][n.activePlayer.localData].inventory[gunR.bulletType] > 0) {
                             pressKey("49")
                             pressKey("82")
-                            sleep(gunR.reloadTime)
                         }
-                        if (enemy == undefined && e.scope[n.activePlayer.main].N.actionType == 0 && !mouseDown && needtoReloadL) {
+                        if (enemy == undefined && curAction == 0 && !mouseDown && needtoReloadL && e.scope[n.activePlayer.main][n.activePlayer.localData].inventory[gunL.bulletType] > 0) {
                             pressKey("50")
                             pressKey("82")
-                            sleep(gunL.reloadTime)
                         }
                         var bulletR = bullets[gunR.bulletType],
                             bulletL = bullets[gunL.bulletType]
-                        if (enemy != undefined && curPos && bullets && items && e.scope[n.activePlayer.main].N.actionType == 0 && !mouseDown) {
-                            distanceToEnemy = calculateDistance(curPos.x, curPos.y, enemy.pos.x, enemy.pos.y)
-                            var RPref = (((gunR.bulletCount * bulletR.damage - Math.pow(distanceToEnemy, bulletR.falloff)) / gunR.fireDelay) / gunR.shotSpread),
-                                LPref = (((gunL.bulletCount * bulletL.damage - Math.pow(distanceToEnemy, bulletL.falloff)) / gunL.fireDelay) / gunL.shotSpread)
-                            if (distanceToEnemy > bulletR.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo == 0) {
-                                RPref = -100000
-                            }
-                            if (distanceToEnemy > bulletL.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo == 0) {
-                                LPref = -100000
-                            }
-                            if (RPref == LPref) {
-                                return null
-                            } else if (RPref > LPref) {
-                                pressKey("50")
-                            } else {
-                                pressKey("49");
-                            }
+                        if (!(e.scope[n.activePlayer.main].curWeapIdx == 3 || e.scope[n.activePlayer.main].curWeapIdx == 4)) {
+                            if (enemy != undefined && curPos && bullets && items && curAction == 0 && !mouseDown) {
+                                distanceToEnemy = calculateDistance(curPos.x, curPos.y, enemy.pos.x, enemy.pos.y)
+                                //  Bullet count per trigger pull * Bullet damage * Exponential falloff calculation / Fire delay / Acuraccy
+                                var RPref = (((gunR.bulletCount * bulletR.damage - Math.pow(distanceToEnemy, bulletR.falloff)) / gunR.fireDelay) / gunR.shotSpread),
+                                    LPref = (((gunL.bulletCount * bulletL.damage - Math.pow(distanceToEnemy, bulletL.falloff)) / gunL.fireDelay) / gunL.shotSpread)
+                                //Check if outside range or if magazine is empty
+                                if (distanceToEnemy > bulletR.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo == 0) {
+                                    RPref = -100000
+                                }
+                                if (distanceToEnemy > bulletL.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["0"].ammo == 0) {
+                                    LPref = -100000
+                                }
+                                //Perform switch
+                                if (RPref == LPref) {
+                                    return null
+                                } else if (RPref > LPref) {
+                                    pressKey("50")
+                                } else {
+                                    pressKey("49");
+                                }
 
+                            }
+                        } else if (gunR != undefined) {
+                            pressKey("50")
+                        } else if (gunL != undefined) {
+                            pressKey("49");
                         }
                     }
                 }
@@ -3314,7 +3318,7 @@
                     window.addEventListener("mousemove", getMousePos)
 
                         ! function n() {
-                            switchWeapon(), o = setTimeout(n, 1e3)
+                            switchWeapon(), o = setTimeout(n, 5e2)
                         }()
 
                     isBinded = true
