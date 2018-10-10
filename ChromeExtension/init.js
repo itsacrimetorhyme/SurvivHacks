@@ -1145,7 +1145,7 @@
         e.exports = {
             menu: "fe",
             camera: "j",
-            bullets: "De",
+            bullets: "Ie",
             planes: "Fe",
             activeId: "nt",
             targetZoom: "u",
