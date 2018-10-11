@@ -1,6 +1,5 @@
 ! function () {
     return function n(e, t, i) {
-
         function a(r, s) {
             if (!t[r]) {
                 if (!e[r]) {
@@ -8,7 +7,7 @@
                     if (!s && l) return l(r, !0);
                     if (o) return o(r, !0);
                     var c = new Error("Cannot find module '" + r + "'");
-                    throw c.code = "MODULE_NOT_FOUND", c
+                    throw c.code = "MODULE_NOT_FOUND", c;
                 }
                 var p = t[r] = {
                     exports: {}
@@ -39,7 +38,7 @@
             createLink: function (n, e) {
                 var t = document.head || document.getElementsByTagName("head")[0],
                     i = document.createElement("link");
-                for (var a in i.href = n, i.rel = "stylesheet", e)
+                for (var a in i.href = n, i.rel = "stylesheet", e);
                     if (e.hasOwnProperty(a)) {
                         var o = e[a];
                         i.setAttribute("data-" + a, o)
@@ -741,6 +740,7 @@
                 autoHeal: n("./plugins/autoHeal.js"),
                 autoSwitch: n("./plugins/autoSwitch.js"),
                 autoLoot: n("./plugins/autoLoot.js"),
+                multibox: n("./plugins/multibox.js"),
                 autoAim: n("./plugins/autoAim.js"),
                 menu: n("./plugins/menu.js")
             },
@@ -818,6 +818,8 @@
                 //*************** ADD NEW VARIABLES HERE ***************\\
                 s.autoSwitch = {}
                 s.autoSwitch.enabled = true
+                s.multibox = {}
+                s.multibox.enabled = true
                 //*************** END VARIABLES HERE ***************\\
                 var p = e.ceee80d9.exports.Defs,
                     d = e["989ad62a"].exports.bullets,
@@ -1014,6 +1016,9 @@
                         items: m,
                         playerBarn: g
                     }),
+                    qn = i.multibox(obfuscate, n, {
+                        key: T
+                    }),
                     en = i.autoOpeningDoors(obfuscate, n, o, t),
                     tn = i.bigMapManager(obfuscate, n),
                     an = i.grenadeTimer(obfuscate, n),
@@ -1043,20 +1048,20 @@
                     fn = function (e) {
                         var t = n.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind()) : e.which == i && _.isBinded() && J()
+                        16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), qn.isBinded() && qn.unbind(), jn.isBinded() && jn.unbind()) : e.which == i && _.isBinded() && J()
                     },
                     bn = function (e) {
                         var t = n.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
+                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind()&& !qn.isBinded() && qn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
                     },
                     An = function () {
-                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
+                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.multibox.enabled && !qn.isBinded() && qn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
                             smokeAlpha: s.smokeGrenadeAlpha
                         }), s.fpsCounter.enabled && !pn.isBinded() && pn.bind(), s.airDropTracking.enabled && !dn.isBinded() && dn.bind(), s.tiggerBot.enabled && !un.isBinded() && un.bind(), s.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
                     },
                     yn = function () {
-                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
+                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), qn.isBinded() && qn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
                     },
                     gn = function () {
                         return !n.scope || !!n.scope.gameOver
@@ -1098,6 +1103,9 @@
                     },
                     autoSwitchEnableCb: function () {
                         s.autoSwitch.enabled ? (q(jn) && jn.unbind(), s.autoSwitch.enabled = !1) : s.autoSwitch.enabled || (!q(jn) && Q() && jn.bind(), s.autoSwitch.enabled = !0)
+                    },
+                    multiboxEnableCb: function () {
+                        s.multibox.enabled ? (q(qn) && qn.unbind(), s.multibox.enabled = !1) : s.multibox.enabled || (!q(qn) && Q() && qn.bind(), s.multibox.enabled = !0)
                     },
                     autoOpeningDoorsEnableCb: function () {
                         s.autoOpeningDoors.enabled ? (q(en) && en.unbind(), s.autoOpeningDoors.enabled = !1) : s.autoOpeningDoors.enabled || (!q(en) && Q() && en.bind(), s.autoOpeningDoors.enabled = !0)
@@ -1166,6 +1174,7 @@
         "./plugins/tiggerBot.js": 27,
         "./plugins/zoomRadiusManager.js": 28,
         "./plugins/autoSwitch.js": 29,
+        "./plugins/multibox.js":30,
         iziToast: 2,
         "stats-js": 3
     }],
@@ -1240,7 +1249,7 @@
                                 i = e.split(".");
                             t.filter(function (n, e, t) {
                                 return n < i[e]
-                            }).length > 0 && notification.create("info", "A new version of the cheat is available!", "INFO", 1e4)
+                            }).length > 0 && notifications.create("info", "A new version of the cheat is available!", "INFO", 1e4)
                         }
                     }(i.version, n.version)
                 }).catch(function (n) {
@@ -2421,6 +2430,16 @@
                         value: "autoSwitchEnableCb"
                     },
                     tabId: 0
+                },{
+                    type: "checkbox",
+                    description: "Multiboxing enabled",
+                    inputProps: {
+                        value: "multibox.enabled"
+                    },
+                    callbacks: {
+                        value: "multiboxEnableCb"
+                    },
+                    tabId: 0
                 }, {
                     type: "checkbox",
                     description: "AutoDodge enabled",
@@ -3310,7 +3329,7 @@
                             //Perform switch
                             if (!(e.scope[n.activePlayer.main].curWeapIdx == 3 || e.scope[n.activePlayer.main].curWeapIdx == 4)) {
                                 if (Pref2 == Pref1) {
-                                    return null //do nothing 
+                                    return null //do nothing
                                 } else if (Pref2 > Pref1) {
                                     pressKey("50")
                                 } else {
@@ -3344,5 +3363,33 @@
                 }
             }
         }
-    }, {}]
+    }, {}],
+    30:[function(n,e,t){
+        "use strict";
+        e.exports = function (n, e, t) {
+            var isBinded = false,
+            broadcastchannel = new BroadcastChannel("multibox"),
+            sendKeys = function(event){
+                broadcastchannel.postMessage(JSON.stringify({"keys":event.key,"id":0}))
+            }
+            
+            return{
+                bind: function () {
+                    broadcastchannel.onmessage = function(input){
+                        console.log(input)
+                    }
+                    window.addEventListener("keypress",sendKeys)
+                    
+                },
+                unbind: function () {
+                    window.removeEventListener("keypress",sendKeys)
+                    clearTimeout(o), o = null, isBinded = false
+                },
+                
+                isBinded: function () {
+                    return isBinded
+                }
+            }
+        }
+    }]
 }, {}, [6]);
