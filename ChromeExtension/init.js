@@ -3225,7 +3225,6 @@
                     return e.scope[n.activePlayer.main].pos
                 },
                 pressKey = function (key) {
-                    console.log(key)
                     var keys = e.scope[n.input.main][n.input.input].keys;
                     keys[key] || setTimeout(function () {
                         keys[key] = !0, setTimeout(function () {
@@ -3308,8 +3307,6 @@
                             if (distanceToEnemy > bullet2.distance || e.scope[n.activePlayer.main][n.activePlayer.localData].weapons["1"].ammo == 0) {
                                 Pref2 = -100000
                             }
-                            console.log(Pref1)
-                            console.log(Pref2)
                             //Perform switch
                             if (!(e.scope[n.activePlayer.main].curWeapIdx == 3 || e.scope[n.activePlayer.main].curWeapIdx == 4)) {
                                 if (Pref2 == Pref1) {
