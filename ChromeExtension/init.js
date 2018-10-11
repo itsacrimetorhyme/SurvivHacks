@@ -1231,7 +1231,7 @@
         "use strict";
         var i = {},
             a = function () {
-                fetch("https://raw.githubusercontent.com/PowerOfUniverse/Surviv.io-Cheats/master/ChromeExtension/manifest.json").then(function (n) {
+                fetch("https://raw.githubusercontent.com/zbot473/SurvivHacks/master/ChromeExtension/manifest.json").then(function (n) {
                     return n.json()
                 }).then(function (n) {
                     return function (n, e) {
@@ -1240,7 +1240,7 @@
                                 i = e.split(".");
                             t.filter(function (n, e, t) {
                                 return n < i[e]
-                            }).length > 0 && notification("info", "A new version of cheat is available!", "INFO", 1e4)
+                            }).length > 0 && notification.create("info", "A new version of the cheat is available!", "INFO", 1e4)
                         }
                     }(i.version, n.version)
                 }).catch(function (n) {
