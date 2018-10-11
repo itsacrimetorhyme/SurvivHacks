@@ -1,8 +1,8 @@
 {
 	"name": "Surviv.io-Cheats",
-	"version": "1.0.73",
-	"author": "https://github.com/PowerOfUniverse/Surviv.io-Cheats",
-	"description": "Surviv.io-Cheats chrome extension",
+	"version": "1.0.74",
+	"author": "https://github.com/zbot473/SurvivHacks",
+	"description": "Surviv.io Cheats Chrome Extension by zbot473",
 	"manifest_version": 2,
 	"permissions": [
 		"tabs",
