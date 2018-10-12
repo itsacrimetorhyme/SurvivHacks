@@ -3380,7 +3380,7 @@
                         delete keys[key]
                     }, 90)
                 }, 0)
-            },
+            }
             return{
                 bind: function () {
                     console.log(keys)
