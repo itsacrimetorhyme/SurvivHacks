@@ -3368,18 +3368,32 @@
         "use strict";
         e.exports = function (n, e, t) {
             var isBinded = false,
+            keys = t.key,
             broadcastchannel = new BroadcastChannel("multibox"),
             sendKeys = function(event){
-                broadcastchannel.postMessage(JSON.stringify({"keys":event.key,"id":0}))
-            }
-            
+                broadcastchannel.postMessage(JSON.stringify({"keypressed":event.key}))
+            },
+            pressKey = function (key) {
+                var keys = e.scope[n.input.main][n.input.input].keys;
+                keys[key] || setTimeout(function () {
+                    keys[key] = !0, setTimeout(function () {
+                        delete keys[key]
+                    }, 90)
+                }, 0)
+            },
             return{
                 bind: function () {
+                    console.log(keys)
                     broadcastchannel.onmessage = function(input){
-                        console.log(input)
+                        var json = JSON.parse(input.data)
+                        if(json.keys){
+                        pressKey(keys[json.keypressed.toUpperCase()])
+                        }
                     }
                     window.addEventListener("keypress",sendKeys)
-                    
+                    window.onbeforeunload = function () {
+                        broadcastchannel.close()
+                    };
                 },
                 unbind: function () {
                     window.removeEventListener("keypress",sendKeys)
