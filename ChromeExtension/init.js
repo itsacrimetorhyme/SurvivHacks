@@ -1334,7 +1334,7 @@
                 lootPool: "tt",
                 pool: "de"
             },
-            version: "1.0.72",
+            version: "1.0.74",
             protocolVersion: 35
         }
     }, {}],
