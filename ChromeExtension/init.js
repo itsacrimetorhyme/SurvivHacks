@@ -3386,7 +3386,13 @@
                     console.log(keys)
                     broadcastchannel.onmessage = function(input){
                         var json = JSON.parse(input.data)
+<<<<<<< HEAD
                         pressKey(keys[json.keypressed.toUpperCase()])
+=======
+                        //if(json.keypressed){
+                        pressKey(keys[json.keypressed.toUpperCase()])
+                        //}
+>>>>>>> c30fded588d8b8b4328fcd799087f3a478ea2edf
                     }
                     window.addEventListener("keypress",sendKeys)
                     window.onbeforeunload = function () {
