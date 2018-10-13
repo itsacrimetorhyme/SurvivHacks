@@ -826,11 +826,11 @@
                     f = e["989ad62a"].exports.bagSizes,
                     b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.Qe,
-                    g = e.a508b62a.exports.Ce,
-                    v = e.a48f3bb2.exports.Ve,
-                    h = e.c73dee75.exports.Ae,
-                    x = e.d3da5587.exports.Ye,
+                    y = e.e5d16b4d.exports.$e,
+                    g = e.a508b62a.exports.Ie,
+                    v = e.a48f3bb2.exports.We,
+                    h = e.c73dee75.exports.De,
+                    x = e.d3da5587.exports.Je,
                     T = e["4b8d140f"].exports.Key;
                 setInterval(function () {
                     n.scope
@@ -1296,34 +1296,34 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "fe",
-            camera: "j",
-            bullets: "Ie",
-            planes: "Fe",
-            activeId: "nt",
+            menu: "xe", 
+            camera: "N",
+            bullets: "Ae",
+            planes: "Re",
+            activeId: "st",
             targetZoom: "u",
-            objectCreator: "ot",
-            pieTimer: "Ke",
+            objectCreator: "nt",
+            pieTimer: "Xe",
             map: "ze",
             input: {
-                main: "he",
+                main: "ge",
                 input: "input",
                 mousePressed: "J"
             },
             activePlayer: {
-                main: "st",
-                netData: "N",
-                localData: "q"
+                main: "lt",
+                netData: "q",
+                localData: "U"
             },
             playerBarn: {
-                main: "Te",
-                players: "Mt"
+                main: "Ce",
+                players: "Pt"
             },
             lootBarn: {
-                main: "Ge",
-                itemf: "kt",
-                lootPool: "tt",
-                pool: "de"
+                main: "Ve",
+                itemf: "zt",
+                lootPool: "at",
+                pool: "pe"
             },
             version: "1.0.74",
             protocolVersion: 35
