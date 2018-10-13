@@ -3208,7 +3208,7 @@
                         playerIds = Object.keys(e.scope[n.playerBarn.main][n.playerBarn.players])
                     for (var i = 0; i < playerIds.length; i++) {
                         var enemyObject = e.scope[n.objectCreator].idToObj[playerIds[i]]
-                        if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !e.scope[n.objectCreator].idToObj[playerIds[i]].N.dead && !e.scope[n.objectCreator].idToObj[playerIds[i]].N.downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
+                        if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.localData].dead && !e.scope[n.objectCreator].idToObj[playerIds[i]].N.downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
                             result[playerIds[i]] = e.scope[n.objectCreator].idToObj[playerIds[i]];
                         }
                     }
@@ -3266,7 +3266,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    curAction = e.scope[n.activePlayer.main].N.actionType,
+                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
                         window.onmousedown = function () {
                             mouseDown = true
                         }
