@@ -1839,16 +1839,18 @@
     16: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t) {
+            window.autoFire = false
             var i = t.items,
                 a = !1,
                 o = !1,
                 r = [],
                 mousedown = false,
                 spamMouse = function(){
-                if (mousedown && e.scope[n.input2.main].mouseButtons){
+                if (mousedown || window.autoFire && e.scope[n.input2.main].mouseButtons){
                     e.scope[n.input2.main].mouseButtons["0"] = !e.scope[n.input2.main].mouseButtons["0"]
                 }   
                 }
+
             if (i) {
                 
                 return {
@@ -3056,8 +3058,8 @@
                 a = t.items,
                 o = !1;
             if (a) {
-                var r = function (n, e, t, i) {
-                        return Math.sqrt(Math.pow(n - t, 2) + Math.pow(e - i, 2))
+                var calculateDistance = function (x1, y1, x2, y2) {
+                        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
                     },
                     s = function (t) {
                         var pos = (u = e.scope[n.activePlayer.main]).pos,
@@ -3087,7 +3089,7 @@
                         });
                         var u = e.scope[n.activePlayer.main];
                         d && !e.scope[n.menu].pieTimer.active && 3 !== u.curWeapIdx && function (n, e) {
-                            var t = r(n.pos.x, n.pos.y, e.pos.x, e.pos.y);
+                            var t = calculateDistance(n.pos.x, n.pos.y, e.pos.x, e.pos.y);
                             if (n.weapType) {
                                 var o = a[n.weapType];
                                 if (isset(o.bulletType)) return t < i[o.bulletType].distance
