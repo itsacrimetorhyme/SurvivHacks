@@ -879,8 +879,8 @@
 
 
 
-                var Y = y.prototype.n;
-                y.prototype.n = function () {
+                var Y = y.prototype.l;
+                y.prototype.l = function () {
                     this.options || function () {
                         this.options = {}, this.__defineSetter__("emoteMouseTriggered", function (n) {
                             this.options.emoteTriggered = n
@@ -896,8 +896,8 @@
                     p[n].ceiling && p[n].ceiling.imgs.forEach(function (n) {
                         n.alpha = s.ceilingTransparency
                     })
-                }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
-                    s.particlesTransparency = n, p.p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
+                }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.bush_05.img.alpha = s.particlesTransparency, p.bush_06.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.tree_06.img.alpha = s.particlesTransparency, p.tree_07.img.alpha = s.particlesTransparency, p.tree_08.img.alpha = s.particlesTransparency, p.tree_08b.img.alpha = s.particlesTransparency, p.tree_08c.img.alpha = s.particlesTransparency, p.tree_09.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
+                    s.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.bush_05.img.alpha = n, p.bush_06.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.tree_06.img.alpha = n, p.tree_07.img.alpha = n, p.tree_08.img.alpha = n, p.tree_08b.img.alpha = n, p.tree_08c.img.alpha = n, p.tree_09.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
                 }, z = function (n) {
                     s.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
                         p[e].ceiling && p[e].ceiling.imgs.forEach(function (e) {
@@ -1298,17 +1298,17 @@
         e.exports = {
             menu: "xe", 
             camera: "N",
-            bullets: "Ae",
+            bullets: "Ee",
             planes: "Re",
-            activeId: "st",
-            targetZoom: "u",
+            activeId: "me",
+            targetZoom: "f",
             objectCreator: "nt",
             pieTimer: "Xe",
-            map: "ze",
+            map: "Pe",
             input: {
                 main: "ge",
                 input: "input",
-                mousePressed: "J"
+                mousePressed: "$"
             },
             activePlayer: {
                 main: "lt",
@@ -1323,10 +1323,10 @@
                 main: "Ve",
                 itemf: "zt",
                 lootPool: "at",
-                pool: "pe"
+                pool: "de"
             },
             version: "1.0.74",
-            protocolVersion: 35
+            protocolVersion: 36
         }
     }, {}],
     13: [function (n, e, t) {
@@ -2069,7 +2069,7 @@
                 return {
                     bind: function (n) {
                         var e;
-                        e = n, l.autoPickUp = e.autoPickUp, l.safeDistance = e.safeDistance, l.dropDelay = e.dropDelay, f = i.prototype.n, i.prototype.n = function (n, e, t, i) {
+                        e = n, l.autoPickUp = e.autoPickUp, l.safeDistance = e.safeDistance, l.dropDelay = e.dropDelay, f = i.prototype.l, i.prototype.l = function (n, e, t, i) {
                             b = this, m(), f.call(b, n, e, t, i)
                         }, A = r.prototype.pushAction, r.prototype.pushAction = function (n) {
                             ! function (n) {
@@ -2078,7 +2078,7 @@
                         }, s = !0
                     },
                     unbind: function () {
-                        i.prototype.n = f, r.prototype.pushAction = A, s = !1
+                        i.prototype.l = f, r.prototype.pushAction = A, s = !1
                     },
                     isBinded: function () {
                         return s
@@ -2210,7 +2210,7 @@
             var t = !1,
                 i = !0,
                 a = function () {
-                    e.scope[n.pieTimer].t(function () {
+                    e.scope[n.pieTimer].a(function () {
                             o()
                         }, 4.2, "Grenade", !0), i = !1,
                         function t() {
@@ -2219,7 +2219,7 @@
                         }()
                 },
                 o = function () {
-                    e.scope[n.pieTimer] && e.scope[n.pieTimer].a(!0), i = !0
+                    e.scope[n.pieTimer] && e.scope[n.pieTimer].o(!0), i = !0
                 },
                 r = function (t) {
                     var o = e.scope[n.activePlayer.main];
@@ -3208,7 +3208,7 @@
                         playerIds = Object.keys(e.scope[n.playerBarn.main][n.playerBarn.players])
                     for (var i = 0; i < playerIds.length; i++) {
                         var enemyObject = e.scope[n.objectCreator].idToObj[playerIds[i]]
-                        if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.localData].dead && !e.scope[n.objectCreator].idToObj[playerIds[i]].N.downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
+                        if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.localData].dead && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.netData].downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
                             result[playerIds[i]] = e.scope[n.objectCreator].idToObj[playerIds[i]];
                         }
                     }
