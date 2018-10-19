@@ -1338,7 +1338,7 @@
                 pool: "pe"
             },
             version: "1.0.74",
-            protocolVersion: 36
+            protocolVersion: 35
         }
     }, {}],
     13: [function (n, e, t) {
@@ -1653,6 +1653,7 @@
                         return !1
                     },
                     M = function (t) {
+                        console.log(e.scope[n.input2.main])
                         if (2 === t.button && !L()) {
                             var i = e.scope[n.activePlayer.main];
                             if (i.curWeapIdx) return void u("49");
@@ -1842,28 +1843,71 @@
             var i = t.items,
                 a = !1,
                 o = !1,
-                r = [],
-                mousedown = false,
-                spamMouse = function(){
-                if (mousedown && e.scope[n.input2.main].mouseButtons){
-                    e.scope[n.input2.main].mouseButtons["0"] = !e.scope[n.input2.main].mouseButtons["0"]
-                }   
-                }
+                r = [];
             if (i) {
-                
+                var s = function (n) {};
                 return {
                     bind: function () {
-                        setInterval(spamMouse,50)
-                        window.addEventListener("mousedown",function(){mousedown = true})
-                        window.addEventListener("mouseup",function(){mousedown = false})
+                        var t = function (n) {
+                                var e = [],
+                                    t = Object.keys(i),
+                                    a = !0,
+                                    o = !1,
+                                    r = void 0;
+                                try {
+                                    for (var s, l = t[Symbol.iterator](); !(a = (s = l.next()).done); a = !0) {
+                                        var c = s.value;
+                                        i[c].fireMode === n && e.push(c)
+                                    }
+                                } catch (n) {
+                                    o = !0, r = n
+                                } finally {
+                                    try {
+                                        !a && l.return && l.return()
+                                    } finally {
+                                        if (o) throw r
+                                    }
+                                }
+                                return e
+                            }("single"),
+                            l = function (n) {
+                                var e = [],
+                                    t = Object.keys(i),
+                                    a = !0,
+                                    o = !1,
+                                    r = void 0;
+                                try {
+                                    for (var s, l = t[Symbol.iterator](); !(a = (s = l.next()).done); a = !0) {
+                                        var c = s.value;
+                                        i[c].type === n && e.push(c)
+                                    }
+                                } catch (n) {
+                                    o = !0, r = n
+                                } finally {
+                                    try {
+                                        !a && l.return && l.return()
+                                    } finally {
+                                        if (o) throw r
+                                    }
+                                }
+                                return e
+                            }("melee");
+                        r = t.concat(l, "fists"), s = e.scope[n.input2.main][n.input2.mousePressed], e.scope[n.input2.main][n.input2.mousePressed] = function (t) {
+                            return !(0 !== t || !o && !window.autoFire) || s.call(e.scope[n.input2.main], t)
+                        }, a = !0, window.events.add("playerBarn", "autoFireRenderCb")
                     },
                     unbind: function () {
-                        clearInterval(spamMouse,50)
-                        window.removeEventListener("mousedown",function(){mousedown = true})
-                        window.removeEventListener("mouseup",function(){mousedown = false})
+                        window.events.remove("playerBarn", "autoFireRenderCb"), a = !1, s = function (n) {
+                            return !this.mouseButtonsOld[n] && !!this.mouseButtons[n]
+                        }, e.scope[n.input2.main][n.input2.mousePressed] = s, o = !1
                     },
                     isBinded: function () {
                         return a
+                    },
+                    render: function () {
+                        var t = e.scope[n.activePlayer.main],
+                            i = e.scope[n.input2.main].mouseButtons;
+                        o = !(!i[0] || !r.includes(t.weapType))
                     }
                 }
             }
@@ -3245,7 +3289,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    curAction = e.scope[n.activePlayer.main][n.activePlayer.netData].actionType,
+                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
                         window.onmousedown = function () {
                             mouseDown = true
                         }
@@ -3307,6 +3351,7 @@
                     realMousePos.x = pos.x
                     realMousePos.y = pos.y
                     window.addEventListener("mousemove", getMousePos);
+
                     ! function n() {
                         switchWeapon(), o = setTimeout(n, 5e2)
                     }()
@@ -3342,6 +3387,7 @@
             }
             return{
                 bind: function () {
+                    console.log(keys)
                     broadcastchannel.onmessage = function(input){
                         var json = JSON.parse(input.data)
                         pressKey(keys[json.keypressed.toUpperCase()])
