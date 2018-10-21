@@ -880,8 +880,8 @@
 
 
 
-                var Y = y.prototype.n;
-                y.prototype.n = function () {
+                var Y = y.prototype.l;
+                y.prototype.l = function () {
                     this.options || function () {
                         this.options = {}, this.__defineSetter__("emoteMouseTriggered", function (n) {
                             this.options.emoteTriggered = n
@@ -897,8 +897,8 @@
                     p[n].ceiling && p[n].ceiling.imgs.forEach(function (n) {
                         n.alpha = s.ceilingTransparency
                     })
-                }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
-                    s.particlesTransparency = n, p.p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
+                }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.bush_05.img.alpha = s.particlesTransparency, p.bush_06.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.tree_06.img.alpha = s.particlesTransparency, p.tree_07.img.alpha = s.particlesTransparency, p.tree_08.img.alpha = s.particlesTransparency, p.tree_08b.img.alpha = s.particlesTransparency, p.tree_08c.img.alpha = s.particlesTransparency, p.tree_09.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
+                    s.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.bush_05.img.alpha = n, p.bush_06.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.tree_06.img.alpha = n, p.tree_07.img.alpha = n, p.tree_08.img.alpha = n, p.tree_08b.img.alpha = n, p.tree_08c.img.alpha = n, p.tree_09.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
                 }, z = function (n) {
                     s.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
                         p[e].ceiling && p[e].ceiling.imgs.forEach(function (e) {
@@ -1308,19 +1308,15 @@
             camera: "N",
             bullets: "Ae",
             planes: "Re",
-            activeId: "st",
-            targetZoom: "u",
+            activeId: "me",
+            targetZoom: "f",
             objectCreator: "nt",
             pieTimer: "Xe",
-            map: "ze",
+            map: "Pe",
             input: {
                 main: "ge",
                 input: "input",
-                mousePressed: "J"
-            },
-            input2: {
-                main: "he",
-                mousePressed: "J"
+                mousePressed: "$"
             },
             activePlayer: {
                 main: "lt",
@@ -1335,7 +1331,7 @@
                 main: "Ve",
                 itemf: "zt",
                 lootPool: "at",
-                pool: "pe"
+                pool: "de"
             },
             version: "1.0.74",
             protocolVersion: 36
@@ -1412,8 +1408,8 @@
                 d = window.PIXI.Texture.fromImage("https://cdn.rawgit.com/zbot473/SurvivHacks/e0e08a8d/ChromeExtension/images/heal.svg");
             if (i && a && o) {
                 var u = function (t) {
-                        var i = e.scope[n.input2.main].keys;
-                        i[t] || setTimeout(function () {
+                    var i = e.scope[n.input.main][n.input.input].keys;
+                    i[t] || setTimeout(function () {
                             i[t] = !0, setTimeout(function () {
                                 delete i[t]
                             }, 50)
@@ -1433,7 +1429,7 @@
                         return e.scope[n.activePlayer.main].pos
                     },
                     A = function () {
-                        return e.scope[n.input2.main].mousePos
+                        return e.scope[n.input.main][n.input.input].mousePos
                     },
                     y = function (n, e) {
                         var t = !0;
@@ -1659,7 +1655,7 @@
                             if (!i.curWeapIdx) return void u("50")
                         }
                         if ((0 === t.button || 2 === t.button && !L()) && s.new) {
-                            var a = e.scope[n.input2.main],
+                            var a = e.scope[n.input.main][n.input.input],
                                 o = t.button;
                             a.mousePos = s.averageTargetMousePosition, a.mouseButtonsOld[o] = !1, a.mouseButtons[o] = !0
                         } else E(t)
@@ -1679,11 +1675,11 @@
                         window.removeEventListener("mousedown", M), window.removeEventListener("mousemove", D)
                     },
                     O = function (t) {
-                        var i = e.scope[n.input2.main].mouseButtons;
+                        var i = e.scope[n.input.main][n.input.input].mouseButtons;
                         32 == t.which && (i[0] = !0)
                     },
                     R = function (t) {
-                        var i = e.scope[n.input2.main].mouseButtons;
+                        var i = e.scope[n.input.main][n.input.input].mouseButtons;
                         32 == t.which && (i[0] = !1)
                     },
                     S = function () {
@@ -1691,7 +1687,7 @@
                     };
                 return {
                     bind: function (t) {
-                        var i, a, o, c = e.scope[n.input2.main];
+                        var i, a, o, c = e.scope[n.input.main][n.input.input];
                         i = t, l.targetEnemyNicknameVisibility = i.targetEnemyNicknameVisibility, l.forwardFiringCoeff = i.forwardFiringCoeff, l.smoothLevel = i.smoothLevel, l.restirctionAngle = i.restirctionAngle, l.restirctions = i.restirctions, l.detectOnDifferentLevels = i.detectOnDifferentLevels, l.enemyExtendedInfo = i.enemyExtendedInfo, l.showEnemiesActions = i.showEnemiesActions, s = function () {
                             for (var n = [], e = 0; e < l.smoothLevel; e++) n.push({
                                 distance: null,
@@ -1755,7 +1751,7 @@
                                 p && (l.showEnemiesActions && C(p), (i = p)[n.activePlayer.netData].dead || i[n.activePlayer.netData].downed || g(a, o, d, r[c]) || !y(s, p) || (t[r[c]] = p))
                             }
                             return t
-                        }()), s.new && (t = s.averageTargetMousePosition, e.scope[n.input2.main].mousePos = t)
+                        }()), s.new && (t = s.averageTargetMousePosition, e.scope[n.input.main][n.input.input].mousePos = t)
                     }
                 }
             }
@@ -1771,8 +1767,8 @@
                 r = !1;
             if (i && a) {
                 var s = function (t) {
-                        var i = e.scope[n.input2.main].keys;
-                        i[t] || setTimeout(function () {
+                    var i = e.scope[n.input.main][n.input.input].keys;
+                    i[t] || setTimeout(function () {
                             i[t] = !0, setTimeout(function () {
                                 delete i[t]
                             }, 50)
@@ -1840,36 +1836,30 @@
         "use strict";
         e.exports = function (n, e, t) {
             window.autoFire = false
-            var i = t.items,
-                a = !1,
-                o = !1,
-                r = [],
-                mousedown = false,
+                var mousedown = false,
+                binded = false,
                 spamMouse = function(){
-                if (mousedown || window.autoFire && e.scope[n.input2.main].mouseButtons){
-                    e.scope[n.input2.main].mouseButtons["0"] = !e.scope[n.input2.main].mouseButtons["0"]
+                if (mousedown || window.autoFire && e.scope[n.input.main][n.input.input].mouseButtons){
+                    e.scope[n.input.main][n.input.input].mouseButtons["0"] = !e.scope[n.input.main][n.input.input].mouseButtons["0"]
                 }   
                 }
-
-            if (i) {
-                
                 return {
                     bind: function () {
                         setInterval(spamMouse,50)
                         window.addEventListener("mousedown",function(){mousedown = true})
                         window.addEventListener("mouseup",function(){mousedown = false})
+                        binded = true
                     },
                     unbind: function () {
                         clearInterval(spamMouse,50)
                         window.removeEventListener("mousedown",function(){mousedown = true})
                         window.removeEventListener("mouseup",function(){mousedown = false})
+                        binded = false
                     },
                     isBinded: function () {
-                        return a
+                        return binded
                     }
                 }
-            }
-            console.log("Cannot init autoFire")
         }
     }, {}],
     17: [function (n, e, t) {
@@ -1879,7 +1869,7 @@
                 a = !1,
                 o = null,
                 r = function (t) {
-                    var i = e.scope[n.input2.main].keys;
+                    var i = e.scope[n.input.main][n.input.input].keys;
                     i[t] || setTimeout(function () {
                         i[t] = !0, setTimeout(function () {
                             delete i[t]
@@ -1895,8 +1885,8 @@
                                 if (o[s] && !o[s][n.activePlayer.netData].dead && !o[s][n.activePlayer.netData].downed && t[s].teamId != i) return !1
                             }
                             return !0
-                        }() && !((o = e.scope[n.input2.main].keys)[i.W] || o[i.D] || o[i.S] || o[i.A]) && ("Reloading" != (a = e.scope[n.menu].pieTimer).clientData.label || !a.active)) {
-                        var t = e.scope[n.activePlayer.main][n.activePlayer.localData];
+                        }() && !((o = e.scope[n.input.main][n.input.input].keys)[i.W] || o[i.D] || o[i.S] || o[i.A]) && ("Reloading" != (a = e.scope[n.menu].pieTimer).clientData.label || !a.active)) {
+                            var t = e.scope[n.activePlayer.main][n.activePlayer.localData];
                         if (t.health < 30 && t.inventory.healthkit > 0) return void r(i.Eight);
                         if (t.health < 70 && t.boost < 40 && t.inventory.bandage > 0) return void r(i.Seven);
                         if (t.boost < 50 && t.inventory.painkiller > 0) return void r(i.Zero);
@@ -1931,8 +1921,8 @@
                 c = window.performance.now();
             if (i && a && o && r) {
                 var p = function (t) {
-                        var i = e.scope[n.input2.main].keys;
-                        i[t] || setTimeout(function () {
+                    var i = e.scope[n.input.main][n.input.input].keys;
+                    i[t] || setTimeout(function () {
                             i[t] = !0, setTimeout(function () {
                                 delete i[t]
                             }, 90)
@@ -2040,7 +2030,7 @@
                 return {
                     bind: function (n) {
                         var e;
-                        e = n, l.autoPickUp = e.autoPickUp, l.safeDistance = e.safeDistance, l.dropDelay = e.dropDelay, f = i.prototype.n, i.prototype.n = function (n, e, t, i) {
+                        e = n, l.autoPickUp = e.autoPickUp, l.safeDistance = e.safeDistance, l.dropDelay = e.dropDelay, f = i.prototype.l, i.prototype.l = function (n, e, t, i) {
                             b = this, m(), f.call(b, n, e, t, i)
                         }, A = r.prototype.pushAction, r.prototype.pushAction = function (n) {
                             ! function (n) {
@@ -2049,7 +2039,7 @@
                         }, s = !0
                     },
                     unbind: function () {
-                        i.prototype.n = f, r.prototype.pushAction = A, s = !1
+                        i.prototype.l = f, r.prototype.pushAction = A, s = !1
                     },
                     isBinded: function () {
                         return s
@@ -2109,8 +2099,8 @@
                     t.scope = function () {
                         if (i.scope) switch (i.scope.__type) {
                             case o:
-                                i.scope.hasOwnProperty("door") && !i.scope.door.open && (t = "70", (a = e.scope[n.input2.main].keys)[t] || setTimeout(function () {
-                                    a[t] = !0, setTimeout(function () {
+                            i.scope.hasOwnProperty("door") && !i.scope.door.open && (t = "70", (a = e.scope[n.input.main][n.input.input].keys)[t] || setTimeout(function () {
+                                a[t] = !0, setTimeout(function () {
                                         delete a[t]
                                     }, 50)
                                 }, 50))
@@ -2181,8 +2171,8 @@
             var t = !1,
                 i = !0,
                 a = function () {
-                    e.scope[n.pieTimer].t(function () {
-                            o()
+                    e.scope[n.pieTimer].a(function () {
+                        o()
                         }, 4.2, "Grenade", !0), i = !1,
                         function t() {
                             var a = e.scope[n.activePlayer.main];
@@ -2190,7 +2180,7 @@
                         }()
                 },
                 o = function () {
-                    e.scope[n.pieTimer] && e.scope[n.pieTimer].a(!0), i = !0
+                    e.scope[n.pieTimer] && e.scope[n.pieTimer].o(!0), i = !0
                 },
                 r = function (t) {
                     var o = e.scope[n.activePlayer.main];
@@ -3154,7 +3144,7 @@
                     };
                 return {
                     bind: function () {
-                        var t = e.scope[n.input2.main];
+                        var t = e.scope[n.input.main][n.input.input];
                         l = t.bOnMouseWheel, window.removeEventListener("wheel", t.bOnMouseWheel), p(), window.addEventListener("wheel", c), r(s), o = !0
                     },
                     unbind: function () {
@@ -3189,9 +3179,8 @@
                         playerIds = Object.keys(e.scope[n.playerBarn.main][n.playerBarn.players])
                     for (var i = 0; i < playerIds.length; i++) {
                         var enemyObject = e.scope[n.objectCreator].idToObj[playerIds[i]]
-                        if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !enemyObject[n.activePlayer.netData].dead && !enemyObject[n.activePlayer.netData].downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
-                            result[playerIds[i]] = enemyObject;
-                        }
+                        if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.localData].dead && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.netData].downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
+                            result[playerIds[i]] = e.scope[n.objectCreator].idToObj[playerIds[i]];}
                     }
                     return result
 
@@ -3206,7 +3195,7 @@
                     return e.scope[n.activePlayer.main].pos
                 },
                 pressKey = function (key) {
-                    var keys = e.scope[n.input2.main].keys;
+                    var keys = e.scope[n.input.main][n.input.input].keys;
                     keys[key] || setTimeout(function () {
                         keys[key] = !0, setTimeout(function () {
                             delete keys[key]
@@ -3247,7 +3236,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    curAction = e.scope[n.activePlayer.main][n.activePlayer.netData].actionType,
+                        curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
                         window.onmousedown = function () {
                             mouseDown = true
                         }
@@ -3335,12 +3324,9 @@
                 broadcastchannel.postMessage(JSON.stringify({"keypressed":event.key}))
             },
             pressKey = function (key) {
-                var keys = e.scope[n.input2.main].keys;
-                keys[key] || setTimeout(function () {
-                    keys[key] = !0, setTimeout(function () {
-                        delete keys[key]
-                    }, 90)
-                }, 0)
+            var keyboardEvent = document.createEvent("KeyboardEvent");
+            keyboardEvent.key = key
+            document.dispatchEvent(keyboardEvent)
             }
             return{
                 bind: function () {
