@@ -1,5 +1,5 @@
 ![alt text](http://i67.tinypic.com/357hs47.png "Survivio Banner")
-# Welcome to Surviv.io-Cheats(Actual working on client: 0.6.3)!
+# Welcome to Surviv.io-Cheats(Actual working on client: 0.6.4)!
 This is a Surviv.io cheat loaded as a Chrome extension. It was originally developed by w3x731 and I've decided to continue the development of the code.
 
 
@@ -42,6 +42,9 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 4. Click "Load Unpacked" and select the subfolder named `ChromeExtension` which is in the extracted (called `Surviv.io-Cheats-master.`)
 5. Open [Surviv.io](http://Surviv.io).
 6. Have fun!
+
+##Currently known errors
+AutoLoot and BumpFire not working as intended, still working on it. This release is mainly to provide aimbot and walls
 
 ## Warning!
 All actions you take at your own risk. The author is not responsible for the consequences of your actions.
