@@ -1298,11 +1298,7 @@
         e.exports = {
             menu: "xe", 
             camera: "q",
-<<<<<<< HEAD
             bullets: "Ee",
-=======
-            bullets: "Ae",
->>>>>>> d0e90a1d7a0b6dc5622bf45f884688d553791387
             planes: "Re",
             activeId: "me",
             targetZoom: "_",
@@ -1329,11 +1325,7 @@
                 lootPool: "at",
                 pool: "de"
             },
-<<<<<<< HEAD
-            version: "1.0.74",
-=======
             version: "1.0.75",
->>>>>>> d0e90a1d7a0b6dc5622bf45f884688d553791387
             protocolVersion: 37
         }
     }, {}],
