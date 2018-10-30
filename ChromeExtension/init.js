@@ -1297,36 +1297,36 @@
         "use strict";
         e.exports = {
             menu: "xe", 
-            camera: "N",
+            camera: "q",
             bullets: "Ee",
             planes: "Re",
             activeId: "me",
-            targetZoom: "f",
+            targetZoom: "_",
             objectCreator: "nt",
             pieTimer: "Xe",
-            map: "Pe",
+            map: "Te",
             input: {
                 main: "ge",
                 input: "input",
-                mousePressed: "$"
+                mousePressed: "ee"
             },
             activePlayer: {
                 main: "lt",
-                netData: "q",
-                localData: "U"
+                netData: "U",
+                localData: "H"
             },
             playerBarn: {
                 main: "Ce",
-                players: "Pt"
+                players: "Tt"
             },
             lootBarn: {
-                main: "Ve",
+                main: "Ge",
                 itemf: "zt",
                 lootPool: "at",
                 pool: "de"
             },
-            version: "1.0.74",
-            protocolVersion: 36
+            version: "1.0.75",
+            protocolVersion: 37
         }
     }, {}],
     13: [function (n, e, t) {
