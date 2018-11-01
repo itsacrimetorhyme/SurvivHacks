@@ -1,4 +1,4 @@
-! function () {
+﻿! function () {
     return function n(e, t, i) {
 
         function a(r, s) {
@@ -1297,23 +1297,23 @@
         "use strict";
         e.exports = {
             menu: "xe", 
-            camera: "q",
+            camera: "N",
             bullets: "Ee",
             planes: "Re",
             activeId: "me",
-            targetZoom: "_",
+            targetZoom: "f",
             objectCreator: "nt",
             pieTimer: "Xe",
             map: "Te",
             input: {
                 main: "ge",
                 input: "input",
-                mousePressed: "ee"
+                mousePressed: "$"
             },
             activePlayer: {
                 main: "lt",
-                netData: "U",
-                localData: "H"
+                netData: "q",
+                localData: "U"
             },
             playerBarn: {
                 main: "Ce",
@@ -1321,11 +1321,11 @@
             },
             lootBarn: {
                 main: "Ge",
-                itemf: "zt",
+                itemf: "Mt",
                 lootPool: "at",
                 pool: "de"
             },
-            version: "1.0.75",
+            version: "1.0.76",
             protocolVersion: 37
         }
     }, {}],
