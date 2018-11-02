@@ -1298,17 +1298,17 @@
         e.exports = {
             menu: "xe", 
             camera: "N",
-            bullets: "Ae",
+            bullets: "Ee",
             planes: "Re",
             activeId: "me",
             targetZoom: "f",
             objectCreator: "nt",
             pieTimer: "Xe",
-            map: "Pe",
+            map: "Te",
             input: {
                 main: "ge",
                 input: "input",
-                mousePressed: "ee"
+                mousePressed: "$"
             },
             activePlayer: {
                 main: "lt",
@@ -1320,8 +1320,8 @@
                 players: "Tt"
             },
             lootBarn: {
-                main: "Ve",
-                itemf: "zt",
+                main: "Ge",
+                itemf: "Mt",
                 lootPool: "at",
                 pool: "de"
             },
