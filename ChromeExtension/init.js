@@ -1320,7 +1320,7 @@
                 players: "Tt"
             },
             lootBarn: {
-                main: "Ge",
+                main: "Ve",
                 itemf: "Mt",
                 lootPool: "at",
                 pool: "de"
