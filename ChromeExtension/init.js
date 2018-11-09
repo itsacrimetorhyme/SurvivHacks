@@ -1316,7 +1316,7 @@
             input: {
                 main: "ge",
                 input: "input",
-                mousePressed: "$"
+                mousePressed: "ee"
             },
             activePlayer: {
                 main: "lt",
@@ -1325,7 +1325,7 @@
             },
             playerBarn: {
                 main: "Ce",
-                players: "Pt"
+                players: "Tt"
             },
             lootBarn: {
                 main: "Ve",
@@ -1333,8 +1333,8 @@
                 lootPool: "at",
                 pool: "de"
             },
-            version: "1.0.74",
-            protocolVersion: 36
+            version: "1.0.76",
+            protocolVersion: 37
         }
     }, {}],
     13: [function (n, e, t) {
@@ -3324,8 +3324,21 @@
                 broadcastchannel.postMessage(JSON.stringify({"keypressed":event.key}))
             },
             pressKey = function (key) {
-            var keyboardEvent = document.createEvent("KeyboardEvent");
-            keyboardEvent.key = key
+            console.log(key)
+            var keyboardEvent = document.createEvent("KeyboardEvent"),
+            initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+            keyboardEvent[initMethod](
+                "keypress", 
+                 true, 
+                 true, 
+                 window, 
+                 false, 
+                 false, 
+                 false, 
+                 false, 
+                 key, 
+                 0 
+            );
             document.dispatchEvent(keyboardEvent)
             }
             return{
