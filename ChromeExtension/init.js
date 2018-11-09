@@ -826,12 +826,13 @@
                     f = e["989ad62a"].exports.bagSizes,
                     b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.$e,
+                    y = e.e5d16b4d.exports.et,
                     g = e.a508b62a.exports.Ie,
-                    v = e.a48f3bb2.exports.We,
-                    h = e.c73dee75.exports.De,
-                    x = e.d3da5587.exports.Je,
+                    v = e.a48f3bb2.exports.He,
+                    h = e.c73dee75.exports.Ee,
+                    x = e.d3da5587.exports.Qe,
                     T = e["4b8d140f"].exports.Key;
+                    // console.log(e.e5d16b4d.exports, e.a508b62a.exports, e.a48f3bb2.exports, e.c73dee75.exports, e.d3da5587.exports);
                 setInterval(function () {
                     n.scope
                 }, 2e3);
@@ -1296,37 +1297,37 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "xe", 
+            menu: "we", 
             camera: "N",
-            bullets: "Ee",
-            planes: "Re",
+            bullets: "Oe",
+            planes: "je",
             activeId: "me",
             targetZoom: "f",
-            objectCreator: "nt",
-            pieTimer: "Xe",
-            map: "Te",
+            objectCreator: "st",
+            pieTimer: "Ze",
+            map: "Pe",
             input: {
-                main: "ge",
+                main: "ye",
                 input: "input",
                 mousePressed: "$"
             },
             activePlayer: {
-                main: "lt",
+                main: "ct",
                 netData: "q",
                 localData: "U"
             },
             playerBarn: {
-                main: "Ce",
-                players: "Tt"
+                main: "Ae",
+                players: "Pt"
             },
             lootBarn: {
-                main: "Ve",
+                main: "We",
                 itemf: "Mt",
-                lootPool: "at",
+                lootPool: "it",
                 pool: "de"
             },
             version: "1.0.76",
-            protocolVersion: 37
+            protocolVersion: 38
         }
     }, {}],
     13: [function (n, e, t) {
