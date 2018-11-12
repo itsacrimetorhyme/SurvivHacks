@@ -2305,7 +2305,7 @@
                                         s = r.range,
                                         l = r.direction - r.angle,
                                         c = r.direction + r.angle;
-                                    l = l > 2 * Math.PI ? l - 2 * Math.PI : l < 0 ? l + 2 * Math.PI : l, c = c > 2 * Math.PI ? c - 2 * Math.PI : c < 0 ? c + 2 * Math.PI : c, i.beginFill(16711680, .1), i.moveTo(a, o), i.arc(a, o, s, l, c), i.lineTo(a, o), i.endFill()
+                                    l = l > 2 * Math.PI ? l - 2 * Math.PI : l < 0 ? l + 2 * Math.PI : l, c = c > 2 * Math.PI ? c - 2 * Math.PI : c < 0 ? c + 2 * Math.PI : c, i.beginFill(16711680, .35), i.moveTo(a, o), i.arc(a, o, s, l, c), i.lineTo(a, o), i.endFill()
                                 }
                             }()) : c()
                         }
