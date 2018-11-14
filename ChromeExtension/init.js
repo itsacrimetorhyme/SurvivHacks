@@ -1241,7 +1241,7 @@
                                 i = e.split(".");
                             t.filter(function (n, e, t) {
                                 return n < i[e]
-                            }).length > 0 && notifications.create("info", "A new version of the cheat is available!", "INFO", 1e4)
+                            }).length > 0 && notifications.create("info", "A new version of the cheat is available! Use the auto update scripts!", "INFO", 1e4)
                         }
                     }(i.version, n.version)
                 }).catch(function (n) {
