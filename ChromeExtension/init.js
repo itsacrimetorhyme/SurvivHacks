@@ -827,7 +827,7 @@
                     b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = e["989ad62a"].exports.protocolVersion,
                     y = e.e5d16b4d.exports.et,
-                    g = e.a508b62a.exports.Ae,
+                    g = e.a508b62a.exports.Ie,
                     v = e.a48f3bb2.exports.He,
                     h = e.c73dee75.exports.Ee,
                     x = e.d3da5587.exports.Qe,
@@ -836,7 +836,7 @@
                 setInterval(function () {
                     n.scope
                 }, 2e3);
-                /*
+                this.console.log(e)
                 setInterval(function () {
                     console.log(n)
 
@@ -1317,7 +1317,7 @@
                 localData: "U"
             },
             playerBarn: {
-                main: "Ie",
+                main: "Ae",
                 players: "Pt"
             },
             lootBarn: {
@@ -1326,7 +1326,7 @@
                 lootPool: "it",
                 pool: "de"
             },
-            version: "1.0.771",
+            version: "1.0.772",
             protocolVersion: 38
         }
     }, {}],
