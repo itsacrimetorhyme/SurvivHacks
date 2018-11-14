@@ -1326,7 +1326,7 @@
                 lootPool: "it",
                 pool: "de"
             },
-            version: "1.0.773",
+            version: "1.0.774",
             protocolVersion: 38
         }
     }, {}],
@@ -3267,7 +3267,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
+                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].action.type,
                         window.onmousedown = function () {
                             mouseDown = true
                         }
