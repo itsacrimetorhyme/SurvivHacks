@@ -1299,7 +1299,7 @@
         e.exports = {
             menu: "xe", 
             camera: "N",
-            bullets: "Oe",
+            bullets: "De",
             planes: "je",
             activeId: "me",
             targetZoom: "f",
@@ -1326,7 +1326,7 @@
                 lootPool: "it",
                 pool: "de"
             },
-            version: "1.0.775",
+            version: "1.0.776",
             protocolVersion: 38
         }
     }, {}],
