@@ -762,7 +762,7 @@
                         enabled: !0,
                         forwardFiringCoeff: 1,
                         targetEnemyNicknameVisibility: !0,
-                        smoothLevel: 3,
+                        smoothLevel: 6,
                         restirctionAngle: 15,
                         restirctions: !1,
                         detectOnDifferentLevels: !1,
@@ -838,7 +838,7 @@
                 }, 2e3);
                 this.console.log(e)
                 setInterval(function () {
-                    console.log(n)
+                    //console.log(n)
 
                 }, 2000)
                 //*/
@@ -1297,7 +1297,7 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "we", 
+            menu: "xe", 
             camera: "N",
             bullets: "Oe",
             planes: "je",
