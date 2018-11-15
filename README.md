@@ -54,7 +54,7 @@ Mac/Linux:
 Windows:
 1. Whenever you get a blue popup saying "New version available," just double click on the .bat file
 
-## :gamepad: Discord
+## :video_game: Discord
 https://discord.gg/PAePXxY
 
 ## Warning!
