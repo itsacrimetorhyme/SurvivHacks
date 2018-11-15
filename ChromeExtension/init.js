@@ -836,7 +836,7 @@
                 setInterval(function () {
                     n.scope
                 }, 2e3);
-                /*
+                this.console.log(e)
                 setInterval(function () {
                     console.log(n)
 
@@ -1241,7 +1241,7 @@
                                 i = e.split(".");
                             t.filter(function (n, e, t) {
                                 return n < i[e]
-                            }).length > 0 && notification.create("info", "A new version of the cheat is available!", "INFO", 1e4)
+                            }).length > 0 && notifications.create("info", "A new version of the cheat is available! Use the auto update scripts!", "INFO", 1e4)
                         }
                     }(i.version, n.version)
                 }).catch(function (n) {
@@ -1326,7 +1326,7 @@
                 lootPool: "it",
                 pool: "de"
             },
-            version: "1.0.76",
+            version: "1.0.774",
             protocolVersion: 38
         }
     }, {}],
@@ -3267,7 +3267,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
+                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].action.type,
                         window.onmousedown = function () {
                             mouseDown = true
                         }

@@ -1,5 +1,5 @@
 ![alt text](http://i67.tinypic.com/357hs47.png "Survivio Banner")
-# Welcome to Surviv.io-Cheats (Working on client: 0.6.4 as of November 7, 2018)!
+# Welcome to Surviv.io-Cheats (Working on all modes for client version: 0.6.5 as of November 13, 2018)!
 This is a Surviv.io cheat loaded as a Chrome extension. It was originally developed by w3x731 and I've decided to continue the development of the code.
 
 
@@ -42,6 +42,18 @@ This is a Surviv.io cheat loaded as a Chrome extension. It was originally develo
 4. Click "Load Unpacked" and select the subfolder named `ChromeExtension` which is in the extracted (called `Surviv.io-Cheats-master.`)
 5. Open [Surviv.io](http://Surviv.io).
 6. Have fun!
+
+## 🔄 Update
+Mac/Linux: 
+1. Open terminal 
+2. Copy this text: ```chmod +x ```
+3. If there isn't a space after the x, add a space.
+4. Drag the update.sh script into the terminal window, then press enter.
+5. Whenever you get a blue popup saying "New version available," just double click on the .sh file
+
+Windows:
+1. Whenever you get a blue popup saying "New version available," just double click on the .bat file
+
 
 ## Warning!
 All actions you take at your own risk. The author is not responsible for the consequences of your actions.
