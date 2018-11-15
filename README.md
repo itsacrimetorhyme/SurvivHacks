@@ -48,12 +48,14 @@ Mac/Linux:
 1. Open terminal 
 2. Copy this text: ```chmod +x ```
 3. If there isn't a space after the x, add a space.
-4. Drag the update.sh script into the terminal window, then press enter.
+4. Drag the update-mac.sh (or update-linux.sh) script into the terminal window, then press enter.
 5. Whenever you get a blue popup saying "New version available," just double click on the .sh file
 
 Windows:
 1. Whenever you get a blue popup saying "New version available," just double click on the .bat file
 
+## :gamepad: Discord
+https://discord.gg/PAePXxY
 
 ## Warning!
 All actions you take at your own risk. The author is not responsible for the consequences of your actions.
