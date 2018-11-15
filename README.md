@@ -52,7 +52,7 @@ Mac/Linux:
 5. Whenever you get a blue popup saying "New version available," just double click on the .sh file
 
 Windows:
-1. Whenever you get a blue popup saying "New version available," just double click on the .bat file
+1. Whenever you get a blue popup saying "New version available," just double click on the update-windows.ps1 file
 
 ## :video_game: Discord
 https://discord.gg/PAePXxY
