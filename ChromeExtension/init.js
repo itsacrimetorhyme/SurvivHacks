@@ -4,8 +4,8 @@
             if (!t[r]) {
                 if (!e[r]) {
                     var l = "function" == typeof require && require;
-                    if (!s && l) return l(r, !0);
-                    if (o) return o(r, !0);
+                    if (!s && l) return l(r, true);
+                    if (o) return o(r, true);
                     var c = new Error("Cannot find module '" + r + "'");
                     throw c.code = "MODULE_NOT_FOUND", c;
                 }
@@ -39,10 +39,10 @@
                 var t = document.head || document.getElementsByTagName("head")[0],
                     i = document.createElement("link");
                 for (var a in i.href = n, i.rel = "stylesheet", e);
-                    if (e.hasOwnProperty(a)) {
-                        var o = e[a];
-                        i.setAttribute("data-" + a, o)
-                    } t.appendChild(i)
+                if (e.hasOwnProperty(a)) {
+                    var o = e[a];
+                    i.setAttribute("data-" + a, o)
+                } t.appendChild(i)
             },
             createStyle: function (n, e, t) {
                 t = t || {};
@@ -97,25 +97,25 @@
                     maxWidth: null,
                     zindex: null,
                     layout: 1,
-                    balloon: !1,
-                    close: !0,
-                    closeOnEscape: !1,
-                    closeOnClick: !1,
+                    balloon: false,
+                    close: true,
+                    closeOnEscape: false,
+                    closeOnClick: false,
                     displayMode: 0,
                     position: "bottomRight",
                     target: "",
-                    targetFirst: !0,
+                    targetFirst: true,
                     timeout: 5e3,
-                    rtl: !1,
-                    animateInside: !0,
-                    drag: !0,
-                    pauseOnHover: !0,
-                    resetOnHover: !1,
-                    progressBar: !0,
+                    rtl: false,
+                    animateInside: true,
+                    drag: true,
+                    pauseOnHover: true,
+                    resetOnHover: false,
+                    progressBar: true,
                     progressBarColor: "",
                     progressBarEasing: "linear",
-                    overlay: !1,
-                    overlayClose: !1,
+                    overlay: false,
+                    overlayClose: false,
                     overlayColor: "rgba(0, 0, 0, 0.6)",
                     transitionIn: "fadeInUp",
                     transitionOut: "fadeOut",
@@ -133,8 +133,8 @@
                     }), "function" != typeof window.CustomEvent) {
                     var c = function (n, e) {
                         e = e || {
-                            bubbles: !1,
-                            cancelable: !1,
+                            bubbles: false,
+                            cancelable: false,
                             detail: void 0
                         };
                         var t = document.createEvent("CustomEvent");
@@ -205,7 +205,7 @@
                         n.remove()
                     }), p(document.querySelectorAll(".iziToast"), function (n, e) {
                         n.remove()
-                    }), this.children = {}, document.removeEventListener("iziToast-opened", {}, !1), document.removeEventListener("iziToast-opening", {}, !1), document.removeEventListener("iziToast-closing", {}, !1), document.removeEventListener("iziToast-closed", {}, !1), document.removeEventListener("keyup", {}, !1), s = {}
+                    }), this.children = {}, document.removeEventListener("iziToast-opened", {}, false), document.removeEventListener("iziToast-opening", {}, false), document.removeEventListener("iziToast-closing", {}, false), document.removeEventListener("iziToast-closed", {}, false), document.removeEventListener("keyup", {}, false), s = {}
                 }, e.settings = function (n) {
                     e.destroy(), s = n, l = d(l, n || {})
                 }, p({
@@ -286,8 +286,8 @@
                     try {
                         var s = new CustomEvent("iziToast-closing", {
                             detail: o,
-                            bubbles: !0,
-                            cancelable: !0
+                            bubbles: true,
+                            cancelable: true
                         });
                         document.dispatchEvent(s)
                     } catch (n) {
@@ -299,8 +299,8 @@
                             try {
                                 var n = new CustomEvent("iziToast-closed", {
                                     detail: o,
-                                    bubbles: !0,
-                                    cancelable: !0
+                                    bubbles: true,
+                                    cancelable: true
                                 });
                                 document.dispatchEvent(n)
                             } catch (n) {
@@ -313,7 +313,7 @@
                     var i, a = this,
                         c = d(s, n || {});
                     if ((c = d(l, c)).time = {}, null === c.id && (c.id = (i = c.title + c.message + c.color, btoa(encodeURIComponent(i)).replace(/=/g, ""))), 1 === c.displayMode || "once" == c.displayMode) try {
-                        if (document.querySelectorAll(".iziToast#" + c.id).length > 0) return !1
+                        if (document.querySelectorAll(".iziToast#" + c.id).length > 0) return false
                     } catch (n) {
                         console.warn("[iziToast] Could not find an element with this selector: #" + c.id + ". Try to set an valid id.")
                     }
@@ -352,7 +352,7 @@
                             try {
                                 return btoa(atob(n)) == n
                             } catch (n) {
-                                return !1
+                                return false
                             }
                         }(c.image.replace(/ /g, "")) ? b.cover.style.backgroundImage = "url(data:image/png;base64," + c.image.replace(/ /g, "") + ")" : b.cover.style.backgroundImage = "url(" + c.image + ")", c.rtl ? b.toastBody.style.marginRight = c.imageWidth + 10 + "px" : b.toastBody.style.marginLeft = c.imageWidth + 10 + "px", b.toast.appendChild(b.cover)), c.close ? (b.buttonClose = document.createElement("button"), b.buttonClose.type = "button", b.buttonClose.classList.add("iziToast-close"), b.buttonClose.addEventListener("click", function (n) {
                             n.target, a.hide(c, b.toast, "button")
@@ -427,8 +427,8 @@
                     try {
                         var A = new CustomEvent("iziToast-opening", {
                             detail: c,
-                            bubbles: !0,
-                            cancelable: !0
+                            bubbles: true,
+                            cancelable: true
                         });
                         document.dispatchEvent(A)
                     } catch (n) {
@@ -439,8 +439,8 @@
                         try {
                             var n = new CustomEvent("iziToast-opened", {
                                 detail: c,
-                                bubbles: !0,
-                                cancelable: !0
+                                bubbles: true,
+                                cancelable: true
                             });
                             document.dispatchEvent(n)
                         } catch (n) {
@@ -449,13 +449,13 @@
                         c.onOpened.apply(null, [c, b.toast])
                     }, 1e3), c.drag && (o ? (b.toast.addEventListener("touchstart", function (n) {
                         m.startMoving(this, a, c, n)
-                    }, !1), b.toast.addEventListener("touchend", function (n) {
+                    }, false), b.toast.addEventListener("touchend", function (n) {
                         m.stopMoving(this, n)
-                    }, !1)) : (b.toast.addEventListener("mousedown", function (n) {
+                    }, false)) : (b.toast.addEventListener("mousedown", function (n) {
                         n.preventDefault(), m.startMoving(this, a, c, n)
-                    }, !1), b.toast.addEventListener("mouseup", function (n) {
+                    }, false), b.toast.addEventListener("mouseup", function (n) {
                         n.preventDefault(), m.stopMoving(this, n)
-                    }, !1))), c.closeOnEscape && document.addEventListener("keyup", function (n) {
+                    }, false))), c.closeOnEscape && document.addEventListener("keyup", function (n) {
                         27 == (n = n || window.event).keyCode && a.hide(c, b.toast, "esc")
                     }), c.closeOnClick && b.toast.addEventListener("click", function (n) {
                         a.hide(c, b.toast, "toast")
@@ -479,7 +479,7 @@
                 p = document.createElement("div");
             p.id = "stats", p.addEventListener("mousedown", function (n) {
                 n.preventDefault(), g(++c % 2)
-            }, !1), p.style.cssText = "width:80px;opacity:0.9;cursor:pointer";
+            }, false), p.style.cssText = "width:80px;opacity:0.9;cursor:pointer";
             var d = document.createElement("div");
             d.id = "fps", d.style.cssText = "padding:0 0 3px 3px;text-align:left;background-color:#002", p.appendChild(d);
             var u = document.createElement("div");
@@ -529,21 +529,21 @@
             var i = e.playerBarn,
                 a = ["playerBarn"],
                 o = [],
-                r = !1,
+                r = false,
                 s = function (n) {};
             return {
                 bind: function () {
                     r || (s = i.prototype.render, i.prototype.render = function (n) {
-                        var e = !0,
-                            i = !1,
+                        var e = true,
+                            i = false,
                             a = void 0;
                         try {
-                            for (var r, l = o[Symbol.iterator](); !(e = (r = l.next()).done); e = !0) {
+                            for (var r, l = o[Symbol.iterator](); !(e = (r = l.next()).done); e = true) {
                                 var c = r.value;
                                 "playerBarn" == c.type && t[c.callback].call()
                             }
                         } catch (n) {
-                            i = !0, a = n
+                            i = true, a = n
                         } finally {
                             try {
                                 !e && l.return && l.return()
@@ -552,10 +552,10 @@
                             }
                         }
                         s.call(this, n)
-                    }), r = !0
+                    }), r = true
                 },
                 unbind: function () {
-                    r && (i.prototype.render = s, o = []), r = !1
+                    r && (i.prototype.render = s, o = []), r = false
                 },
                 add: function (n, e) {
                     return !(!a.includes(n) || function (n, e) {
@@ -569,149 +569,14 @@
                 },
                 remove: function (n, e) {
                     for (var t = 0; t < o.length; t++)
-                        if (o[t].type == n && o[t].callback == e) return o.splice(t, 1), !0;
-                    return !1
+                        if (o[t].type == n && o[t].callback == e) return o.splice(t, 1), true;
+                    return false
                 }
             }
         }
     }, {}],
     5: [function (n, e, t) {
-        var i = `/* Izitoast */
-        /*
-        * iziToast | v1.4.0
-        * http://izitoast.marcelodolce.com
-        * by Marcelo Dolce.
-        */
-        .iziToast-capsule {
-            font-size: 0;
-            height: 0;
-            width: 100%;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            transition: transform .5s cubic-bezier(.25, .8, .25, 1), height .5s cubic-bezier(.25, .8, .25, 1);
-        }
-        
-        .iziToast-capsule,
-        .iziToast-capsule * {
-            box-sizing: border-box;
-        }
-        
-        .iziToast-overlay {
-            display: block;
-            position: fixed;
-            top: -100px;
-            left: 0;
-            right: 0;
-            bottom: -100px;
-            z-index: 997;
-        }
-        
-        .iziToast {
-            display: inline-block;
-            clear: both;
-            position: relative;
-            font-family: 'Lato', Tahoma, Arial;
-            font-size: 14px;
-            padding: 8px 45px 9px 0;
-            background: rgba(238, 238, 238, .9);
-            border-color: rgba(238, 238, 238, .9);
-            width: 100%;
-            pointer-events: all;
-            cursor: default;
-            transform: translateX(0);
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            min-height: 54px;
-        }
-        
-        .iziToast>.iziToast-progressbar {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            z-index: 1;
-            background: rgba(255, 255, 255, .2);
-        }
-        
-        .iziToast>.iziToast-progressbar>div {
-            height: 2px;
-            width: 100%;
-            background: rgba(0, 0, 0, .3);
-            border-radius: 0 0 3px 3px;
-        }
-        
-        .iziToast.iziToast-balloon:before {
-            content: '';
-            position: absolute;
-            right: 8px;
-            left: auto;
-            width: 0;
-            height: 0;
-            top: 100%;
-            border-right: 0 solid transparent;
-            border-left: 15px solid transparent;
-            border-top: 10px solid #000;
-            border-top-color: inherit;
-            border-radius: 0;
-        }
-        
-        .iziToast.iziToast-balloon .iziToast-progressbar {
-            top: 0;
-            bottom: auto;
-        }
-        
-        .iziToast.iziToast-balloon>div {
-            border-radius: 0 0 0 3px;
-        }
-        
-        .iziToast>.iziToast-cover {
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            height: 100%;
-            margin: 0;
-            background-size: 100%;
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-            background-color: rgba(0, 0, 0, .1);
-        }
-        
-        .iziToast>.iziToast-close {
-            position: absolute;
-            right: 0;
-            top: 0;
-            border: 0;
-            padding: 0;
-            opacity: .6;
-            width: 42px;
-            height: 100%;
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAJPAAACTwBcGfW0QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAD3SURBVFiF1ZdtDoMgDEBfdi4PwAX8vLFn0qT7wxantojKupmQmCi8R4tSACpgjC2ICCUbEBa8ingjsU1AXRBeR8aLN64FiknswN8CYefBBDQ3whuFESy7WyQMeC0ipEI0A+0FeBvHUFN8xPaUhAH/iKoWsnXHGegy4J0yxialOfaHJAz4bhRzQzgDvdGnz4GbAonZbCQMuBm1K/kcFu8Mp1N2cFFpsxsMuJqqbIGExGl4loARajU1twskJLLhIsID7+tvUoDnIjTg5T9DPH9EBrz8rxjPzciAl9+O8SxI8CzJ8CxKFfh3ynK8Dyb8wNHM/XDqejx/AtNyPO87tNybAAAAAElFTkSuQmCC) no-repeat 50% 50%;
-            background-size: 8px;
-            cursor: pointer;
-            outline: 0;
-        }
-        
-        .iziToast>.iziToast-close:hover {
-            opacity: 1;
-        }
-        
-        .iziToast>.iziToast-body {
-            position: relative;
-            padding: 0 0 0 10px;
-            height: auto;
-            min-height: 36px;
-            margin: 0 0 0 15px;
-            text-align: left;
-        }
-        
-        .iziToast>.iziToast-body:after {
-            content: \"\";  display: table;  clear: both;}.iziToast>.iziToast-body .iziToast-texts {  margin: 10px 0 0;  padding-right: 2px;  display: inline-block;  float: left;}.iziToast>.iziToast-body .iziToast-inputs {  min-height: 19px;  float: left;  margin: 3px -2px;}.iziToast>.iziToast-body .iziToast-inputs>input:not([type=checkbox]):not([type=radio]),.iziToast>.iziToast-body .iziToast-inputs>select {  position: relative;  display: inline-block;  margin: 2px;  border-radius: 2px;  border: 0;  padding: 4px 7px;  font-size: 13px;  letter-spacing: .02em;  background: rgba(0,0,0,.1);  color: #000;  box-shadow: 0 0 0 1px rgba(0,0,0,.2);  min-height: 26px;}.iziToast>.iziToast-body .iziToast-inputs>input:not([type=checkbox]):not([type=radio]):focus,.iziToast>.iziToast-body .iziToast-inputs>select:focus {  box-shadow: 0 0 0 1px rgba(0,0,0,.6);}.iziToast>.iziToast-body .iziToast-buttons {  min-height: 17px;  float: left;  margin: 4px -2px;}.iziToast>.iziToast-body .iziToast-buttons>a,.iziToast>.iziToast-body .iziToast-buttons>button,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]) {  position: relative;  display: inline-block;  margin: 2px;  border-radius: 2px;  border: 0;  padding: 5px 10px;  font-size: 12px;  letter-spacing: .02em;  cursor: pointer;  background: rgba(0,0,0,.1);  color: #000;}.iziToast>.iziToast-body .iziToast-buttons>a:hover,.iziToast>.iziToast-body .iziToast-buttons>button:hover,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]):hover {  background: rgba(0,0,0,.2);}.iziToast>.iziToast-body .iziToast-buttons>a:focus,.iziToast>.iziToast-body .iziToast-buttons>button:focus,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]):focus {  box-shadow: 0 0 0 1px rgba(0,0,0,.6);}.iziToast>.iziToast-body .iziToast-buttons>a:active,.iziToast>.iziToast-body .iziToast-buttons>button:active,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]):active {  top: 1px;}.iziToast>.iziToast-body .iziToast-icon {  position: absolute;  left: 0;  top: 50%;  display: table;  font-size: 23px;  line-height: 24px;  margin-top: -12px;  color: #000;  width: 24px;  height: 24px;}.iziToast>.iziToast-body .iziToast-icon.ico-info {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAflBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACCtoPsAAAAKXRSTlMA6PsIvDob+OapavVhWRYPrIry2MxGQ97czsOzpJaMcE0qJQOwVtKjfxCVFeIAAAI3SURBVFjDlJPZsoIwEETnCiGyb8q+qmjl/3/wFmGKwjBROS9QWbtnOqDDGPq4MdMkSc0m7gcDDhF4NRdv8NoL4EcMpzoJglPl/KTDz4WW3IdvXEvxkfIKn7BMZb1bFK4yZFqghZ03jk0nG8N5NBwzx9xU5cxAg8fXi20/hDdC316lcA8o7t16eRuQvW1XGd2d2P8QSHQDDbdIII/9CR3lUF+lbucfJy4WfMS64EJPORnrZxtfc2pjJdnbuags3l04TTtJMXrdTph4Pyg4XAjugAJqMDf5Rf+oXx2/qi4u6nipakIi7CsgiuMSEF9IGKg8heQJKkxIfFSUU/egWSwNrS1fPDtLfon8sZOcYUQml1Qv9a3kfwsEUyJEMgFBKzdV8o3Iw9yAjg1jdLQCV4qbd3no8yD2GugaC3oMbF0NYHCpJYSDhNI5N2DAWB4F4z9Aj/04Cna/x7eVAQ17vRjQZPh+G/kddYv0h49yY4NWNDWMMOMUIRYvlTECmrN8pUAjo5RCMn8KoPmbJ/+Appgnk//Sy90GYBCGgm7IAskQ7D9hFKW4ApB1ei3FSYD9PjGAKygAV+ARFYBH5BsVgG9kkBSAQWKUFYBRZpkUgGVinRWAdUZQDABBQdIcAElDVBUAUUXWHQBZx1gMAGMprM0AsLbVXHsA5trZe93/wp3svQ0YNb/jWV3AIOLsMtlznSNOH7JqjOpDVh7z8qCZR10ftvO4nxeOvPLkpSuvfXnxzKtvXr7j+v8C5ii0e71At7cAAAAASUVORK5CYII=) no-repeat 50% 50%;  background-size: 85%;}.iziToast>.iziToast-body .iziToast-icon.ico-warning {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAMAAAAPzWOAAAAAkFBMVEUAAAAAAAABAAIAAAABAAIAAAMAAAABAAIBAAIBAAIAAAIAAAABAAIAAAABAAICAAICAAIAAAIAAAAAAAAAAAABAAIBAAIAAAMAAAABAAIBAAMBAAECAAIAAAIAAAIAAAABAAIBAAIBAAMBAAIBAAEAAAIAAAMAAAAAAAABAAECAAICAAIAAAIAAAMAAAQAAAE05yNAAAAAL3RSTlMAB+kD7V8Q+PXicwv7I9iYhkAzJxnx01IV5cmnk2xmHfzexsK4eEw5L7Gei39aRw640awAAAHQSURBVFjD7ZfJdoJAEEWJgCiI4oDiPM8m7///LidErRO7sHrY5u7YXLr7vKqu9kTC0HPmo9n8cJbEQOzqqAdAUHeUZACQuTkGDQBoDJwkHZR0XBz9FkpafXuHP0SJ09mGeJLZ5wwlTmcbA0THPmdEK7XPGTG1zxmInn3OiJ19zkB0jSVTKExMHT0wjAwlWzC0fSPHF1gWRpIhWMYm7fYTFcQGlbemf4dFfdTGg0B/KXM8qBU/3wntbq7rSGqvJ9kla6IpueFJet8fxfem5yhykjyOgNaWF1qSGd5JMNNxpNF7SZQaVh5JzLrTCZIEJ1GyEyVyd+pClMjdaSJK5O40giSRu5PfFiVyd1pAksjdKRnrSsbVdbiHrgT7yss315fkVQPLFQrL+4FHeOXKO5YRFEKv5AiFaMlKLlBpJuVCJlC5sJfvCgztru/3NmBYccPgGTxRAzxn1XGEMUf58pXZvjoOsOCgjL08+b53mtfAM/SVsZcjKLtysQZPqIy9HPP3m/3zKItRwT0LyQo8sTr26tcO83DIUMWIJjierHLsJda/tbNBFY0BP/bKtcM8HNIWCK3aYR4OMzgxo5w5EFLOLKDExXAm9gI4E3iAO94/Ct/lKWuM2LMGbgAAAABJRU5ErkJggg==) no-repeat 50% 50%;  background-size: 85%;}.iziToast>.iziToast-body .iziToast-icon.ico-error {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAeFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVyEiIAAAAJ3RSTlMA3BsB98QV8uSyWVUFz7+kcWMM2LuZioBpTUVBNcq2qaibj4d1azLZZYABAAACZElEQVRYw7WX25KCMAyGAxUoFDkpiohnV97/DXeGBtoOUprZ2dyo1K82fxKbwJJVp+KQZ7so2mX5oThVQLKwjDe9YZu4DF3ptAn6rxY0qQPOEq9fNC9ha3y77a22ba24v+9Xbe8v8x03dPOC2/NdvB6xeSreLfGJpnx0TyotKqLm2s7Jd/WO6ivXNp0tCy02R/aFz5VQ5wUPlUL5fIfj5KIlVGU0nWHm/5QtoTVMWY8mzIVu1K9O7XH2JiU/xnOOT39gnUfj+lFHddx4tFjL3/H8jjzaFCy2Rf0c/fdQyQszI8BDR973IyMSKa4krjxAiW/lkRvMP+bKK9WbYS1ASQg8dKjaUGlYPwRe/WoIkz8tiQchH5QAEMv6T0k8MD4mUyWr4E7jAWqZ+xWcMIYkXvlwggJ3IvFK+wIOcpXAo8n8P0COAaXyKH4OsjBuZB4ew0IGu+H1SebhNazsQBbWm8yj+hFuUJB5eMsN0IUXmYendAFFfJB5uEkRMYwxmcd6zDGRtmQePEykAgubymMRFmMxCSIPCRbTuFNN5OGORTjmNGc0Po0m8Uv0gcCry6xUhR2QeLii9tofbEfhz/qvNti+OfPqNm2Mq6105FUMvdT4GPmufMiV8PqBMkc+DdT1bjYYbjzU/ew23VP4n3mLAz4n8Jtv/Ui3ceTT2mzz5o1mZt0gnBpmsdjqRqVlmplcPdqa7X23kL9brdm2t/uBYDPn2+tyu48mtIGD10JTuUrukVrbCFiwDzcHrPjxKt7PW+AZQyT/WESO+1WL7f3o+WLHL2dYMSZsg6dg/z360ofvP4//v1NPzgs28WlWAAAAAElFTkSuQmCC) no-repeat 50% 50%;  background-size: 80%;}.iziToast>.iziToast-body .iziToast-icon.ico-success {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAIVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABt0UjBAAAACnRSTlMApAPhIFn82wgGv8mVtwAAAKVJREFUSMft0LEJAkEARNFFFEw1NFJb8CKjAy1AEOzAxNw+bEEEg6nyFjbY4LOzcBwX7S/gwUxoTdIn+Jbv4Lv8bx446+kB6VsBtK0B+wbMCKxrwL33wOrVeeChX28n7KTOTjgoEu6DRSYAgAAAAkAmAIAAAAIACQIkMkACAAgAIACAyECBKAOJuCagTJwSUCaUAEMAABEBRwAAEQFLbCJgO4bW+AZKGnktR+jAFAAAAABJRU5ErkJggg==) no-repeat 50% 50%;  background-size: 85%;}.iziToast>.iziToast-body .iziToast-icon.ico-question {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCQkUEhFovxTxAAAEDklEQVRo3s2ZTWgTQRTHf03ipTRUqghNSgsRjHgQrFUQC6JgD1Kak3gQUUoPqRdBglf1oBehBws9Cn4cGk+1SOmh2upBxAYVoeJHrR9tgq0i1Cq0lqYeks7MbpPdmU00/c8hm9n33v/t7Nt5M2+qMEWQI0QIibZKRrQpHvLL2KI2wnQzzBKrDm2RIeKEy01dTYKUI7G1ZRknQXV5yP10kTYgly1NF/5S6duZ8ES+1iZodyaocrjXxE0OFeifYYgp0mRIkwFChAkRJsIxGgrIP+I0n82fvZW5dc/zkss0O2o1c5mX6/TmaDWl77RFe5YkUW3tKEmyFv0lOvXJ/fTYnmCEFuMRbGHEZqVHLyT9DFjUJmkzJl9DG5MWWwM6Llif/gF1nukB6nhgGwUXdFrE+wiURA8QoM9i0zEWWpXQW+ZsyeRrOMuyEo5Fv4gmy4dXPvqcC+pH2VRYaMwy+OWG+iLGCgm0W0Kv9HdvR8ASjmKCXpuK/bxiV/76A/v5UdDIZuKcJGjrnec5KZ7wwsWFOp6xPX/9mt2sqDe7FO+Kf/fXHBPPDWpdXGhTpLvUG9VKwh1xMDDjkvu+cNDFBTk7ptX1QkKZ850m3duu6fcrWxwdaFFyREJ2j4vOpKP6Du6z4uJCv8sYJIVkCnJBGGZaBONO3roY2EqNrSfIPi7SKP4fdXyNUd6I6wbSAHEl33tFLe+FlSsusnK90A0+oEPcuufZgXnOi+u9LrKSJQZQw6LwqBnv2CKsfHORbFbyQhA6xN/pEuihSdj56Co7LWRjPiKie6gkB2LiKuUqK5kiPkLiz1QJ9K1cNXBAMoUCigNpQ9IqDtMI1HKA4/jyvUsaoSyZLA5kjOjDPFZen8Ql5TsvBskUgjciIPSX3QAXC86DT7VWvlEh/xZ+ij9BDVWJ0QL0SbZq6QaFxoLPcXPmBLveLCc4wXdDK6s+6/vwhCSniFLPXW0NJe5UB8zKCsviqpc7vGPVQFcyZbyPwGD+d5ZnxmNWlhG4xSBZZjivjIWHEQgoDkSMjMwTo54569JSE5IpA7EyJSMTyGTUAUFlO1ZKOtaHTMeL1PhYYFTcihmY2cQ5+ullj7EDkiVfVez2sCTz8yiv84djhg7IJVk81xFWJlPdfHBG0flkRC/zQFZ+DSllNtfDdUsOMCliyGX5uOzU3ZhIXFDof4m1gDuKbEx0t2YS25gVGpcMnr/I1kx3c6piB8P8ZoqEwfMX3ZyCXynJTmq/U7NUXqfUzCbWL1wqVKBQUeESzQYoUlW8TAcVL1RCxUu1G6BYXfFyfQ4VPbDI4T8d2WzgQ6sc/vmxnTsqfHCZQzUJxm1h5dxS5Tu6lQgTZ0ipqRVqSwzTbbLHMt+c19iO76tsx/cLZub+Ali+tYC93olEAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA5LTA5VDIwOjE4OjE3KzAyOjAwjKtfjgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wOS0wOVQyMDoxODoxNyswMjowMP325zIAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC) no-repeat 50% 50%;  background-size: 85%;}.iziToast>.iziToast-body .iziToast-message,.iziToast>.iziToast-body .iziToast-title {  padding: 0;  font-size: 14px;  line-height: 16px;  text-align: left;  float: left;  white-space: normal;}.iziToast>.iziToast-body .iziToast-title {  color: #000;  margin: 0;}.iziToast>.iziToast-body .iziToast-message {  margin: 0 0 10px;  color: rgba(0,0,0,.6);}.iziToast.iziToast-animateInside .iziToast-buttons-child,.iziToast.iziToast-animateInside .iziToast-icon,.iziToast.iziToast-animateInside .iziToast-inputs-child,.iziToast.iziToast-animateInside .iziToast-message,.iziToast.iziToast-animateInside .iziToast-title {  opacity: 0;}.iziToast-target {  position: relative;  width: 100%;  margin: 0 auto;}.iziToast-target .iziToast-capsule {  overflow: hidden;}.iziToast-target .iziToast-capsule:after {  visibility: hidden;  display: block;  font-size: 0;  content: \" \";  clear: both;  height: 0;}.iziToast-target .iziToast-capsule .iziToast {  width: 100%;  float: left;}.iziToast-wrapper {  z-index: 99999;  position: fixed;  width: 100%;  pointer-events: none;  display: flex;  flex-direction: column;}.iziToast-wrapper .iziToast.iziToast-balloon:before {  border-right: 0 solid transparent;  border-left: 15px solid transparent;  border-top: 10px solid #000;  border-top-color: inherit;  right: 8px;  left: auto;}.iziToast-wrapper-bottomLeft {  left: 0;  bottom: 0;  text-align: left;}.iziToast-wrapper-bottomLeft .iziToast.iziToast-balloon:before,.iziToast-wrapper-topLeft .iziToast.iziToast-balloon:before {  border-right: 15px solid transparent;  border-left: 0 solid transparent;  right: auto;  left: 8px;}.iziToast-wrapper-bottomRight {  right: 0;  bottom: 0;  text-align: right;}.iziToast-wrapper-topLeft {  left: 0;  top: 0;  text-align: left;}.iziToast-wrapper-topRight {  top: 0;  right: 0;  text-align: right;}.iziToast-wrapper-topCenter {  top: 0;  left: 0;  right: 0;  text-align: center;}.iziToast-wrapper-bottomCenter,.iziToast-wrapper-center {  bottom: 0;  left: 0;  right: 0;  text-align: center;}.iziToast-wrapper-center {  top: 0;  justify-content: center;  flex-flow: column;  align-items: center;}.iziToast-rtl {  direction: rtl;  padding: 8px 0 9px 45px;  font-family: Tahoma,'Lato',Arial;}.iziToast-rtl .iziToast-cover {  left: auto;  right: 0;}.iziToast-rtl .iziToast-close {  right: auto;  left: 0;}.iziToast-rtl .iziToast-body {  padding: 0 10px 0 0;  margin: 0 16px 0 0;  text-align: right;}.iziToast-rtl .iziToast-body .iziToast-buttons,.iziToast-rtl .iziToast-body .iziToast-inputs,.iziToast-rtl .iziToast-body .iziToast-message,.iziToast-rtl .iziToast-body .iziToast-texts,.iziToast-rtl .iziToast-body .iziToast-title {  float: right;  text-align: right;}.iziToast-rtl .iziToast-body .iziToast-icon {  left: auto;  right: 0;}@media only screen and (min-width:568px) {  .iziToast-wrapper {    padding: 10px 15px;  }  .iziToast {    margin: 5px 0;    border-radius: 3px;    width: auto;  }  .iziToast:after {    content: '';    z-index: -1;    position: absolute;    top: 0;    left: 0;    width: 100%;    height: 100%;    border-radius: 3px;    box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,.2),inset 0 0 5px rgba(0,0,0,.1),0 8px 8px -5px rgba(0,0,0,.25);  }  .iziToast:not(.iziToast-rtl) .iziToast-cover {    border-radius: 3px 0 0 3px;  }  .iziToast.iziToast-rtl .iziToast-cover {    border-radius: 0 3px 3px 0;  }  .iziToast.iziToast-color-dark:after {    box-shadow: inset 0 -10px 20px -10px rgba(255,255,255,.3),0 10px 10px -5px rgba(0,0,0,.25);  }  .iziToast.iziToast-balloon .iziToast-progressbar {    background: 0 0;  }  .iziToast.iziToast-balloon:after {    box-shadow: 0 10px 10px -5px rgba(0,0,0,.25),inset 0 10px 20px -5px rgba(0,0,0,.25);  }  .iziToast-target .iziToast:after {    box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,.2),inset 0 0 5px rgba(0,0,0,.1);  }}.iziToast.iziToast-theme-dark {  background: #565c70;  border-color: #565c70;}.iziToast.iziToast-theme-dark .iziToast-title {  color: #fff;}.iziToast.iziToast-theme-dark .iziToast-message {  color: rgba(255,255,255,.7);  font-weight: 300;}.iziToast.iziToast-theme-dark .iziToast-close {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfgCR4OIQIPSao6AAAAwElEQVRIx72VUQ6EIAwFmz2XB+AConhjzqTJ7JeGKhLYlyx/BGdoBVpjIpMJNjgIZDKTkQHYmYfwmR2AfAqGFBcO2QjXZCd24bEggvd1KBx+xlwoDpYmvnBUUy68DYXD77ESr8WDtYqvxRex7a8oHP4Wo1Mkt5I68Mc+qYqv1h5OsZmZsQ3gj/02h6cO/KEYx29hu3R+VTTwz6D3TymIP1E8RvEiiVdZfEzicxYLiljSxKIqlnW5seitTW6uYnv/Aqh4whX3mEUrAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE2LTA5LTMwVDE0OjMzOjAyKzAyOjAwl6RMVgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNi0wOS0zMFQxNDozMzowMiswMjowMOb59OoAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC) no-repeat 50% 50%;  background-size: 8px;}.iziToast.iziToast-theme-dark .iziToast-icon {  color: #fff;}.iziToast.iziToast-theme-dark .iziToast-icon.ico-info {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAflBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////vroaSAAAAKXRSTlMA6PsIvDob+OapavVhWRYPrIry2MxGQ97czsOzpJaMcE0qJQOwVtKjfxCVFeIAAAI3SURBVFjDlJPZsoIwEETnCiGyb8q+qmjl/3/wFmGKwjBROS9QWbtnOqDDGPq4MdMkSc0m7gcDDhF4NRdv8NoL4EcMpzoJglPl/KTDz4WW3IdvXEvxkfIKn7BMZb1bFK4yZFqghZ03jk0nG8N5NBwzx9xU5cxAg8fXi20/hDdC316lcA8o7t16eRuQvW1XGd2d2P8QSHQDDbdIII/9CR3lUF+lbucfJy4WfMS64EJPORnrZxtfc2pjJdnbuags3l04TTtJMXrdTph4Pyg4XAjugAJqMDf5Rf+oXx2/qi4u6nipakIi7CsgiuMSEF9IGKg8heQJKkxIfFSUU/egWSwNrS1fPDtLfon8sZOcYUQml1Qv9a3kfwsEUyJEMgFBKzdV8o3Iw9yAjg1jdLQCV4qbd3no8yD2GugaC3oMbF0NYHCpJYSDhNI5N2DAWB4F4z9Aj/04Cna/x7eVAQ17vRjQZPh+G/kddYv0h49yY4NWNDWMMOMUIRYvlTECmrN8pUAjo5RCMn8KoPmbJ/+Appgnk//Sy90GYBCGgm7IAskQ7D9hFKW4ApB1ei3FSYD9PjGAKygAV+ARFYBH5BsVgG9kkBSAQWKUFYBRZpkUgGVinRWAdUZQDABBQdIcAElDVBUAUUXWHQBZx1gMAGMprM0AsLbVXHsA5trZe93/wp3svQ0YNb/jWV3AIOLsMtlznSNOH7JqjOpDVh7z8qCZR10ftvO4nxeOvPLkpSuvfXnxzKtvXr7j+v8C5ii0e71At7cAAAAASUVORK5CYII=) no-repeat 50% 50%;  background-size: 85%;}.iziToast.iziToast-theme-dark .iziToast-icon.ico-warning {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAMAAAAPzWOAAAAAllBMVEUAAAD////+//3+//3+//3///////z+//3+//3+//3////////////9//3////+//39//3///3////////////+//3+//39//3///z+//z+//7///3///3///3///3////////+//3+//3+//3+//z+//3+//7///3///z////////+//79//3///3///z///v+//3///+trXouAAAAMHRSTlMAB+j87RBf+PXiCwQClSPYhkAzJxnx05tSyadzcmxmHRbp5d7Gwrh4TDkvsYt/WkdQzCITAAAB1UlEQVRYw+3XaXKCQBCGYSIIighoxCVqNJrEPfly/8vFImKXduNsf/Mc4K1y7FnwlMLQc/bUbj85R6bA1LXRDICg6RjJcZa7NQYtnLUGTpERSiOXxrOPkv9s30iGKDmtbYir3H7OUHJa2ylAuvZzRvzUfs7Ii/2cgfTt54x82s8ZSM848gJmYtroQzA2jHwA+LkBIEuMGt+QIng1igzlyMrkuP2CyOi47axRaYTL5jhDJehoR+aovC29s3iIyly3Eb+hRCvZo2qsGTnhKr2cLDS+J73GsqBI9W80UCmWWpEuhIjh6ZRGjyNRarjzKGJ2Ou2himCvjHwqI+rTqQdlRH06TZQR9ek0hiqiPp06mV4ke7QPX6ERUZxO8Uo3sqrfhxvoRrCpvXwL/UjR9GRHMIvLgke4d5QbiwhM6JV2YKKF4vIl7XIBkwm4keryJVmvk/TfwcmPwQNkUQuyA2/sYGwnXL7GPu4bW1jYsmevrNj09/MGZMOEPXslQVqO8hqykD17JfPHP/bmo2yGGpdZiH3IZvzZa7B3+IdDjjpjesHJcvbs5dZ/e+cddVoDdvlq7x12Nac+iN7e4R8OXTjp0pw5CGnOLNDEzeBs5gVwFniAO+8f8wvfeXP2hyqnmwAAAABJRU5ErkJggg==) no-repeat 50% 50%;  background-size: 85%;}.iziToast.iziToast-theme-dark .iziToast-icon.ico-error {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAeFBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////GqOSsAAAAJ3RSTlMA3BsB98QV8uSyWVUFz6RxYwzYvbupmYqAaU1FQTXKv7abj4d1azKNUit3AAACZElEQVRYw7WXaZOCMAyGw30UORRQBLxX/v8/3BkaWjrY2szO5otKfGrzJrEp6Kw6F8f8sI+i/SE/FucKSBaWiT8p5idlaEtnXTB9tKDLLHAvdSatOan3je93k9F2vRF36+mr1a6eH2NFNydoHq/ieU/UXcWjjk9XykdNWq2ywtp4tXL6Wb2T/MqtzzZutsrNyfvA51KoQROhVCjfrnASIRpSVUZiD5v4RbWExjRdJzSmOsZFvzYz59kRSr6V5zE+/QELHkNdb3VRx45HS1b1u+zfkkcbRAZ3qJ9l/A4qefHUDMShJe+6kZKJDD2pLQ9Q4lu+5Q7rz7Plperd7AtQEgIPI6o2dxr2D4GXvxqCiKcn8cD4gxIAEt7/GYkHL16KqeJd0NB4gJbXfgVnzCGJlzGcocCVSLzUvoAj9xJ4NF7/R8gxoVQexc/hgBpSebjPjgPs59cHmYfn7NkDb6wXmUf1I1ygIPPw4gtgCE8yDw8eAop4J/PQcBExjQmZx37MsZB2ZB4cLKQCG5vKYxMWSzMxIg8pNtOyUkvkocEmXGo69mh8FgnxS4yBwMvDrJSNHZB4uC3ayz/YkcIP4lflwVIT+OU07ZSjrbTkZQ6dTPkYubZ8GC/Cqxu6WvJZII93dcCw46GdNqdpTeF/tiMOuDGB9z/NI6NvyWetGPM0g+bVNeovBmamHXWj0nCbEaGeTMN2PWrqd6cM26ZxP2DeJvj+ph/30Zi/GmRbtlK5SptI+nwGGnvH6gUruT+L16MJHF+58rwNIifTV0vM8+hwMeOXAb6Yx0wXT+b999WXfvn+8/X/F7fWzjdTord5AAAAAElFTkSuQmCC) no-repeat 50% 50%;  background-size: 80%;}.iziToast.iziToast-theme-dark .iziToast-icon.ico-success {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAIVBMVEUAAAD////////////////////////////////////////PIev5AAAACnRSTlMApAPhIFn82wgGv8mVtwAAAKVJREFUSMft0LEJAkEARNFFFEw1NFJb8CKjAy1AEOzAxNw+bEEEg6nyFjbY4LOzcBwX7S/gwUxoTdIn+Jbv4Lv8bx446+kB6VsBtK0B+wbMCKxrwL33wOrVeeChX28n7KTOTjgoEu6DRSYAgAAAAkAmAIAAAAIACQIkMkACAAgAIACAyECBKAOJuCagTJwSUCaUAEMAABEBRwAAEQFLbCJgO4bW+AZKGnktR+jAFAAAAABJRU5ErkJggg==) no-repeat 50% 50%;  background-size: 85%;}.iziToast.iziToast-theme-dark .iziToast-icon.ico-question {  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCQkUEg18vki+AAAETUlEQVRo3s1ZTWhbRxD+VlIuxsLFCYVIIQYVopBDoK5bKDWUBupDMNbJ5FBKg/FBziUQdE9yaC+FHBrwsdCfQ9RTGoLxwWl+DqHEojUFFydxnB9bInZDqOsErBrr6yGvs/ueX97bldTKo4Pe7puZb3Z33s7srIIjMY1jyCEjP6ImvyX8pF64arSHznKC06wzijY5xSKz7YbuYokV2lODsyyxqz3gSY6z6gCuqcpxJluFH+Z8U+D/0jyHoxFUBHgfvsGHIS9WMIUlVFFDFTUAGWSRQRY5HMeBEP6b+Ew9dh/7INd2jGeO59kfKdXP85zbIbfGQVf4sYC3N1hm3lo6zzIbPvk6x+zBk7wQGMEMB5xncIAzAS0XrFySSV72iS1yyBVcdA1x0afrsoUJgdFfY2+z8ADAXl7zz0KcwJiPfZKpVuABgClO+nRG+QIHDdfb4qlWwUXvKW4Z7vi6L4J9vg+vbfCeCeZH2RfOdMOc/HbCA4BvIW6EMQz7XK/ltd+hP+VzR9mgva2YSfyGI17fA7ynnocqeQNFfIJ0oHsdv6CC2+rXGBN6cQdveY3fcVRtmy/HDete+93zy8jA8zV7YkwYMrjHzRddRsCdiVCwwmh6wg9iTNC7Y9XIF1iS7kbUpsvvGEdPuTfSgAEjRpR096x0liPFD/Eqt2NMuBQzB2XhrACAApjFsuQFh9XdGAX70B3oSuNdnMVBaX+sopYxjwVpHFBVACyKTXNoktjD+6Ll8xhenS9MAAkAI/Lux2YNUOs4I413Ypg1SgEAu7kpFvWjaeJe0fJHDGe/cNaZBkekudw8PMA+0fMwlndZeAsJ5KR/qhUDUJCnSiyvRsolkJHGUgvjH8QXDgZopEzKMKDqCKrwEQ4C6MH7GEXC665buLJG8hlQc4LP4paxfJrOqYVYYY2UARfEIazTbgDg2dB98GebzJd54b8L/iWNdLyooeR6CHyZ+6xk0yKxkYg6nEVSUG4VJ9QJ9cxRCxO+9WiOyvgUeexXP1hLGH5nGuBWVtiSp4vqe3VP0UFWI9Wan4Er3v8q7jjPWVtm4FtcQQMrOKO2nOQCM5AyDMi56FDrKHA/1nyppS1ppBpYaE8wciEjGI2AaeM41kI4doDX4XiT3Qm1gevyruCgZg9P8xIv8m1nCzTKq6oiJ9xTMiZ505P5m8cdZ0CnZMVXHVljM7WMBzxpyDxygtdxoCEFTaMIWbZU85UvBjgUMYy0fBaAF8V1Lj9qWQ1aMZ5f4k9r+AGMSkMP1vZoZih6k6sicc5h/OFHM9vDqU/VIU7zJZdYYsKGH4g4nAJMGiXZRds1pVMoZ69RM5vfkbh0qkBhsnS2RLMLilQdL9MBHS9UAh0v1e6CYnXHy/WeeCcvLDwl/9OVze69tPKM+M+v7eJN6OzFpWdEF0ucDbhVNFXadnVrmJFlkVNGTS2M6pzmhMvltfPhnN2B63sVuL7fcNP3D1TSk2ihosPrAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA5LTA5VDIwOjE4OjEzKzAyOjAweOR7nQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wOS0wOVQyMDoxODoxMyswMjowMAm5wyEAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC) no-repeat 50% 50%;  background-size: 85%;}.iziToast.iziToast-theme-dark .iziToast-buttons>a,.iziToast.iziToast-theme-dark .iziToast-buttons>button,.iziToast.iziToast-theme-dark .iziToast-buttons>input {  color: #fff;  background: rgba(255,255,255,.1);}.iziToast.iziToast-theme-dark .iziToast-buttons>a:hover,.iziToast.iziToast-theme-dark .iziToast-buttons>button:hover,.iziToast.iziToast-theme-dark .iziToast-buttons>input:hover {  background: rgba(255,255,255,.2);}.iziToast.iziToast-theme-dark .iziToast-buttons>a:focus,.iziToast.iziToast-theme-dark .iziToast-buttons>button:focus,.iziToast.iziToast-theme-dark .iziToast-buttons>input:focus {  box-shadow: 0 0 0 1px rgba(255,255,255,.6);}.iziToast.iziToast-color-red {  background: rgba(255,175,180,.9);  border-color: rgba(255,175,180,.9);}.iziToast.iziToast-color-orange {  background: rgba(255,207,165,.9);  border-color: rgba(255,207,165,.9);}.iziToast.iziToast-color-yellow {  background: rgba(255,249,178,.9);  border-color: rgba(255,249,178,.9);}.iziToast.iziToast-color-blue {  background: rgba(157,222,255,.9);  border-color: rgba(157,222,255,.9);}.iziToast.iziToast-color-green {  background: rgba(166,239,184,.9);  border-color: rgba(166,239,184,.9);}.iziToast.iziToast-layout2 .iziToast-body .iziToast-message,.iziToast.iziToast-layout2 .iziToast-body .iziToast-texts {  width: 100%;}.iziToast.iziToast-layout3 {  border-radius: 2px;}.iziToast.iziToast-layout3::after {  display: none;}.iziToast .revealIn,.iziToast.revealIn {  -webkit-animation: iziT-revealIn 1s cubic-bezier(.25,1.6,.25,1) both;  -moz-animation: iziT-revealIn 1s cubic-bezier(.25,1.6,.25,1) both;  animation: iziT-revealIn 1s cubic-bezier(.25,1.6,.25,1) both;}.iziToast .slideIn,.iziToast.slideIn {  -webkit-animation: iziT-slideIn 1s cubic-bezier(.16,.81,.32,1) both;  -moz-animation: iziT-slideIn 1s cubic-bezier(.16,.81,.32,1) both;  animation: iziT-slideIn 1s cubic-bezier(.16,.81,.32,1) both;}.iziToast.bounceInLeft {  -webkit-animation: iziT-bounceInLeft .7s ease-in-out both;  animation: iziT-bounceInLeft .7s ease-in-out both;}.iziToast.bounceInRight {  -webkit-animation: iziT-bounceInRight .85s ease-in-out both;  animation: iziT-bounceInRight .85s ease-in-out both;}.iziToast.bounceInDown {  -webkit-animation: iziT-bounceInDown .7s ease-in-out both;  animation: iziT-bounceInDown .7s ease-in-out both;}.iziToast.bounceInUp {  -webkit-animation: iziT-bounceInUp .7s ease-in-out both;  animation: iziT-bounceInUp .7s ease-in-out both;}.iziToast .fadeIn,.iziToast.fadeIn {  -webkit-animation: iziT-fadeIn .5s ease both;  animation: iziT-fadeIn .5s ease both;}.iziToast.fadeInUp {  -webkit-animation: iziT-fadeInUp .7s ease both;  animation: iziT-fadeInUp .7s ease both;}.iziToast.fadeInDown {  -webkit-animation: iziT-fadeInDown .7s ease both;  animation: iziT-fadeInDown .7s ease both;}.iziToast.fadeInLeft {  -webkit-animation: iziT-fadeInLeft .85s cubic-bezier(.25,.8,.25,1) both;  animation: iziT-fadeInLeft .85s cubic-bezier(.25,.8,.25,1) both;}.iziToast.fadeInRight {  -webkit-animation: iziT-fadeInRight .85s cubic-bezier(.25,.8,.25,1) both;  animation: iziT-fadeInRight .85s cubic-bezier(.25,.8,.25,1) both;}.iziToast.flipInX {  -webkit-animation: iziT-flipInX .85s cubic-bezier(.35,0,.25,1) both;  animation: iziT-flipInX .85s cubic-bezier(.35,0,.25,1) both;}.iziToast.fadeOut {  -webkit-animation: iziT-fadeOut .7s ease both;  animation: iziT-fadeOut .7s ease both;}.iziToast.fadeOutDown {  -webkit-animation: iziT-fadeOutDown .7s cubic-bezier(.4,.45,.15,.91) both;  animation: iziT-fadeOutDown .7s cubic-bezier(.4,.45,.15,.91) both;}.iziToast.fadeOutUp {  -webkit-animation: iziT-fadeOutUp .7s cubic-bezier(.4,.45,.15,.91) both;  animation: iziT-fadeOutUp .7s cubic-bezier(.4,.45,.15,.91) both;}.iziToast.fadeOutLeft {  -webkit-animation: iziT-fadeOutLeft .5s ease both;  animation: iziT-fadeOutLeft .5s ease both;}.iziToast.fadeOutRight {  -webkit-animation: iziT-fadeOutRight .5s ease both;  animation: iziT-fadeOutRight .5s ease both;}.iziToast.flipOutX {  -webkit-backface-visibility: visible!important;  backface-visibility: visible!important;  -webkit-animation: iziT-flipOutX .7s cubic-bezier(.4,.45,.15,.91) both;  animation: iziT-flipOutX .7s cubic-bezier(.4,.45,.15,.91) both;}.iziToast-overlay.fadeIn {  -webkit-animation: iziT-fadeIn .5s ease both;  animation: iziT-fadeIn .5s ease both;}.iziToast-overlay.fadeOut {  -webkit-animation: iziT-fadeOut .7s ease both;  animation: iziT-fadeOut .7s ease both;}@-webkit-keyframes iziT-revealIn {  0% {    opacity: 0;    -webkit-transform: scale3d(.3,.3,1);  }  to {    opacity: 1;  }}@-moz-keyframes iziT-revealIn {  0% {    opacity: 0;    -moz-transform: scale3d(.3,.3,1);  }  to {    opacity: 1;  }}@-webkit-keyframes iziT-slideIn {  0% {    opacity: 0;    -webkit-transform: translateX(50px);  }  to {    opacity: 1;    -webkit-transform: translateX(0);  }}@-moz-keyframes iziT-slideIn {  0% {    opacity: 0;    -moz-transform: translateX(50px);  }  to {    opacity: 1;    -moz-transform: translateX(0);  }}@-webkit-keyframes iziT-bounceInLeft {  0% {    opacity: 0;    -webkit-transform: translateX(280px);  }  50% {    opacity: 1;    -webkit-transform: translateX(-20px);  }  70% {    -webkit-transform: translateX(10px);  }  to {    -webkit-transform: translateX(0);  }}@-webkit-keyframes iziT-bounceInRight {  0% {    opacity: 0;    -webkit-transform: translateX(-280px);  }  50% {    opacity: 1;    -webkit-transform: translateX(20px);  }  70% {    -webkit-transform: translateX(-10px);  }  to {    -webkit-transform: translateX(0);  }}@-webkit-keyframes iziT-bounceInDown {  0% {    opacity: 0;    -webkit-transform: translateY(-200px);  }  50% {    opacity: 1;    -webkit-transform: translateY(10px);  }  70% {    -webkit-transform: translateY(-5px);  }  to {    -webkit-transform: translateY(0);  }}@-webkit-keyframes iziT-bounceInUp {  0% {    opacity: 0;    -webkit-transform: translateY(200px);  }  50% {    opacity: 1;    -webkit-transform: translateY(-10px);  }  70% {    -webkit-transform: translateY(5px);  }  to {    -webkit-transform: translateY(0);  }}@-webkit-keyframes iziT-fadeIn {  0% {    opacity: 0;  }  to {    opacity: 1;  }}@-webkit-keyframes iziT-fadeInUp {  0% {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInDown {  0% {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInLeft {  0% {    opacity: 0;    -webkit-transform: translate3d(300px,0,0);    transform: translate3d(300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInRight {  0% {    opacity: 0;    -webkit-transform: translate3d(-300px,0,0);    transform: translate3d(-300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-flipInX {  0% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }  40% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);  }  60% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,10deg);    transform: perspective(400px) rotate3d(1,0,0,10deg);    opacity: 1;  }  80% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-5deg);    transform: perspective(400px) rotate3d(1,0,0,-5deg);  }  to {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }}@-webkit-keyframes iziT-fadeOut {  0% {    opacity: 1;  }  to {    opacity: 0;  }}@-webkit-keyframes iziT-fadeOutDown {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }}@-webkit-keyframes iziT-fadeOutUp {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }}@-webkit-keyframes iziT-fadeOutLeft {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(-200px,0,0);    transform: translate3d(-200px,0,0);  }}@-webkit-keyframes iziT-fadeOutRight {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(200px,0,0);    transform: translate3d(200px,0,0);  }}@-webkit-keyframes iziT-flipOutX {  0% {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }  30% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);    opacity: 1;  }  to {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }}@-moz-keyframes iziT-revealIn {  0% {    opacity: 0;    transform: scale3d(.3,.3,1);  }  to {    opacity: 1;  }}@-webkit-keyframes iziT-revealIn {  0% {    opacity: 0;    transform: scale3d(.3,.3,1);  }  to {    opacity: 1;  }}@-o-keyframes iziT-revealIn {  0% {    opacity: 0;    transform: scale3d(.3,.3,1);  }  to {    opacity: 1;  }}@keyframes iziT-revealIn {  0% {    opacity: 0;    transform: scale3d(.3,.3,1);  }  to {    opacity: 1;  }}@-moz-keyframes iziT-slideIn {  0% {    opacity: 0;    transform: translateX(50px);  }  to {    opacity: 1;    transform: translateX(0);  }}@-webkit-keyframes iziT-slideIn {  0% {    opacity: 0;    transform: translateX(50px);  }  to {    opacity: 1;    transform: translateX(0);  }}@-o-keyframes iziT-slideIn {  0% {    opacity: 0;    transform: translateX(50px);  }  to {    opacity: 1;    transform: translateX(0);  }}@keyframes iziT-slideIn {  0% {    opacity: 0;    transform: translateX(50px);  }  to {    opacity: 1;    transform: translateX(0);  }}@-moz-keyframes iziT-bounceInLeft {  0% {    opacity: 0;    transform: translateX(280px);  }  50% {    opacity: 1;    transform: translateX(-20px);  }  70% {    transform: translateX(10px);  }  to {    transform: translateX(0);  }}@-webkit-keyframes iziT-bounceInLeft {  0% {    opacity: 0;    transform: translateX(280px);  }  50% {    opacity: 1;    transform: translateX(-20px);  }  70% {    transform: translateX(10px);  }  to {    transform: translateX(0);  }}@-o-keyframes iziT-bounceInLeft {  0% {    opacity: 0;    transform: translateX(280px);  }  50% {    opacity: 1;    transform: translateX(-20px);  }  70% {    transform: translateX(10px);  }  to {    transform: translateX(0);  }}@keyframes iziT-bounceInLeft {  0% {    opacity: 0;    transform: translateX(280px);  }  50% {    opacity: 1;    transform: translateX(-20px);  }  70% {    transform: translateX(10px);  }  to {    transform: translateX(0);  }}@-moz-keyframes iziT-bounceInRight {  0% {    opacity: 0;    transform: translateX(-280px);  }  50% {    opacity: 1;    transform: translateX(20px);  }  70% {    transform: translateX(-10px);  }  to {    transform: translateX(0);  }}@-webkit-keyframes iziT-bounceInRight {  0% {    opacity: 0;    transform: translateX(-280px);  }  50% {    opacity: 1;    transform: translateX(20px);  }  70% {    transform: translateX(-10px);  }  to {    transform: translateX(0);  }}@-o-keyframes iziT-bounceInRight {  0% {    opacity: 0;    transform: translateX(-280px);  }  50% {    opacity: 1;    transform: translateX(20px);  }  70% {    transform: translateX(-10px);  }  to {    transform: translateX(0);  }}@keyframes iziT-bounceInRight {  0% {    opacity: 0;    transform: translateX(-280px);  }  50% {    opacity: 1;    transform: translateX(20px);  }  70% {    transform: translateX(-10px);  }  to {    transform: translateX(0);  }}@-moz-keyframes iziT-bounceInDown {  0% {    opacity: 0;    transform: translateY(-200px);  }  50% {    opacity: 1;    transform: translateY(10px);  }  70% {    transform: translateY(-5px);  }  to {    transform: translateY(0);  }}@-webkit-keyframes iziT-bounceInDown {  0% {    opacity: 0;    transform: translateY(-200px);  }  50% {    opacity: 1;    transform: translateY(10px);  }  70% {    transform: translateY(-5px);  }  to {    transform: translateY(0);  }}@-o-keyframes iziT-bounceInDown {  0% {    opacity: 0;    transform: translateY(-200px);  }  50% {    opacity: 1;    transform: translateY(10px);  }  70% {    transform: translateY(-5px);  }  to {    transform: translateY(0);  }}@keyframes iziT-bounceInDown {  0% {    opacity: 0;    transform: translateY(-200px);  }  50% {    opacity: 1;    transform: translateY(10px);  }  70% {    transform: translateY(-5px);  }  to {    transform: translateY(0);  }}@-moz-keyframes iziT-bounceInUp {  0% {    opacity: 0;    transform: translateY(200px);  }  50% {    opacity: 1;    transform: translateY(-10px);  }  70% {    transform: translateY(5px);  }  to {    transform: translateY(0);  }}@-webkit-keyframes iziT-bounceInUp {  0% {    opacity: 0;    transform: translateY(200px);  }  50% {    opacity: 1;    transform: translateY(-10px);  }  70% {    transform: translateY(5px);  }  to {    transform: translateY(0);  }}@-o-keyframes iziT-bounceInUp {  0% {    opacity: 0;    transform: translateY(200px);  }  50% {    opacity: 1;    transform: translateY(-10px);  }  70% {    transform: translateY(5px);  }  to {    transform: translateY(0);  }}@keyframes iziT-bounceInUp {  0% {    opacity: 0;    transform: translateY(200px);  }  50% {    opacity: 1;    transform: translateY(-10px);  }  70% {    transform: translateY(5px);  }  to {    transform: translateY(0);  }}@-moz-keyframes iziT-fadeIn {  0% {    opacity: 0;  }  to {    opacity: 1;  }}@-webkit-keyframes iziT-fadeIn {  0% {    opacity: 0;  }  to {    opacity: 1;  }}@-o-keyframes iziT-fadeIn {  0% {    opacity: 0;  }  to {    opacity: 1;  }}@keyframes iziT-fadeIn {  0% {    opacity: 0;  }  to {    opacity: 1;  }}@-moz-keyframes iziT-fadeInUp {  0% {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInUp {  0% {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-o-keyframes iziT-fadeInUp {  0% {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@keyframes iziT-fadeInUp {  0% {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-moz-keyframes iziT-fadeInDown {  0% {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInDown {  0% {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-o-keyframes iziT-fadeInDown {  0% {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@keyframes iziT-fadeInDown {  0% {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-moz-keyframes iziT-fadeInLeft {  0% {    opacity: 0;    -webkit-transform: translate3d(300px,0,0);    transform: translate3d(300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInLeft {  0% {    opacity: 0;    -webkit-transform: translate3d(300px,0,0);    transform: translate3d(300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-o-keyframes iziT-fadeInLeft {  0% {    opacity: 0;    -webkit-transform: translate3d(300px,0,0);    transform: translate3d(300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@keyframes iziT-fadeInLeft {  0% {    opacity: 0;    -webkit-transform: translate3d(300px,0,0);    transform: translate3d(300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-moz-keyframes iziT-fadeInRight {  0% {    opacity: 0;    -webkit-transform: translate3d(-300px,0,0);    transform: translate3d(-300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-webkit-keyframes iziT-fadeInRight {  0% {    opacity: 0;    -webkit-transform: translate3d(-300px,0,0);    transform: translate3d(-300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-o-keyframes iziT-fadeInRight {  0% {    opacity: 0;    -webkit-transform: translate3d(-300px,0,0);    transform: translate3d(-300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@keyframes iziT-fadeInRight {  0% {    opacity: 0;    -webkit-transform: translate3d(-300px,0,0);    transform: translate3d(-300px,0,0);  }  to {    opacity: 1;    -webkit-transform: none;    transform: none;  }}@-moz-keyframes iziT-flipInX {  0% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }  40% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);  }  60% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,10deg);    transform: perspective(400px) rotate3d(1,0,0,10deg);    opacity: 1;  }  80% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-5deg);    transform: perspective(400px) rotate3d(1,0,0,-5deg);  }  to {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }}@-webkit-keyframes iziT-flipInX {  0% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }  40% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);  }  60% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,10deg);    transform: perspective(400px) rotate3d(1,0,0,10deg);    opacity: 1;  }  80% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-5deg);    transform: perspective(400px) rotate3d(1,0,0,-5deg);  }  to {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }}@-o-keyframes iziT-flipInX {  0% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }  40% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);  }  60% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,10deg);    transform: perspective(400px) rotate3d(1,0,0,10deg);    opacity: 1;  }  80% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-5deg);    transform: perspective(400px) rotate3d(1,0,0,-5deg);  }  to {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }}@keyframes iziT-flipInX {  0% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }  40% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);  }  60% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,10deg);    transform: perspective(400px) rotate3d(1,0,0,10deg);    opacity: 1;  }  80% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-5deg);    transform: perspective(400px) rotate3d(1,0,0,-5deg);  }  to {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }}@-moz-keyframes iziT-fadeOut {  0% {    opacity: 1;  }  to {    opacity: 0;  }}@-webkit-keyframes iziT-fadeOut {  0% {    opacity: 1;  }  to {    opacity: 0;  }}@-o-keyframes iziT-fadeOut {  0% {    opacity: 1;  }  to {    opacity: 0;  }}@keyframes iziT-fadeOut {  0% {    opacity: 1;  }  to {    opacity: 0;  }}@-moz-keyframes iziT-fadeOutDown {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }}@-webkit-keyframes iziT-fadeOutDown {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }}@-o-keyframes iziT-fadeOutDown {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }}@keyframes iziT-fadeOutDown {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,100%,0);    transform: translate3d(0,100%,0);  }}@-moz-keyframes iziT-fadeOutUp {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }}@-webkit-keyframes iziT-fadeOutUp {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }}@-o-keyframes iziT-fadeOutUp {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }}@keyframes iziT-fadeOutUp {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(0,-100%,0);    transform: translate3d(0,-100%,0);  }}@-moz-keyframes iziT-fadeOutLeft {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(-200px,0,0);    transform: translate3d(-200px,0,0);  }}@-webkit-keyframes iziT-fadeOutLeft {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(-200px,0,0);    transform: translate3d(-200px,0,0);  }}@-o-keyframes iziT-fadeOutLeft {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(-200px,0,0);    transform: translate3d(-200px,0,0);  }}@keyframes iziT-fadeOutLeft {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(-200px,0,0);    transform: translate3d(-200px,0,0);  }}@-moz-keyframes iziT-fadeOutRight {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(200px,0,0);    transform: translate3d(200px,0,0);  }}@-webkit-keyframes iziT-fadeOutRight {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(200px,0,0);    transform: translate3d(200px,0,0);  }}@-o-keyframes iziT-fadeOutRight {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(200px,0,0);    transform: translate3d(200px,0,0);  }}@keyframes iziT-fadeOutRight {  0% {    opacity: 1;  }  to {    opacity: 0;    -webkit-transform: translate3d(200px,0,0);    transform: translate3d(200px,0,0);  }}@-moz-keyframes iziT-flipOutX {  0% {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }  30% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);    opacity: 1;  }  to {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }}@-webkit-keyframes iziT-flipOutX {  0% {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }  30% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);    opacity: 1;  }  to {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }}@-o-keyframes iziT-flipOutX {  0% {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }  30% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);    opacity: 1;  }  to {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }}@keyframes iziT-flipOutX {  0% {    -webkit-transform: perspective(400px);    transform: perspective(400px);  }  30% {    -webkit-transform: perspective(400px) rotate3d(1,0,0,-20deg);    transform: perspective(400px) rotate3d(1,0,0,-20deg);    opacity: 1;  }  to {    -webkit-transform: perspective(400px) rotate3d(1,0,0,90deg);    transform: perspective(400px) rotate3d(1,0,0,90deg);    opacity: 0;  }}.iziToast-message,.iziToast-title {  font-size: 22px !important;}/* Glitch Logo */#start-row-header::before {  content: '';  background-image: url(http://surviv.io/img/surviv_logo_full.png);  position: absolute;  height: 100%;  width: 100%;  background-repeat: no-repeat;  background-position: 50%;  background-size: inherit;  top: 0px;  filter: drop-shadow(4px 4px 0px #f00);  animation: glitch-loop-1 0.7s infinite ease-in-out;}#start-row-header::after {  content: '';  background-image: url(http://surviv.io/img/surviv_logo_full.png);  position: absolute;  height: 100%;  width: 100%;  background-repeat: no-repeat;  background-position: 50%;  background-size: inherit;  top: 0px;  filter: drop-shadow(5px -5px 0px #00f);  animation: glitch-loop-2 0.3s infinite ease-in-out alternate-reverse;}@keyframes glitch-loop-1 {  0% {    clip-path: inset(100% 100%);  }  1% {    left: -1.0%;    clip-path: inset(15% 0% 80% 0%);  }  5% {    left: 0.0%;    clip-path: inset(25% 0% 70% 0%);  }  5.1% {    clip-path: inset(100% 100%);  }  11% {    left: 1.0%;    clip-path: inset(90% 0% 10% 0%);  }  15% {    left: 0.5%;    clip-path: inset(85% 0% -20% 0%);  }  15.1% {    clip-path: inset(100% 100%);  }  31% {    left: -1.0%;    clip-path: inset(40% 0% 50% 0%);  }  35% {    left: -0.5%;    clip-path: inset(50% 0% 40% 0%);  }  35.1% {    clip-path: inset(100% 100%);  }  41% {    left: -0.5%;    clip-path: inset(-500% 0% 95% 0%);  }  45% {    left: 1.5%;    clip-path: inset(500% 0% 85% 0%);  }  45.1% {    clip-path: inset(100% 100%);  }  61% {    left: -1.5%;    clip-path: inset(40% 0% 50% 0%);  }  65% {    left: 0.5%;    clip-path: inset(30% 0% 45% 0%);  }  65.1% {    clip-path: inset(100% 100%);  }  81% {    left: 0.5%;    clip-path: inset(66% 0% 11% 0%);  }  85% {    left: 1.0%;    clip-path: inset(77% 0% 77% 0%);  }  85.1% {    clip-path: inset(100% 100%);  }  100% {    clip-path: inset(100% 100%);  }}@keyframes glitch-loop-2 {  0% {    clip-path: inset(100% 100%);  }  1% {    left: 1.0%;    clip-path: inset(55% 0% 33% 0%);  }  5% {    left: 0.5%;    clip-path: inset(66% 0% 33% 0%);  }  5.1% {    clip-path: inset(100% 100%);  }  11% {    left: -1.0%;    clip-path: inset(-200% 0% 300% 0%);  }  15% {    left: 0.5%;    clip-path: inset(70% 0% 23% 0%);  }  15.1% {    clip-path: inset(100% 100%);  }  31% {    left: 1.0%;    clip-path: inset(10% 0% 74% 0%);  }  35% {    left: 0.5%;    clip-path: inset(30% 0% 70% 0%);  }  35.1% {    clip-path: inset(100% 100%);  }  41% {    left: 1.0%;    clip-path: inset(200% 0% -100% 0%);  }  45% {    left: -1.5%;    clip-path: inset(30% 0% 500% 0%);  }  45.1% {    clip-path: inset(100% 100%);  }  61% {    left: 1.5%;    clip-path: inset(56% 0% 36% 0%);  }  65% {    left: -0.5%;    clip-path: inset(60% 0% 31% 0%);  }  65.1% {    clip-path: inset(100% 100%);  }  81% {    left: -0.5%;    clip-path: inset(90% 0% 0% 0%);  }  85% {    left: -1.0%;    clip-path: inset(200% 0% 0% 0%);  }  85.1% {    clip-path: inset(100% 100%);  }  100% {    clip-path: inset(100% 100%);  }}/* Cheat Menu */.ui-game-menu {  background-color: rgba(0, 0, 0, .5);  border-radius: 5px;  box-sizing: border-box;  display: none;  margin: 10px auto;  padding: 10px 15px;}@media screen and (max-width:850px) {  .ui-game-menu {    height: auto;    padding: 4px 10px;    width: 190px;  }}@media (max-width:850px) and (max-height:300px) {  .ui-game-menu {    margin-top: 0;  }}.ui-game-menu p {  bottom: 4px;  display: inline-block;  font-size: 14px;  position: relative;}@media screen and (max-width:850px) {  .ui-game-menu p {    bottom: 0;    font-size: 12px;    margin-bottom: 8px;    margin-top: 6px;  }}.ui-game-menu-desktop {  height: 495px;  width: 350px;}.btns-game-double-row {  display: flex;  position: relative;}.btns-game-double-row>.btn-game-container {  position: relative;  width: 100%;}.btns-game-double-row>.btn-game-container>.btn-double-row {  display: inline-block;}.btns-game-double-row>div:not(:last-child) {  margin-right: 2px;}.btn-grey {  background-color: grey !important;  border-bottom: 2px solid #3e3e3e !important;  box-shadow: inset 0 -2px #3c3c3c !important;}.btn-game-tabs>.btn-game-container>.btn-game-menu {  text-align: center;  color: #fff;  line-height: 36px;  font-size: 16px;  background-color: transparent;  border: 2px solid;  border-color: #fff;  box-shadow: none;  cursor: pointer;  flex: 1;}.btn-game-tabs>.btn-game-container>.btn-game-menu-selected {  border: 2px solid!important;  border-color: #0f0!important;  background-color: rgba(0, 0, 0, .35);}.ui-list {  overflow-y: auto;}.ui-list > div {  width: 98%;}.ui-game-tab-settings {  display: block;  height: auto;}.ui-game-tab-settings-desktop {  height: 340px;}.full-height {  height: 422px !important;}.btn-game-menu {  text-align: center;  line-height: 38px;  display: block;  width: 100%;  height: 40px;  border: 0;  border-radius: 5px;  box-sizing: border-box;  position: relative;  margin: auto;  margin-top: 5px;  margin-bottom: 5px;  color: #fff;  font-size: 16px;  text-shadow: 0 1px 2px rgba(0, 0, 0, .25);  background-color: #50afab;  border-bottom: 2px solid #387c79;  box-shadow: inset 0 -2px #387c79;  background-repeat: no-repeat;  cursor: pointer;}#ui-game-menu,.ui-game-menu {  float: left !important;  margin: 20px !important;}#ui-center {  width: max-content !important;}.info-container {  text-align: center;}.info-text {  font-size: 20px !important;  color: white;}.slider-current-value {  display: block;  background: #ffffff38;  border-radius: 2px;  padding: 6px 10px;}.center {  text-align: center;}.left {  float: left;  text-align: left;}.right {  float: right;}.ui-green {  background: #2b4013;}/* Reset Select */select[class^=\"select-cheat\"] {  -webkit-appearance: none;  -moz-appearance: none;  -ms-appearance: none;  appearance: none;  outline: 0;  box-shadow: none;  border: 0 !important;  background: rgba(0, 0, 0, 0.68) !important;  background-image: none;}/* Custom Select */.select-cheat {  position: relative;  display: block;  background: rgba(0, 0, 0, 0.68) !important;  overflow: hidden;  border-radius: .25em;}select[class^=\"select-cheat\"] {  width: 100%;  height: 100%;  margin: 0;  padding: 15px;  color: #fff;  cursor: pointer;}select[class^=\"select-cheat\"]::-ms-expand {  display: none;}/* Arrow */.select::after {  content: '\\25BC';  position: absolute;  top: 0;  right: 0;  bottom: 0;  padding: 0 1em;  background: #34495e;  pointer-events: none;}/* Transition */.select:hover::after {  color: #f39c12;}.select::after {  -webkit-transition: .25s all ease;  -o-transition: .25s all ease;  transition: .25s all ease;}/* Enemy container */.ui-cheat-enemy-info {  position: absolute;  width: 200px;  padding: 4px;  margin-bottom: 8px;  color: white;  top: calc(50% - 119px);  margin-left: 10px;}#ui-cheat-info {  width: auto !important;}#ui-cheat-armor-container {  margin-top: 66px;  margin: 0 !important;  display: inline-block;  padding-top: 26px !important;  display: block;  pointer-events: auto;}.ui-cheat-armor-counter {  float: left;  position: relative !important;  margin-left: 4px;  margin-right: 4px;}.ui-cheat-team-member-name {  width: 100%;  text-align: center;  max-width: initial !important;}.ui-cheat-armor-image {  transform: scale(1, 1);  display: none;}d
-        `
+        var i = `.btn-game-menu,.iziToast-capsule,.iziToast-capsule *,.ui-game-menu{box-sizing:border-box}.iziToast-capsule{font-size:0;height:0;width:100%;transform:translateZ(0);backface-visibility:hidden;transition:transform .5s cubic-bezier(.25,.8,.25,1),height .5s cubic-bezier(.25,.8,.25,1)}.iziToast-overlay{display:block;position:fixed;top:-100px;left:0;right:0;bottom:-100px;z-index:997}.iziToast{display:inline-block;clear:both;position:relative;font-family:Lato,Tahoma,Arial;font-size:14px;padding:8px 45px 9px 0;background:rgba(238,238,238,.9);border-color:rgba(238,238,238,.9);width:100%;pointer-events:all;cursor:default;transform:translateX(0);-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;min-height:54px}.iziToast>.iziToast-progressbar{position:absolute;left:0;bottom:0;width:100%;z-index:1;background:rgba(255,255,255,.2)}.iziToast>.iziToast-progressbar>div{height:2px;width:100%;background:rgba(0,0,0,.3);border-radius:0 0 3px 3px}.iziToast.iziToast-balloon:before{content:'';position:absolute;right:8px;left:auto;width:0;height:0;top:100%;border-right:0 solid transparent;border-left:15px solid transparent;border-top:10px solid #000;border-top-color:inherit;border-radius:0}.iziToast.iziToast-balloon .iziToast-progressbar{top:0;bottom:auto}.iziToast.iziToast-balloon>div{border-radius:0 0 0 3px}.iziToast>.iziToast-cover{position:absolute;left:0;top:0;bottom:0;height:100%;margin:0;background-size:100%;background-position:50% 50%;background-repeat:no-repeat;background-color:rgba(0,0,0,.1)}.iziToast>.iziToast-close{position:absolute;right:0;top:0;border:0;padding:0;opacity:.6;width:42px;height:100%;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAJPAAACTwBcGfW0QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAD3SURBVFiF1ZdtDoMgDEBfdi4PwAX8vLFn0qT7wxantojKupmQmCi8R4tSACpgjC2ICCUbEBa8ingjsU1AXRBeR8aLN64FiknswN8CYefBBDQ3whuFESy7WyQMeC0ipEI0A+0FeBvHUFN8xPaUhAH/iKoWsnXHGegy4J0yxialOfaHJAz4bhRzQzgDvdGnz4GbAonZbCQMuBm1K/kcFu8Mp1N2cFFpsxsMuJqqbIGExGl4loARajU1twskJLLhIsID7+tvUoDnIjTg5T9DPH9EBrz8rxjPzciAl9+O8SxI8CzJ8CxKFfh3ynK8Dyb8wNHM/XDqejx/AtNyPO87tNybAAAAAElFTkSuQmCC) 50% 50% no-repeat;background-size:8px;cursor:pointer;outline:0}.iziToast>.iziToast-close:hover{opacity:1}.iziToast>.iziToast-body{position:relative;padding:0 0 0 10px;height:auto;min-height:36px;margin:0 0 0 15px;text-align:left}.iziToast>.iziToast-body:after{content:"";display:table;clear:both}.iziToast>.iziToast-body .iziToast-texts{margin:10px 0 0;padding-right:2px;display:inline-block;float:left}.iziToast>.iziToast-body .iziToast-inputs{min-height:19px;float:left;margin:3px -2px}.iziToast>.iziToast-body .iziToast-inputs>input:not([type=checkbox]):not([type=radio]),.iziToast>.iziToast-body .iziToast-inputs>select{position:relative;display:inline-block;margin:2px;border-radius:2px;border:0;padding:4px 7px;font-size:13px;letter-spacing:.02em;background:rgba(0,0,0,.1);color:#000;box-shadow:0 0 0 1px rgba(0,0,0,.2);min-height:26px}.iziToast>.iziToast-body .iziToast-buttons>a:focus,.iziToast>.iziToast-body .iziToast-buttons>button:focus,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]):focus,.iziToast>.iziToast-body .iziToast-inputs>input:not([type=checkbox]):not([type=radio]):focus,.iziToast>.iziToast-body .iziToast-inputs>select:focus{box-shadow:0 0 0 1px rgba(0,0,0,.6)}.iziToast>.iziToast-body .iziToast-buttons{min-height:17px;float:left;margin:4px -2px}.iziToast>.iziToast-body .iziToast-buttons>a,.iziToast>.iziToast-body .iziToast-buttons>button,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]){position:relative;display:inline-block;margin:2px;border-radius:2px;border:0;padding:5px 10px;font-size:12px;letter-spacing:.02em;cursor:pointer;background:rgba(0,0,0,.1);color:#000}.iziToast>.iziToast-body .iziToast-buttons>a:hover,.iziToast>.iziToast-body .iziToast-buttons>button:hover,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]):hover{background:rgba(0,0,0,.2)}.iziToast>.iziToast-body .iziToast-buttons>a:active,.iziToast>.iziToast-body .iziToast-buttons>button:active,.iziToast>.iziToast-body .iziToast-buttons>input:not([type=checkbox]):not([type=radio]):active{top:1px}.iziToast>.iziToast-body .iziToast-icon{position:absolute;left:0;top:50%;display:table;font-size:23px;line-height:24px;margin-top:-12px;color:#000;width:24px;height:24px}.iziToast>.iziToast-body .iziToast-icon.ico-info{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAflBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACCtoPsAAAAKXRSTlMA6PsIvDob+OapavVhWRYPrIry2MxGQ97czsOzpJaMcE0qJQOwVtKjfxCVFeIAAAI3SURBVFjDlJPZsoIwEETnCiGyb8q+qmjl/3/wFmGKwjBROS9QWbtnOqDDGPq4MdMkSc0m7gcDDhF4NRdv8NoL4EcMpzoJglPl/KTDz4WW3IdvXEvxkfIKn7BMZb1bFK4yZFqghZ03jk0nG8N5NBwzx9xU5cxAg8fXi20/hDdC316lcA8o7t16eRuQvW1XGd2d2P8QSHQDDbdIII/9CR3lUF+lbucfJy4WfMS64EJPORnrZxtfc2pjJdnbuags3l04TTtJMXrdTph4Pyg4XAjugAJqMDf5Rf+oXx2/qi4u6nipakIi7CsgiuMSEF9IGKg8heQJKkxIfFSUU/egWSwNrS1fPDtLfon8sZOcYUQml1Qv9a3kfwsEUyJEMgFBKzdV8o3Iw9yAjg1jdLQCV4qbd3no8yD2GugaC3oMbF0NYHCpJYSDhNI5N2DAWB4F4z9Aj/04Cna/x7eVAQ17vRjQZPh+G/kddYv0h49yY4NWNDWMMOMUIRYvlTECmrN8pUAjo5RCMn8KoPmbJ/+Appgnk//Sy90GYBCGgm7IAskQ7D9hFKW4ApB1ei3FSYD9PjGAKygAV+ARFYBH5BsVgG9kkBSAQWKUFYBRZpkUgGVinRWAdUZQDABBQdIcAElDVBUAUUXWHQBZx1gMAGMprM0AsLbVXHsA5trZe93/wp3svQ0YNb/jWV3AIOLsMtlznSNOH7JqjOpDVh7z8qCZR10ftvO4nxeOvPLkpSuvfXnxzKtvXr7j+v8C5ii0e71At7cAAAAASUVORK5CYII=) 50% 50% no-repeat;background-size:85%}.iziToast>.iziToast-body .iziToast-icon.ico-warning{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAMAAAAPzWOAAAAAkFBMVEUAAAAAAAABAAIAAAABAAIAAAMAAAABAAIBAAIBAAIAAAIAAAABAAIAAAABAAICAAICAAIAAAIAAAAAAAAAAAABAAIBAAIAAAMAAAABAAIBAAMBAAECAAIAAAIAAAIAAAABAAIBAAIBAAMBAAIBAAEAAAIAAAMAAAAAAAABAAECAAICAAIAAAIAAAMAAAQAAAE05yNAAAAAL3RSTlMAB+kD7V8Q+PXicwv7I9iYhkAzJxnx01IV5cmnk2xmHfzexsK4eEw5L7Gei39aRw640awAAAHQSURBVFjD7ZfJdoJAEEWJgCiI4oDiPM8m7///LidErRO7sHrY5u7YXLr7vKqu9kTC0HPmo9n8cJbEQOzqqAdAUHeUZACQuTkGDQBoDJwkHZR0XBz9FkpafXuHP0SJ09mGeJLZ5wwlTmcbA0THPmdEK7XPGTG1zxmInn3OiJ19zkB0jSVTKExMHT0wjAwlWzC0fSPHF1gWRpIhWMYm7fYTFcQGlbemf4dFfdTGg0B/KXM8qBU/3wntbq7rSGqvJ9kla6IpueFJet8fxfem5yhykjyOgNaWF1qSGd5JMNNxpNF7SZQaVh5JzLrTCZIEJ1GyEyVyd+pClMjdaSJK5O40giSRu5PfFiVyd1pAksjdKRnrSsbVdbiHrgT7yss315fkVQPLFQrL+4FHeOXKO5YRFEKv5AiFaMlKLlBpJuVCJlC5sJfvCgztru/3NmBYccPgGTxRAzxn1XGEMUf58pXZvjoOsOCgjL08+b53mtfAM/SVsZcjKLtysQZPqIy9HPP3m/3zKItRwT0LyQo8sTr26tcO83DIUMWIJjierHLsJda/tbNBFY0BP/bKtcM8HNIWCK3aYR4OMzgxo5w5EFLOLKDExXAm9gI4E3iAO94/Ct/lKWuM2LMGbgAAAABJRU5ErkJggg==) 50% 50% no-repeat;background-size:85%}.iziToast>.iziToast-body .iziToast-icon.ico-error{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAeFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVyEiIAAAAJ3RSTlMA3BsB98QV8uSyWVUFz7+kcWMM2LuZioBpTUVBNcq2qaibj4d1azLZZYABAAACZElEQVRYw7WX25KCMAyGAxUoFDkpiohnV97/DXeGBtoOUprZ2dyo1K82fxKbwJJVp+KQZ7so2mX5oThVQLKwjDe9YZu4DF3ptAn6rxY0qQPOEq9fNC9ha3y77a22ba24v+9Xbe8v8x03dPOC2/NdvB6xeSreLfGJpnx0TyotKqLm2s7Jd/WO6ivXNp0tCy02R/aFz5VQ5wUPlUL5fIfj5KIlVGU0nWHm/5QtoTVMWY8mzIVu1K9O7XH2JiU/xnOOT39gnUfj+lFHddx4tFjL3/H8jjzaFCy2Rf0c/fdQyQszI8BDR973IyMSKa4krjxAiW/lkRvMP+bKK9WbYS1ASQg8dKjaUGlYPwRe/WoIkz8tiQchH5QAEMv6T0k8MD4mUyWr4E7jAWqZ+xWcMIYkXvlwggJ3IvFK+wIOcpXAo8n8P0COAaXyKH4OsjBuZB4ew0IGu+H1SebhNazsQBbWm8yj+hFuUJB5eMsN0IUXmYendAFFfJB5uEkRMYwxmcd6zDGRtmQePEykAgubymMRFmMxCSIPCRbTuFNN5OGORTjmNGc0Po0m8Uv0gcCry6xUhR2QeLii9tofbEfhz/qvNti+OfPqNm2Mq6105FUMvdT4GPmufMiV8PqBMkc+DdT1bjYYbjzU/ew23VP4n3mLAz4n8Jtv/Ui3ceTT2mzz5o1mZt0gnBpmsdjqRqVlmplcPdqa7X23kL9brdm2t/uBYDPn2+tyu48mtIGD10JTuUrukVrbCFiwDzcHrPjxKt7PW+AZQyT/WESO+1WL7f3o+WLHL2dYMSZsg6dg/z360ofvP4//v1NPzgs28WlWAAAAAElFTkSuQmCC) 50% 50% no-repeat;background-size:80%}.iziToast>.iziToast-body .iziToast-icon.ico-success{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAIVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABt0UjBAAAACnRSTlMApAPhIFn82wgGv8mVtwAAAKVJREFUSMft0LEJAkEARNFFFEw1NFJb8CKjAy1AEOzAxNw+bEEEg6nyFjbY4LOzcBwX7S/gwUxoTdIn+Jbv4Lv8bx446+kB6VsBtK0B+wbMCKxrwL33wOrVeeChX28n7KTOTjgoEu6DRSYAgAAAAkAmAIAAAAIACQIkMkACAAgAIACAyECBKAOJuCagTJwSUCaUAEMAABEBRwAAEQFLbCJgO4bW+AZKGnktR+jAFAAAAABJRU5ErkJggg==) 50% 50% no-repeat;background-size:85%}.iziToast>.iziToast-body .iziToast-icon.ico-question{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCQkUEhFovxTxAAAEDklEQVRo3s2ZTWgTQRTHf03ipTRUqghNSgsRjHgQrFUQC6JgD1Kak3gQUUoPqRdBglf1oBehBws9Cn4cGk+1SOmh2upBxAYVoeJHrR9tgq0i1Cq0lqYeks7MbpPdmU00/c8hm9n33v/t7Nt5M2+qMEWQI0QIibZKRrQpHvLL2KI2wnQzzBKrDm2RIeKEy01dTYKUI7G1ZRknQXV5yP10kTYgly1NF/5S6duZ8ES+1iZodyaocrjXxE0OFeifYYgp0mRIkwFChAkRJsIxGgrIP+I0n82fvZW5dc/zkss0O2o1c5mX6/TmaDWl77RFe5YkUW3tKEmyFv0lOvXJ/fTYnmCEFuMRbGHEZqVHLyT9DFjUJmkzJl9DG5MWWwM6Llif/gF1nukB6nhgGwUXdFrE+wiURA8QoM9i0zEWWpXQW+ZsyeRrOMuyEo5Fv4gmy4dXPvqcC+pH2VRYaMwy+OWG+iLGCgm0W0Kv9HdvR8ASjmKCXpuK/bxiV/76A/v5UdDIZuKcJGjrnec5KZ7wwsWFOp6xPX/9mt2sqDe7FO+Kf/fXHBPPDWpdXGhTpLvUG9VKwh1xMDDjkvu+cNDFBTk7ptX1QkKZ850m3duu6fcrWxwdaFFyREJ2j4vOpKP6Du6z4uJCv8sYJIVkCnJBGGZaBONO3roY2EqNrSfIPi7SKP4fdXyNUd6I6wbSAHEl33tFLe+FlSsusnK90A0+oEPcuufZgXnOi+u9LrKSJQZQw6LwqBnv2CKsfHORbFbyQhA6xN/pEuihSdj56Co7LWRjPiKie6gkB2LiKuUqK5kiPkLiz1QJ9K1cNXBAMoUCigNpQ9IqDtMI1HKA4/jyvUsaoSyZLA5kjOjDPFZen8Ql5TsvBskUgjciIPSX3QAXC86DT7VWvlEh/xZ+ij9BDVWJ0QL0SbZq6QaFxoLPcXPmBLveLCc4wXdDK6s+6/vwhCSniFLPXW0NJe5UB8zKCsviqpc7vGPVQFcyZbyPwGD+d5ZnxmNWlhG4xSBZZjivjIWHEQgoDkSMjMwTo54569JSE5IpA7EyJSMTyGTUAUFlO1ZKOtaHTMeL1PhYYFTcihmY2cQ5+ullj7EDkiVfVez2sCTz8yiv84djhg7IJVk81xFWJlPdfHBG0flkRC/zQFZ+DSllNtfDdUsOMCliyGX5uOzU3ZhIXFDof4m1gDuKbEx0t2YS25gVGpcMnr/I1kx3c6piB8P8ZoqEwfMX3ZyCXynJTmq/U7NUXqfUzCbWL1wqVKBQUeESzQYoUlW8TAcVL1RCxUu1G6BYXfFyfQ4VPbDI4T8d2WzgQ6sc/vmxnTsqfHCZQzUJxm1h5dxS5Tu6lQgTZ0ipqRVqSwzTbbLHMt+c19iO76tsx/cLZub+Ali+tYC93olEAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA5LTA5VDIwOjE4OjE3KzAyOjAwjKtfjgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wOS0wOVQyMDoxODoxNyswMjowMP325zIAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC) 50% 50% no-repeat;background-size:85%}.iziToast>.iziToast-body .iziToast-message,.iziToast>.iziToast-body .iziToast-title{padding:0;font-size:14px;line-height:16px;text-align:left;float:left;white-space:normal}.iziToast>.iziToast-body .iziToast-title{color:#000;margin:0}.iziToast>.iziToast-body .iziToast-message{margin:0 0 10px;color:rgba(0,0,0,.6)}.iziToast.iziToast-animateInside .iziToast-buttons-child,.iziToast.iziToast-animateInside .iziToast-icon,.iziToast.iziToast-animateInside .iziToast-inputs-child,.iziToast.iziToast-animateInside .iziToast-message,.iziToast.iziToast-animateInside .iziToast-title{opacity:0}.iziToast-target{position:relative;width:100%;margin:0 auto}.iziToast-target .iziToast-capsule{overflow:hidden}.iziToast-target .iziToast-capsule:after{visibility:hidden;display:block;font-size:0;content:"";clear:both;height:0}.iziToast-target .iziToast-capsule .iziToast{width:100%;float:left}.iziToast-wrapper{z-index:99999;position:fixed;width:100%;pointer-events:none;display:flex;flex-direction:column}.iziToast-wrapper .iziToast.iziToast-balloon:before{border-right:0 solid transparent;border-left:15px solid transparent;border-top:10px solid #000;border-top-color:inherit;right:8px;left:auto}.iziToast-wrapper-bottomLeft{left:0;bottom:0;text-align:left}.iziToast-wrapper-bottomLeft .iziToast.iziToast-balloon:before,.iziToast-wrapper-topLeft .iziToast.iziToast-balloon:before{border-right:15px solid transparent;border-left:0 solid transparent;right:auto;left:8px}.iziToast-wrapper-bottomRight{right:0;bottom:0;text-align:right}.iziToast-wrapper-topLeft{left:0;top:0;text-align:left}.iziToast-wrapper-topRight{top:0;right:0;text-align:right}.iziToast-wrapper-topCenter{top:0;left:0;right:0;text-align:center}.iziToast-wrapper-bottomCenter,.iziToast-wrapper-center{bottom:0;left:0;right:0;text-align:center}.iziToast-wrapper-center{top:0;justify-content:center;flex-flow:column;align-items:center}.iziToast-rtl{direction:rtl;padding:8px 0 9px 45px;font-family:Tahoma,Lato,Arial}.iziToast-rtl .iziToast-cover{left:auto;right:0}.iziToast-rtl .iziToast-close{right:auto;left:0}.iziToast-rtl .iziToast-body{padding:0 10px 0 0;margin:0 16px 0 0;text-align:right}.iziToast-rtl .iziToast-body .iziToast-buttons,.iziToast-rtl .iziToast-body .iziToast-inputs,.iziToast-rtl .iziToast-body .iziToast-message,.iziToast-rtl .iziToast-body .iziToast-texts,.iziToast-rtl .iziToast-body .iziToast-title{float:right;text-align:right}.btn-game-menu,.center,.info-container{text-align:center}.iziToast-rtl .iziToast-body .iziToast-icon{left:auto;right:0}@media only screen and (min-width:568px){.iziToast-wrapper{padding:10px 15px}.iziToast{margin:5px 0;border-radius:3px;width:auto}.iziToast:after{content:'';z-index:-1;position:absolute;top:0;left:0;width:100%;height:100%;border-radius:3px;box-shadow:inset 0 -10px 20px -10px rgba(0,0,0,.2),inset 0 0 5px rgba(0,0,0,.1),0 8px 8px -5px rgba(0,0,0,.25)}.iziToast:not(.iziToast-rtl) .iziToast-cover{border-radius:3px 0 0 3px}.iziToast.iziToast-rtl .iziToast-cover{border-radius:0 3px 3px 0}.iziToast.iziToast-color-dark:after{box-shadow:inset 0 -10px 20px -10px rgba(255,255,255,.3),0 10px 10px -5px rgba(0,0,0,.25)}.iziToast.iziToast-balloon .iziToast-progressbar{background:0 0}.iziToast.iziToast-balloon:after{box-shadow:0 10px 10px -5px rgba(0,0,0,.25),inset 0 10px 20px -5px rgba(0,0,0,.25)}.iziToast-target .iziToast:after{box-shadow:inset 0 -10px 20px -10px rgba(0,0,0,.2),inset 0 0 5px rgba(0,0,0,.1)}}.iziToast.iziToast-theme-dark{background:#565c70;border-color:#565c70}.iziToast.iziToast-theme-dark .iziToast-title{color:#fff}.iziToast.iziToast-theme-dark .iziToast-message{color:rgba(255,255,255,.7);font-weight:300}.iziToast.iziToast-theme-dark .iziToast-close{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfgCR4OIQIPSao6AAAAwElEQVRIx72VUQ6EIAwFmz2XB+AConhjzqTJ7JeGKhLYlyx/BGdoBVpjIpMJNjgIZDKTkQHYmYfwmR2AfAqGFBcO2QjXZCd24bEggvd1KBx+xlwoDpYmvnBUUy68DYXD77ESr8WDtYqvxRex7a8oHP4Wo1Mkt5I68Mc+qYqv1h5OsZmZsQ3gj/02h6cO/KEYx29hu3R+VTTwz6D3TymIP1E8RvEiiVdZfEzicxYLiljSxKIqlnW5seitTW6uYnv/Aqh4whX3mEUrAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE2LTA5LTMwVDE0OjMzOjAyKzAyOjAwl6RMVgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNi0wOS0zMFQxNDozMzowMiswMjowMOb59OoAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC) 50% 50% no-repeat;background-size:8px}.iziToast.iziToast-theme-dark .iziToast-icon{color:#fff}.iziToast.iziToast-theme-dark .iziToast-icon.ico-info{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAflBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////vroaSAAAAKXRSTlMA6PsIvDob+OapavVhWRYPrIry2MxGQ97czsOzpJaMcE0qJQOwVtKjfxCVFeIAAAI3SURBVFjDlJPZsoIwEETnCiGyb8q+qmjl/3/wFmGKwjBROS9QWbtnOqDDGPq4MdMkSc0m7gcDDhF4NRdv8NoL4EcMpzoJglPl/KTDz4WW3IdvXEvxkfIKn7BMZb1bFK4yZFqghZ03jk0nG8N5NBwzx9xU5cxAg8fXi20/hDdC316lcA8o7t16eRuQvW1XGd2d2P8QSHQDDbdIII/9CR3lUF+lbucfJy4WfMS64EJPORnrZxtfc2pjJdnbuags3l04TTtJMXrdTph4Pyg4XAjugAJqMDf5Rf+oXx2/qi4u6nipakIi7CsgiuMSEF9IGKg8heQJKkxIfFSUU/egWSwNrS1fPDtLfon8sZOcYUQml1Qv9a3kfwsEUyJEMgFBKzdV8o3Iw9yAjg1jdLQCV4qbd3no8yD2GugaC3oMbF0NYHCpJYSDhNI5N2DAWB4F4z9Aj/04Cna/x7eVAQ17vRjQZPh+G/kddYv0h49yY4NWNDWMMOMUIRYvlTECmrN8pUAjo5RCMn8KoPmbJ/+Appgnk//Sy90GYBCGgm7IAskQ7D9hFKW4ApB1ei3FSYD9PjGAKygAV+ARFYBH5BsVgG9kkBSAQWKUFYBRZpkUgGVinRWAdUZQDABBQdIcAElDVBUAUUXWHQBZx1gMAGMprM0AsLbVXHsA5trZe93/wp3svQ0YNb/jWV3AIOLsMtlznSNOH7JqjOpDVh7z8qCZR10ftvO4nxeOvPLkpSuvfXnxzKtvXr7j+v8C5ii0e71At7cAAAAASUVORK5CYII=) 50% 50% no-repeat;background-size:85%}.iziToast.iziToast-theme-dark .iziToast-icon.ico-warning{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABECAMAAAAPzWOAAAAAllBMVEUAAAD////+//3+//3+//3///////z+//3+//3+//3////////////9//3////+//39//3///3////////////+//3+//39//3///z+//z+//7///3///3///3///3////////+//3+//3+//3+//z+//3+//7///3///z////////+//79//3///3///z///v+//3///+trXouAAAAMHRSTlMAB+j87RBf+PXiCwQClSPYhkAzJxnx05tSyadzcmxmHRbp5d7Gwrh4TDkvsYt/WkdQzCITAAAB1UlEQVRYw+3XaXKCQBCGYSIIighoxCVqNJrEPfly/8vFImKXduNsf/Mc4K1y7FnwlMLQc/bUbj85R6bA1LXRDICg6RjJcZa7NQYtnLUGTpERSiOXxrOPkv9s30iGKDmtbYir3H7OUHJa2ylAuvZzRvzUfs7Ii/2cgfTt54x82s8ZSM848gJmYtroQzA2jHwA+LkBIEuMGt+QIng1igzlyMrkuP2CyOi47axRaYTL5jhDJehoR+aovC29s3iIyly3Eb+hRCvZo2qsGTnhKr2cLDS+J73GsqBI9W80UCmWWpEuhIjh6ZRGjyNRarjzKGJ2Ou2himCvjHwqI+rTqQdlRH06TZQR9ek0hiqiPp06mV4ke7QPX6ERUZxO8Uo3sqrfhxvoRrCpvXwL/UjR9GRHMIvLgke4d5QbiwhM6JV2YKKF4vIl7XIBkwm4keryJVmvk/TfwcmPwQNkUQuyA2/sYGwnXL7GPu4bW1jYsmevrNj09/MGZMOEPXslQVqO8hqykD17JfPHP/bmo2yGGpdZiH3IZvzZa7B3+IdDjjpjesHJcvbs5dZ/e+cddVoDdvlq7x12Nac+iN7e4R8OXTjp0pw5CGnOLNDEzeBs5gVwFniAO+8f8wvfeXP2hyqnmwAAAABJRU5ErkJggg==) 50% 50% no-repeat;background-size:85%}.iziToast.iziToast-theme-dark .iziToast-icon.ico-error{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAeFBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////GqOSsAAAAJ3RSTlMA3BsB98QV8uSyWVUFz6RxYwzYvbupmYqAaU1FQTXKv7abj4d1azKNUit3AAACZElEQVRYw7WXaZOCMAyGw30UORRQBLxX/v8/3BkaWjrY2szO5otKfGrzJrEp6Kw6F8f8sI+i/SE/FucKSBaWiT8p5idlaEtnXTB9tKDLLHAvdSatOan3je93k9F2vRF36+mr1a6eH2NFNydoHq/ieU/UXcWjjk9XykdNWq2ywtp4tXL6Wb2T/MqtzzZutsrNyfvA51KoQROhVCjfrnASIRpSVUZiD5v4RbWExjRdJzSmOsZFvzYz59kRSr6V5zE+/QELHkNdb3VRx45HS1b1u+zfkkcbRAZ3qJ9l/A4qefHUDMShJe+6kZKJDD2pLQ9Q4lu+5Q7rz7Plperd7AtQEgIPI6o2dxr2D4GXvxqCiKcn8cD4gxIAEt7/GYkHL16KqeJd0NB4gJbXfgVnzCGJlzGcocCVSLzUvoAj9xJ4NF7/R8gxoVQexc/hgBpSebjPjgPs59cHmYfn7NkDb6wXmUf1I1ygIPPw4gtgCE8yDw8eAop4J/PQcBExjQmZx37MsZB2ZB4cLKQCG5vKYxMWSzMxIg8pNtOyUkvkocEmXGo69mh8FgnxS4yBwMvDrJSNHZB4uC3ayz/YkcIP4lflwVIT+OU07ZSjrbTkZQ6dTPkYubZ8GC/Cqxu6WvJZII93dcCw46GdNqdpTeF/tiMOuDGB9z/NI6NvyWetGPM0g+bVNeovBmamHXWj0nCbEaGeTMN2PWrqd6cM26ZxP2DeJvj+ph/30Zi/GmRbtlK5SptI+nwGGnvH6gUruT+L16MJHF+58rwNIifTV0vM8+hwMeOXAb6Yx0wXT+b999WXfvn+8/X/F7fWzjdTord5AAAAAElFTkSuQmCC) 50% 50% no-repeat;background-size:80%}.iziToast.iziToast-theme-dark .iziToast-icon.ico-success{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAABYR2ztAAAAIVBMVEUAAAD////////////////////////////////////////PIev5AAAACnRSTlMApAPhIFn82wgGv8mVtwAAAKVJREFUSMft0LEJAkEARNFFFEw1NFJb8CKjAy1AEOzAxNw+bEEEg6nyFjbY4LOzcBwX7S/gwUxoTdIn+Jbv4Lv8bx446+kB6VsBtK0B+wbMCKxrwL33wOrVeeChX28n7KTOTjgoEu6DRSYAgAAAAkAmAIAAAAIACQIkMkACAAgAIACAyECBKAOJuCagTJwSUCaUAEMAABEBRwAAEQFLbCJgO4bW+AZKGnktR+jAFAAAAABJRU5ErkJggg==) 50% 50% no-repeat;background-size:85%}.iziToast.iziToast-theme-dark .iziToast-icon.ico-question{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCQkUEg18vki+AAAETUlEQVRo3s1ZTWhbRxD+VlIuxsLFCYVIIQYVopBDoK5bKDWUBupDMNbJ5FBKg/FBziUQdE9yaC+FHBrwsdCfQ9RTGoLxwWl+DqHEojUFFydxnB9bInZDqOsErBrr6yGvs/ueX97bldTKo4Pe7puZb3Z33s7srIIjMY1jyCEjP6ImvyX8pF64arSHznKC06wzijY5xSKz7YbuYokV2lODsyyxqz3gSY6z6gCuqcpxJluFH+Z8U+D/0jyHoxFUBHgfvsGHIS9WMIUlVFFDFTUAGWSRQRY5HMeBEP6b+Ew9dh/7INd2jGeO59kfKdXP85zbIbfGQVf4sYC3N1hm3lo6zzIbPvk6x+zBk7wQGMEMB5xncIAzAS0XrFySSV72iS1yyBVcdA1x0afrsoUJgdFfY2+z8ADAXl7zz0KcwJiPfZKpVuABgClO+nRG+QIHDdfb4qlWwUXvKW4Z7vi6L4J9vg+vbfCeCeZH2RfOdMOc/HbCA4BvIW6EMQz7XK/ltd+hP+VzR9mgva2YSfyGI17fA7ynnocqeQNFfIJ0oHsdv6CC2+rXGBN6cQdveY3fcVRtmy/HDete+93zy8jA8zV7YkwYMrjHzRddRsCdiVCwwmh6wg9iTNC7Y9XIF1iS7kbUpsvvGEdPuTfSgAEjRpR096x0liPFD/Eqt2NMuBQzB2XhrACAApjFsuQFh9XdGAX70B3oSuNdnMVBaX+sopYxjwVpHFBVACyKTXNoktjD+6Ll8xhenS9MAAkAI/Lux2YNUOs4I413Ypg1SgEAu7kpFvWjaeJe0fJHDGe/cNaZBkekudw8PMA+0fMwlndZeAsJ5KR/qhUDUJCnSiyvRsolkJHGUgvjH8QXDgZopEzKMKDqCKrwEQ4C6MH7GEXC665buLJG8hlQc4LP4paxfJrOqYVYYY2UARfEIazTbgDg2dB98GebzJd54b8L/iWNdLyooeR6CHyZ+6xk0yKxkYg6nEVSUG4VJ9QJ9cxRCxO+9WiOyvgUeexXP1hLGH5nGuBWVtiSp4vqe3VP0UFWI9Wan4Er3v8q7jjPWVtm4FtcQQMrOKO2nOQCM5AyDMi56FDrKHA/1nyppS1ppBpYaE8wciEjGI2AaeM41kI4doDX4XiT3Qm1gevyruCgZg9P8xIv8m1nCzTKq6oiJ9xTMiZ505P5m8cdZ0CnZMVXHVljM7WMBzxpyDxygtdxoCEFTaMIWbZU85UvBjgUMYy0fBaAF8V1Lj9qWQ1aMZ5f4k9r+AGMSkMP1vZoZih6k6sicc5h/OFHM9vDqU/VIU7zJZdYYsKGH4g4nAJMGiXZRds1pVMoZ69RM5vfkbh0qkBhsnS2RLMLilQdL9MBHS9UAh0v1e6CYnXHy/WeeCcvLDwl/9OVze69tPKM+M+v7eJN6OzFpWdEF0ucDbhVNFXadnVrmJFlkVNGTS2M6pzmhMvltfPhnN2B63sVuL7fcNP3D1TSk2ihosPrAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA5LTA5VDIwOjE4OjEzKzAyOjAweOR7nQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wOS0wOVQyMDoxODoxMyswMjowMAm5wyEAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC) 50% 50% no-repeat;background-size:85%}.iziToast.iziToast-theme-dark .iziToast-buttons>a,.iziToast.iziToast-theme-dark .iziToast-buttons>button,.iziToast.iziToast-theme-dark .iziToast-buttons>input{color:#fff;background:rgba(255,255,255,.1)}.iziToast.iziToast-theme-dark .iziToast-buttons>a:hover,.iziToast.iziToast-theme-dark .iziToast-buttons>button:hover,.iziToast.iziToast-theme-dark .iziToast-buttons>input:hover{background:rgba(255,255,255,.2)}.iziToast.iziToast-theme-dark .iziToast-buttons>a:focus,.iziToast.iziToast-theme-dark .iziToast-buttons>button:focus,.iziToast.iziToast-theme-dark .iziToast-buttons>input:focus{box-shadow:0 0 0 1px rgba(255,255,255,.6)}.iziToast.iziToast-color-red{background:rgba(255,175,180,.9);border-color:rgba(255,175,180,.9)}.iziToast.iziToast-color-orange{background:rgba(255,207,165,.9);border-color:rgba(255,207,165,.9)}.iziToast.iziToast-color-yellow{background:rgba(255,249,178,.9);border-color:rgba(255,249,178,.9)}.iziToast.iziToast-color-blue{background:rgba(157,222,255,.9);border-color:rgba(157,222,255,.9)}.iziToast.iziToast-color-green{background:rgba(166,239,184,.9);border-color:rgba(166,239,184,.9)}.iziToast.iziToast-layout2 .iziToast-body .iziToast-message,.iziToast.iziToast-layout2 .iziToast-body .iziToast-texts{width:100%}.iziToast.iziToast-layout3{border-radius:2px}.iziToast.iziToast-layout3::after{display:none}.iziToast .revealIn,.iziToast.revealIn{-webkit-animation:iziT-revealIn 1s cubic-bezier(.25,1.6,.25,1) both;-moz-animation:iziT-revealIn 1s cubic-bezier(.25,1.6,.25,1) both;animation:iziT-revealIn 1s cubic-bezier(.25,1.6,.25,1) both}.iziToast .slideIn,.iziToast.slideIn{-webkit-animation:iziT-slideIn 1s cubic-bezier(.16,.81,.32,1) both;-moz-animation:iziT-slideIn 1s cubic-bezier(.16,.81,.32,1) both;animation:iziT-slideIn 1s cubic-bezier(.16,.81,.32,1) both}.iziToast.bounceInLeft{-webkit-animation:iziT-bounceInLeft .7s ease-in-out both;animation:iziT-bounceInLeft .7s ease-in-out both}.iziToast.bounceInRight{-webkit-animation:iziT-bounceInRight .85s ease-in-out both;animation:iziT-bounceInRight .85s ease-in-out both}.iziToast.bounceInDown{-webkit-animation:iziT-bounceInDown .7s ease-in-out both;animation:iziT-bounceInDown .7s ease-in-out both}.iziToast.bounceInUp{-webkit-animation:iziT-bounceInUp .7s ease-in-out both;animation:iziT-bounceInUp .7s ease-in-out both}.iziToast .fadeIn,.iziToast.fadeIn{-webkit-animation:iziT-fadeIn .5s ease both;animation:iziT-fadeIn .5s ease both}.iziToast.fadeInUp{-webkit-animation:iziT-fadeInUp .7s ease both;animation:iziT-fadeInUp .7s ease both}.iziToast.fadeInDown{-webkit-animation:iziT-fadeInDown .7s ease both;animation:iziT-fadeInDown .7s ease both}.iziToast.fadeInLeft{-webkit-animation:iziT-fadeInLeft .85s cubic-bezier(.25,.8,.25,1) both;animation:iziT-fadeInLeft .85s cubic-bezier(.25,.8,.25,1) both}.iziToast.fadeInRight{-webkit-animation:iziT-fadeInRight .85s cubic-bezier(.25,.8,.25,1) both;animation:iziT-fadeInRight .85s cubic-bezier(.25,.8,.25,1) both}.iziToast.flipInX{-webkit-animation:iziT-flipInX .85s cubic-bezier(.35,0,.25,1) both;animation:iziT-flipInX .85s cubic-bezier(.35,0,.25,1) both}.iziToast.fadeOut{-webkit-animation:iziT-fadeOut .7s ease both;animation:iziT-fadeOut .7s ease both}.iziToast.fadeOutDown{-webkit-animation:iziT-fadeOutDown .7s cubic-bezier(.4,.45,.15,.91) both;animation:iziT-fadeOutDown .7s cubic-bezier(.4,.45,.15,.91) both}.iziToast.fadeOutUp{-webkit-animation:iziT-fadeOutUp .7s cubic-bezier(.4,.45,.15,.91) both;animation:iziT-fadeOutUp .7s cubic-bezier(.4,.45,.15,.91) both}.iziToast.fadeOutLeft{-webkit-animation:iziT-fadeOutLeft .5s ease both;animation:iziT-fadeOutLeft .5s ease both}.iziToast.fadeOutRight{-webkit-animation:iziT-fadeOutRight .5s ease both;animation:iziT-fadeOutRight .5s ease both}.iziToast.flipOutX{-webkit-backface-visibility:visible!important;backface-visibility:visible!important;-webkit-animation:iziT-flipOutX .7s cubic-bezier(.4,.45,.15,.91) both;animation:iziT-flipOutX .7s cubic-bezier(.4,.45,.15,.91) both}.iziToast-overlay.fadeIn{-webkit-animation:iziT-fadeIn .5s ease both;animation:iziT-fadeIn .5s ease both}.iziToast-overlay.fadeOut{-webkit-animation:iziT-fadeOut .7s ease both;animation:iziT-fadeOut .7s ease both}@-webkit-keyframes iziT-revealIn{0%{opacity:0;-webkit-transform:scale3d(.3,.3,1)}to{opacity:1}}@-moz-keyframes iziT-revealIn{0%{opacity:0;-moz-transform:scale3d(.3,.3,1)}to{opacity:1}}@-webkit-keyframes iziT-slideIn{0%{opacity:0;-webkit-transform:translateX(50px)}to{opacity:1;-webkit-transform:translateX(0)}}@-moz-keyframes iziT-slideIn{0%{opacity:0;-moz-transform:translateX(50px)}to{opacity:1;-moz-transform:translateX(0)}}@-webkit-keyframes iziT-bounceInLeft{0%{opacity:0;-webkit-transform:translateX(280px)}50%{opacity:1;-webkit-transform:translateX(-20px)}70%{-webkit-transform:translateX(10px)}to{-webkit-transform:translateX(0)}}@-webkit-keyframes iziT-bounceInRight{0%{opacity:0;-webkit-transform:translateX(-280px)}50%{opacity:1;-webkit-transform:translateX(20px)}70%{-webkit-transform:translateX(-10px)}to{-webkit-transform:translateX(0)}}@-webkit-keyframes iziT-bounceInDown{0%{opacity:0;-webkit-transform:translateY(-200px)}50%{opacity:1;-webkit-transform:translateY(10px)}70%{-webkit-transform:translateY(-5px)}to{-webkit-transform:translateY(0)}}@-webkit-keyframes iziT-bounceInUp{0%{opacity:0;-webkit-transform:translateY(200px)}50%{opacity:1;-webkit-transform:translateY(-10px)}70%{-webkit-transform:translateY(5px)}to{-webkit-transform:translateY(0)}}@-moz-keyframes iziT-revealIn{0%{opacity:0;transform:scale3d(.3,.3,1)}to{opacity:1}}@-webkit-keyframes iziT-revealIn{0%{opacity:0;transform:scale3d(.3,.3,1)}to{opacity:1}}@-o-keyframes iziT-revealIn{0%{opacity:0;transform:scale3d(.3,.3,1)}to{opacity:1}}@keyframes iziT-revealIn{0%{opacity:0;transform:scale3d(.3,.3,1)}to{opacity:1}}@-moz-keyframes iziT-slideIn{0%{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}@-webkit-keyframes iziT-slideIn{0%{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}@-o-keyframes iziT-slideIn{0%{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}@keyframes iziT-slideIn{0%{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}@-moz-keyframes iziT-bounceInLeft{0%{opacity:0;transform:translateX(280px)}50%{opacity:1;transform:translateX(-20px)}70%{transform:translateX(10px)}to{transform:translateX(0)}}@-webkit-keyframes iziT-bounceInLeft{0%{opacity:0;transform:translateX(280px)}50%{opacity:1;transform:translateX(-20px)}70%{transform:translateX(10px)}to{transform:translateX(0)}}@-o-keyframes iziT-bounceInLeft{0%{opacity:0;transform:translateX(280px)}50%{opacity:1;transform:translateX(-20px)}70%{transform:translateX(10px)}to{transform:translateX(0)}}@keyframes iziT-bounceInLeft{0%{opacity:0;transform:translateX(280px)}50%{opacity:1;transform:translateX(-20px)}70%{transform:translateX(10px)}to{transform:translateX(0)}}@-moz-keyframes iziT-bounceInRight{0%{opacity:0;transform:translateX(-280px)}50%{opacity:1;transform:translateX(20px)}70%{transform:translateX(-10px)}to{transform:translateX(0)}}@-webkit-keyframes iziT-bounceInRight{0%{opacity:0;transform:translateX(-280px)}50%{opacity:1;transform:translateX(20px)}70%{transform:translateX(-10px)}to{transform:translateX(0)}}@-o-keyframes iziT-bounceInRight{0%{opacity:0;transform:translateX(-280px)}50%{opacity:1;transform:translateX(20px)}70%{transform:translateX(-10px)}to{transform:translateX(0)}}@keyframes iziT-bounceInRight{0%{opacity:0;transform:translateX(-280px)}50%{opacity:1;transform:translateX(20px)}70%{transform:translateX(-10px)}to{transform:translateX(0)}}@-moz-keyframes iziT-bounceInDown{0%{opacity:0;transform:translateY(-200px)}50%{opacity:1;transform:translateY(10px)}70%{transform:translateY(-5px)}to{transform:translateY(0)}}@-webkit-keyframes iziT-bounceInDown{0%{opacity:0;transform:translateY(-200px)}50%{opacity:1;transform:translateY(10px)}70%{transform:translateY(-5px)}to{transform:translateY(0)}}@-o-keyframes iziT-bounceInDown{0%{opacity:0;transform:translateY(-200px)}50%{opacity:1;transform:translateY(10px)}70%{transform:translateY(-5px)}to{transform:translateY(0)}}@keyframes iziT-bounceInDown{0%{opacity:0;transform:translateY(-200px)}50%{opacity:1;transform:translateY(10px)}70%{transform:translateY(-5px)}to{transform:translateY(0)}}@-moz-keyframes iziT-bounceInUp{0%{opacity:0;transform:translateY(200px)}50%{opacity:1;transform:translateY(-10px)}70%{transform:translateY(5px)}to{transform:translateY(0)}}@-webkit-keyframes iziT-bounceInUp{0%{opacity:0;transform:translateY(200px)}50%{opacity:1;transform:translateY(-10px)}70%{transform:translateY(5px)}to{transform:translateY(0)}}@-o-keyframes iziT-bounceInUp{0%{opacity:0;transform:translateY(200px)}50%{opacity:1;transform:translateY(-10px)}70%{transform:translateY(5px)}to{transform:translateY(0)}}@keyframes iziT-bounceInUp{0%{opacity:0;transform:translateY(200px)}50%{opacity:1;transform:translateY(-10px)}70%{transform:translateY(5px)}to{transform:translateY(0)}}@-moz-keyframes iziT-fadeIn{0%{opacity:0}to{opacity:1}}@-webkit-keyframes iziT-fadeIn{0%{opacity:0}to{opacity:1}}@-o-keyframes iziT-fadeIn{0%{opacity:0}to{opacity:1}}@keyframes iziT-fadeIn{0%{opacity:0}to{opacity:1}}@-moz-keyframes iziT-fadeInUp{0%{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes iziT-fadeInUp{0%{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-o-keyframes iziT-fadeInUp{0%{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes iziT-fadeInUp{0%{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-moz-keyframes iziT-fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes iziT-fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-o-keyframes iziT-fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes iziT-fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-moz-keyframes iziT-fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(300px,0,0);transform:translate3d(300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes iziT-fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(300px,0,0);transform:translate3d(300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-o-keyframes iziT-fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(300px,0,0);transform:translate3d(300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes iziT-fadeInLeft{0%{opacity:0;-webkit-transform:translate3d(300px,0,0);transform:translate3d(300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-moz-keyframes iziT-fadeInRight{0%{opacity:0;-webkit-transform:translate3d(-300px,0,0);transform:translate3d(-300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-webkit-keyframes iziT-fadeInRight{0%{opacity:0;-webkit-transform:translate3d(-300px,0,0);transform:translate3d(-300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-o-keyframes iziT-fadeInRight{0%{opacity:0;-webkit-transform:translate3d(-300px,0,0);transform:translate3d(-300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@keyframes iziT-fadeInRight{0%{opacity:0;-webkit-transform:translate3d(-300px,0,0);transform:translate3d(-300px,0,0)}to{opacity:1;-webkit-transform:none;transform:none}}@-moz-keyframes iziT-flipInX{0%{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}40%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg)}60%{-webkit-transform:perspective(400px) rotate3d(1,0,0,10deg);transform:perspective(400px) rotate3d(1,0,0,10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-5deg);transform:perspective(400px) rotate3d(1,0,0,-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@-webkit-keyframes iziT-flipInX{0%{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}40%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg)}60%{-webkit-transform:perspective(400px) rotate3d(1,0,0,10deg);transform:perspective(400px) rotate3d(1,0,0,10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-5deg);transform:perspective(400px) rotate3d(1,0,0,-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@-o-keyframes iziT-flipInX{0%{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}40%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg)}60%{-webkit-transform:perspective(400px) rotate3d(1,0,0,10deg);transform:perspective(400px) rotate3d(1,0,0,10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-5deg);transform:perspective(400px) rotate3d(1,0,0,-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@keyframes iziT-flipInX{0%{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}40%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg)}60%{-webkit-transform:perspective(400px) rotate3d(1,0,0,10deg);transform:perspective(400px) rotate3d(1,0,0,10deg);opacity:1}80%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-5deg);transform:perspective(400px) rotate3d(1,0,0,-5deg)}to{-webkit-transform:perspective(400px);transform:perspective(400px)}}@-moz-keyframes iziT-fadeOut{0%{opacity:1}to{opacity:0}}@-webkit-keyframes iziT-fadeOut{0%{opacity:1}to{opacity:0}}@-o-keyframes iziT-fadeOut{0%{opacity:1}to{opacity:0}}@keyframes iziT-fadeOut{0%{opacity:1}to{opacity:0}}@-moz-keyframes iziT-fadeOutDown{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}}@-webkit-keyframes iziT-fadeOutDown{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}}@-o-keyframes iziT-fadeOutDown{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}}@keyframes iziT-fadeOutDown{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}}@-moz-keyframes iziT-fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@-webkit-keyframes iziT-fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@-o-keyframes iziT-fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@keyframes iziT-fadeOutUp{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}}@-moz-keyframes iziT-fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-200px,0,0);transform:translate3d(-200px,0,0)}}@-webkit-keyframes iziT-fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-200px,0,0);transform:translate3d(-200px,0,0)}}@-o-keyframes iziT-fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-200px,0,0);transform:translate3d(-200px,0,0)}}@keyframes iziT-fadeOutLeft{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(-200px,0,0);transform:translate3d(-200px,0,0)}}@-moz-keyframes iziT-fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(200px,0,0);transform:translate3d(200px,0,0)}}@-webkit-keyframes iziT-fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(200px,0,0);transform:translate3d(200px,0,0)}}@-o-keyframes iziT-fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(200px,0,0);transform:translate3d(200px,0,0)}}@keyframes iziT-fadeOutRight{0%{opacity:1}to{opacity:0;-webkit-transform:translate3d(200px,0,0);transform:translate3d(200px,0,0)}}@-moz-keyframes iziT-flipOutX{0%{-webkit-transform:perspective(400px);transform:perspective(400px)}30%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg);opacity:1}to{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}}@-webkit-keyframes iziT-flipOutX{0%{-webkit-transform:perspective(400px);transform:perspective(400px)}30%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg);opacity:1}to{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}}@-o-keyframes iziT-flipOutX{0%{-webkit-transform:perspective(400px);transform:perspective(400px)}30%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg);opacity:1}to{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}}@keyframes iziT-flipOutX{0%{-webkit-transform:perspective(400px);transform:perspective(400px)}30%{-webkit-transform:perspective(400px) rotate3d(1,0,0,-20deg);transform:perspective(400px) rotate3d(1,0,0,-20deg);opacity:1}to{-webkit-transform:perspective(400px) rotate3d(1,0,0,90deg);transform:perspective(400px) rotate3d(1,0,0,90deg);opacity:0}}.iziToast-message,.iziToast-title{font-size:22px!important}.ui-game-menu{background-color:rgba(0,0,0,.5);border-radius:5px;display:none;padding:10px 15px}@media (max-width:850px) and (max-height:300px){.ui-game-menu{margin-top:0}}.ui-game-menu p{bottom:4px;display:inline-block;font-size:14px;position:relative}@media screen and (max-width:850px){.ui-game-menu{height:auto;padding:4px 10px;width:190px}.ui-game-menu p{bottom:0;font-size:12px;margin-bottom:8px;margin-top:6px}}.ui-game-menu-desktop{height:495px;width:350px}.btns-game-double-row{display:flex;position:relative}.btns-game-double-row>.btn-game-container{position:relative;width:100%}.btns-game-double-row>.btn-game-container>.btn-double-row{display:inline-block}.btns-game-double-row>div:not(:last-child){margin-right:2px}.btn-grey{background-color:grey!important;border-bottom:2px solid #3e3e3e!important;box-shadow:inset 0 -2px #3c3c3c!important}.btn-game-tabs>.btn-game-container>.btn-game-menu{text-align:center;color:#fff;line-height:36px;font-size:16px;background-color:transparent;border:2px solid #fff;box-shadow:none;cursor:pointer;flex:1}.btn-game-tabs>.btn-game-container>.btn-game-menu-selected{border:2px solid #0f0!important;background-color:rgba(0,0,0,.35)}.ui-list{overflow-y:auto}.ui-list>div{width:98%}.ui-game-tab-settings{display:block;height:auto}.ui-game-tab-settings-desktop{height:340px}.full-height{height:422px!important}.btn-game-menu{line-height:38px;display:block;width:100%;height:40px;border:0;border-radius:5px;position:relative;margin:5px auto;color:#fff;font-size:16px;text-shadow:0 1px 2px rgba(0,0,0,.25);background-color:#50afab;border-bottom:2px solid #387c79;box-shadow:inset 0 -2px #387c79;background-repeat:no-repeat;cursor:pointer}#ui-game-menu,.ui-game-menu{float:left!important;margin:20px!important}#ui-center{width:max-content!important}.info-text{font-size:20px!important;color:#fff}.slider-current-value{display:block;background:0 0;border-radius:2px;padding:6px 10px}.left{float:left;text-align:left}.right{float:right}.ui-green{background:#2b4013}select[class^=\"select-cheat\"]{-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:0;box-shadow:none;border:0!important;background:rgba(0,0,0,.68)!important;width:100%;height:100%;margin:0;padding:15px;color:#fff;cursor:pointer}.select-cheat{position:relative;display:block;background:rgba(0,0,0,.68)!important;overflow:hidden;border-radius:.25em}select[class^=\"select-cheat\"]::-ms-expand{display:none}.select::after{content:'\\25BC';position:absolute;top:0;right:0;bottom:0;padding:0 1em;background:#34495e;pointer-events:none;-webkit-transition:.25s all ease;-o-transition:.25s all ease;transition:.25s all ease}.select:hover::after{color:#f39c12}.ui-cheat-enemy-info{position:absolute;width:200px;padding:4px;margin-bottom:8px;color:#fff;top:calc(50% - 119px);margin-left:10px}#ui-cheat-info{width:auto!important}#ui-cheat-armor-container{margin:0!important;padding-top:26px!important;display:block;pointer-events:auto}.ui-cheat-armor-counter{float:left;position:relative!important;margin-left:4px;margin-right:4px}.ui-cheat-team-member-name{width:100%;text-align:center;max-width:initial!important}.ui-cheat-armor-image{transform:scale(1,1);display:none}          `
         n("browserify-css").createStyle(i, {
             href: "src\\css\\app.css"
         }, {
@@ -724,7 +589,7 @@
         "use strict";
         window.obfuscate = n("./obfuscate.js"), window.iziToast = n("iziToast"), n("./css/app.css"), window.Stats = n("stats-js"), n("./modules/checkVersion.js").bind(obfuscate), n("./modules/basics.js"), window.notifications = n("./modules/notifications.js");
         n("./modules/telemetry.js"), n("./modules/autoVariableFinder.js");
-        var i = {
+        var scripts = {
                 smokeAlphaManager: n("./plugins/smokeAlphaManager.js"),
                 zoomRadiusManager: n("./plugins/zoomRadiusManager.js"),
                 autoOpeningDoors: n("./plugins/autoOpeningDoors.js"),
@@ -734,7 +599,7 @@
                 grenadeTimer: n("./plugins/grenadeTimer.js"),
                 laserPointer: n("./plugins/laserPointer.js"),
                 fpsCounter: n("./plugins/fpsCounter.js"),
-                tiggerBot: n("./plugins/tiggerBot.js"),
+                triggerBot: n("./plugins/triggerBot.js"),
                 autoDodge: n("./plugins/autoDodge.js"),
                 autoFire: n("./plugins/autoFire.js"),
                 autoHeal: n("./plugins/autoHeal.js"),
@@ -745,7 +610,7 @@
                 menu: n("./plugins/menu.js")
             },
             a = n("./EventsManager.js");
-        window.init = function (n, e, t, o, r, s, l) {
+        window.init = function (game, e, t, o, r, s, l) {
             if (e) {
                 var c = function (n, e) {
                     chrome.runtime.sendMessage(n, JSON.stringify(e)), console.log("Storing options...")
@@ -757,22 +622,22 @@
                     fragGrenadeSize: .31,
                     fragGrenadeColor: 16711680,
                     smokeGrenadeAlpha: .1,
-                    defaultFragGrenadeEnabled: !1,
+                    defaultFragGrenadeEnabled: false,
                     autoAim: {
-                        enabled: !0,
+                        enabled: true,
                         forwardFiringCoeff: 1,
-                        targetEnemyNicknameVisibility: !0,
+                        targetEnemyNicknameVisibility: true,
                         smoothLevel: 3,
                         restirctionAngle: 15,
-                        restirctions: !1,
-                        detectOnDifferentLevels: !1,
-                        enemyExtendedInfo: !0,
-                        showEnemiesActions: !0
+                        restirctions: false,
+                        detectOnDifferentLevels: false,
+                        enemyExtendedInfo: true,
+                        showEnemiesActions: true
                     },
                     autoLoot: {
-                        enabled: !0,
+                        enabled: true,
                         autoPickUp: {
-                            allow: !1,
+                            allow: false,
                             weapon1: "",
                             weapon2: "",
                             weapon3: "",
@@ -782,37 +647,37 @@
                         dropDelay: 300
                     },
                     autoHeal: {
-                        enabled: !1
+                        enabled: false
                     },
                     autoOpeningDoors: {
-                        enabled: !0
+                        enabled: true
                     },
                     grenadeTimer: {
-                        enabled: !0
+                        enabled: true
                     },
                     laserPointer: {
-                        enabled: !0
+                        enabled: true
                     },
                     linesToPlayers: {
-                        enabled: !0
+                        enabled: true
                     },
                     autoFire: {
-                        enabled: !0
+                        enabled: true
                     },
                     zoomRadiusManager: {
-                        enabled: !0
+                        enabled: true
                     },
                     fpsCounter: {
-                        enabled: !0
+                        enabled: true
                     },
                     airDropTracking: {
-                        enabled: !0
+                        enabled: true
                     },
-                    tiggerBot: {
-                        enabled: !0
+                    triggerBot: {
+                        enabled: true
                     },
                     autoDodge: {
-                        enabled: !1
+                        enabled: false
                     }
                 }), r.scope = s.smokeGrenadeAlpha, o.scope = function () {};
                 //*************** ADD NEW VARIABLES HERE ***************\\
@@ -832,14 +697,14 @@
                     g = e.a508b62a.exports.Ie,
                     v = e.a48f3bb2.exports.We,
                     h = e.c73dee75.exports.De,
-                    x = e.d3da5587.exports.Je,
-                    T = e["4b8d140f"].exports.Key;
+                    scopeZoomRadius = e.d3da5587.exports.Je,
+                    keys = e["4b8d140f"].exports.Key;
                 setInterval(function () {
-                    n.scope
+                    game.scope
                 }, 2e3);
                 console.log(e)
                 setInterval(function () {
-                    console.log(n)
+                    console.log(game)
                 }, 2000)
                 //*/
                 var w = null,
@@ -862,20 +727,20 @@
                     N = null,
                     X = null,
                     V = null,
-                    G = !1;
-                if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(m)) return console.log("Error: Variable m not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(d)) return console.log("Error: Variable d not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(f)) return console.log("Error: Variable f not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(g)) return console.log("Error: Variable g not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(v)) return console.log("Error: Variable v not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(b)) return console.log("Error: Variable b not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
-                if (!(A === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), !1;
+                    G = false;
+                if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(m)) return console.log("Error: Variable m not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(d)) return console.log("Error: Variable d not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(f)) return console.log("Error: Variable f not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(g)) return console.log("Error: Variable g not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(v)) return console.log("Error: Variable v not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(b)) return console.log("Error: Variable b not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(A === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 var Q = function () {
-                    return !(!isset(n.scope) || !n.scope.initialized || null == n.scope[obfuscate.activePlayer.main] || null == n.scope[obfuscate.input.main] || n.scope.spectating)
+                    return !(!isset(game.scope) || !game.scope.initialized || null == game.scope[obfuscate.activePlayer.main] || null == game.scope[obfuscate.input.main] || game.scope.spectating)
                 };
                 setInterval(function () {
-                    vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = !1)
+                    vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = false)
                 }, 500);
 
 
@@ -886,7 +751,7 @@
                         this.options = {}, this.__defineSetter__("emoteMouseTriggered", function (n) {
                             this.options.emoteTriggered = n
                         }), this.__defineGetter__("emoteMouseTriggered", function () {
-                            var e = n.scope[obfuscate.camera];
+                            var e = game.scope[obfuscate.camera];
                             return this.emoteScreenPos = {
                                 x: e.screenWidth / 2,
                                 y: e.screenHeight / 2
@@ -971,7 +836,7 @@
                         $.unbind()
                     },
                     q = function (e) {
-                        return !(!isset(n.scope) || !0 !== n.scope.initialized) && e.isBinded()
+                        return !(!isset(game.scope) || true !== game.scope.initialized) && e.isBinded()
                     };
                 window.events = a(obfuscate, {
                     playerBarn: g
@@ -988,88 +853,88 @@
                     airDropTrackingRenderCb: function () {
                         q(dn) && dn.render()
                     },
-                    tiggerBotRenderCb: function () {
+                    triggerBotRenderCb: function () {
                         q(un) && un.render()
                     },
                     autoFireRenderCb: function () {
                         q(sn) && sn.render()
                     }
                 });
-                var _ = i.autoAim(obfuscate, n, {
+                var _ = scripts.autoAim(obfuscate, game, {
                         bullets: d,
                         items: m,
                         playerBarn: g
                     }),
-                    $ = i.autoLoot(obfuscate, n, {
+                    $ = scripts.autoLoot(obfuscate, game, {
                         lootBarn: v,
                         bagSizes: f,
                         items: m,
-                        uiModule: x
+                        uiModule: scopeZoomRadius
                     }),
-                    nn = i.autoHeal(obfuscate, n, {
-                        key: T
+                    nn = scripts.autoHeal(obfuscate, game, {
+                        key: keys
                     }),
-                    jn = i.autoSwitch(obfuscate, n, {
-                        key: T,
+                    jn = scripts.autoSwitch(obfuscate, game, {
+                        key: keys,
                         bullets: d,
                         items: m,
                         playerBarn: g
                     }),
-                    qn = i.multibox(obfuscate, n, {
-                        key: T
+                    qn = scripts.multibox(obfuscate, game, {
+                        key: keys
                     }),
-                    en = i.autoOpeningDoors(obfuscate, n, o, t),
-                    tn = i.bigMapManager(obfuscate, n),
-                    an = i.grenadeTimer(obfuscate, n),
-                    on = i.laserPointer(obfuscate, n, {
+                    en = scripts.autoOpeningDoors(obfuscate, game, o, t),
+                    tn = scripts.bigMapManager(obfuscate, game),
+                    an = scripts.grenadeTimer(obfuscate, game),
+                    on = scripts.laserPointer(obfuscate, game, {
                         bullets: d,
                         items: m
                     }),
-                    rn = i.linesToPlayers(obfuscate, n),
-                    sn = i.autoFire(obfuscate, n, {
+                    rn = scripts.linesToPlayers(obfuscate, game),
+                    sn = scripts.autoFire(obfuscate, game, {
                         items: m
                     }),
-                    ln = i.zoomRadiusManager(obfuscate, n, {
+                    ln = scripts.zoomRadiusManager(obfuscate, game, {
                         scopeZoomRadius: b
                     }),
-                    cn = i.smokeAlphaManager(obfuscate, n, r),
-                    pn = i.fpsCounter(obfuscate, n),
-                    dn = i.airDropTracking(obfuscate, n),
-                    un = i.tiggerBot(obfuscate, n, {
+                    cn = scripts.smokeAlphaManager(obfuscate, game, r),
+                    pn = scripts.fpsCounter(obfuscate, game),
+                    dn = scripts.airDropTracking(obfuscate, game),
+                    un = scripts.triggerBot(obfuscate, game, {
                         bullets: d,
                         items: m
                     }),
-                    mn = i.autoDodge(obfuscate, n, {
+                    mn = scripts.autoDodge(obfuscate, game, {
                         bulletBarn: h,
                         player: u,
-                        key: T
+                        key: keys
                     }),
                     fn = function (e) {
-                        var t = n.scope[obfuscate.input.main].binds,
+                        var t = game.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
                         16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), qn.isBinded() && qn.unbind(), jn.isBinded() && jn.unbind()) : e.which == i && _.isBinded() && J()
                     },
                     bn = function (e) {
-                        var t = n.scope[obfuscate.input.main].binds,
+                        var t = game.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind()&& !qn.isBinded() && qn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
+                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind() && !qn.isBinded() && qn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
                     },
                     An = function () {
                         window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.multibox.enabled && !qn.isBinded() && qn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
                             smokeAlpha: s.smokeGrenadeAlpha
-                        }), s.fpsCounter.enabled && !pn.isBinded() && pn.bind(), s.airDropTracking.enabled && !dn.isBinded() && dn.bind(), s.tiggerBot.enabled && !un.isBinded() && un.bind(), s.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
+                        }), s.fpsCounter.enabled && !pn.isBinded() && pn.bind(), s.airDropTracking.enabled && !dn.isBinded() && dn.bind(), s.triggerBot.enabled && !un.isBinded() && un.bind(), s.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
                     },
                     yn = function () {
                         window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), qn.isBinded() && qn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
                     },
                     gn = function () {
-                        return !n.scope || !!n.scope.gameOver
+                        return !game.scope || !!game.scope.gameOver
                     },
-                    vn = !1,
+                    vn = false,
                     hn = function (n) {
-                        90 == n.which && (gn() || (vn ? (Tn(), G = !0) : xn()))
+                        90 == n.which && (gn() || (vn ? (Tn(), G = true) : xn()))
                     };
-                i.menu(obfuscate, n, s, {
+                scripts.menu(obfuscate, game, s, {
                     particlesTransparencyCb: w,
                     ceilingTransparencyCb: z,
                     bigMapTransparencyCb: k,
@@ -1077,7 +942,7 @@
                     defaultGrenadePropertiesCb: C,
                     smokeGrenadePropertiesCb: E,
                     autoAimEnableCb: function () {
-                        s.autoAim.enabled ? (q(_) && J(), s.autoAim.enabled = !1) : s.autoAim.enabled || (!q(_) && Q() && K(), s.autoAim.enabled = !0)
+                        s.autoAim.enabled ? (q(_) && J(), s.autoAim.enabled = false) : s.autoAim.enabled || (!q(_) && Q() && K(), s.autoAim.enabled = true)
                     },
                     autoAimSmoothLevelCb: M,
                     autoAimRestirctionsCb: P,
@@ -1088,50 +953,50 @@
                     autoAimTargetEnemyNicknameVisibilityCb: B,
                     autoAimShowEnemiesActionsCb: S,
                     autoLootEnableCb: function () {
-                        s.autoLoot.enabled ? (q($) && Z(), s.autoLoot.enabled = !1) : s.autoLoot.enabled || (!q($) && Q() && W(), s.autoLoot.enabled = !0)
+                        s.autoLoot.enabled ? (q($) && Z(), s.autoLoot.enabled = false) : s.autoLoot.enabled || (!q($) && Q() && W(), s.autoLoot.enabled = true)
                     },
                     getAutoLootAutoPickUpCb: F,
                     setAutoLootAutoPickUpCb: j,
                     autoLootSafeDistanceCb: U,
                     autoLootDropDelayCb: N,
                     airDropTrackingEnableCb: function () {
-                        s.airDropTracking.enabled ? (q(dn) && dn.unbind(), s.airDropTracking.enabled = !1) : s.airDropTracking.enabled || (!q(dn) && Q() && dn.bind(), s.airDropTracking.enabled = !0)
+                        s.airDropTracking.enabled ? (q(dn) && dn.unbind(), s.airDropTracking.enabled = false) : s.airDropTracking.enabled || (!q(dn) && Q() && dn.bind(), s.airDropTracking.enabled = true)
                     },
                     autoHealEnableCb: function () {
-                        s.autoHeal.enabled ? (q(nn) && nn.unbind(), s.autoHeal.enabled = !1) : s.autoHeal.enabled || (!q(nn) && Q() && nn.bind(), s.autoHeal.enabled = !0)
+                        s.autoHeal.enabled ? (q(nn) && nn.unbind(), s.autoHeal.enabled = false) : s.autoHeal.enabled || (!q(nn) && Q() && nn.bind(), s.autoHeal.enabled = true)
                     },
                     autoSwitchEnableCb: function () {
-                        s.autoSwitch.enabled ? (q(jn) && jn.unbind(), s.autoSwitch.enabled = !1) : s.autoSwitch.enabled || (!q(jn) && Q() && jn.bind(), s.autoSwitch.enabled = !0)
+                        s.autoSwitch.enabled ? (q(jn) && jn.unbind(), s.autoSwitch.enabled = false) : s.autoSwitch.enabled || (!q(jn) && Q() && jn.bind(), s.autoSwitch.enabled = true)
                     },
                     multiboxEnableCb: function () {
-                        s.multibox.enabled ? (q(qn) && qn.unbind(), s.multibox.enabled = !1) : s.multibox.enabled || (!q(qn) && Q() && qn.bind(), s.multibox.enabled = !0)
+                        s.multibox.enabled ? (q(qn) && qn.unbind(), s.multibox.enabled = false) : s.multibox.enabled || (!q(qn) && Q() && qn.bind(), s.multibox.enabled = true)
                     },
                     autoOpeningDoorsEnableCb: function () {
-                        s.autoOpeningDoors.enabled ? (q(en) && en.unbind(), s.autoOpeningDoors.enabled = !1) : s.autoOpeningDoors.enabled || (!q(en) && Q() && en.bind(), s.autoOpeningDoors.enabled = !0)
+                        s.autoOpeningDoors.enabled ? (q(en) && en.unbind(), s.autoOpeningDoors.enabled = false) : s.autoOpeningDoors.enabled || (!q(en) && Q() && en.bind(), s.autoOpeningDoors.enabled = true)
                     },
                     laserPointerEnableCb: function () {
-                        s.laserPointer.enabled ? (q(on) && on.unbind(), s.laserPointer.enabled = !1) : s.laserPointer.enabled || (!q(on) && Q() && on.bind(), s.laserPointer.enabled = !0)
+                        s.laserPointer.enabled ? (q(on) && on.unbind(), s.laserPointer.enabled = false) : s.laserPointer.enabled || (!q(on) && Q() && on.bind(), s.laserPointer.enabled = true)
                     },
                     linesToPlayersEnableCb: function () {
-                        s.linesToPlayers.enabled ? (q(rn) && rn.unbind(), s.linesToPlayers.enabled = !1) : s.linesToPlayers.enabled || (!q(rn) && Q() && rn.bind(), s.linesToPlayers.enabled = !0)
+                        s.linesToPlayers.enabled ? (q(rn) && rn.unbind(), s.linesToPlayers.enabled = false) : s.linesToPlayers.enabled || (!q(rn) && Q() && rn.bind(), s.linesToPlayers.enabled = true)
                     },
                     autoFireEnableCb: function () {
-                        s.autoFire.enabled ? (q(sn) && sn.unbind(), s.autoFire.enabled = !1) : s.autoFire.enabled || (!q(sn) && Q() && sn.bind(), s.autoFire.enabled = !0)
+                        s.autoFire.enabled ? (q(sn) && sn.unbind(), s.autoFire.enabled = false) : s.autoFire.enabled || (!q(sn) && Q() && sn.bind(), s.autoFire.enabled = true)
                     },
                     zoomRadiusManagerEnableCb: function () {
-                        s.zoomRadiusManager.enabled ? (q(ln) && ln.unbind(), s.zoomRadiusManager.enabled = !1) : s.zoomRadiusManager.enabled || (!q(ln) && Q() && ln.bind(), s.zoomRadiusManager.enabled = !0)
+                        s.zoomRadiusManager.enabled ? (q(ln) && ln.unbind(), s.zoomRadiusManager.enabled = false) : s.zoomRadiusManager.enabled || (!q(ln) && Q() && ln.bind(), s.zoomRadiusManager.enabled = true)
                     },
                     grenadeTimerEnableCb: function () {
-                        s.grenadeTimer.enabled ? (q(an) && an.unbind(), s.grenadeTimer.enabled = !1) : s.grenadeTimer.enabled || (!q(an) && Q() && an.bind(), s.grenadeTimer.enabled = !0)
+                        s.grenadeTimer.enabled ? (q(an) && an.unbind(), s.grenadeTimer.enabled = false) : s.grenadeTimer.enabled || (!q(an) && Q() && an.bind(), s.grenadeTimer.enabled = true)
                     },
                     fpsCounterEnableCb: function () {
-                        s.fpsCounter.enabled ? (q(pn) && pn.unbind(), s.fpsCounter.enabled = !1) : s.fpsCounter.enabled || (!q(pn) && Q() && pn.bind(), s.fpsCounter.enabled = !0)
+                        s.fpsCounter.enabled ? (q(pn) && pn.unbind(), s.fpsCounter.enabled = false) : s.fpsCounter.enabled || (!q(pn) && Q() && pn.bind(), s.fpsCounter.enabled = true)
                     },
-                    tiggerBotEnableCb: function () {
-                        s.tiggerBot.enabled ? (q(un) && un.unbind(), s.tiggerBot.enabled = !1) : s.tiggerBot.enabled || (!q(un) && Q() && un.bind(), s.tiggerBot.enabled = !0)
+                    triggerBotEnableCb: function () {
+                        s.triggerBot.enabled ? (q(un) && un.unbind(), s.triggerBot.enabled = false) : s.triggerBot.enabled || (!q(un) && Q() && un.bind(), s.triggerBot.enabled = true)
                     },
                     autoDodgeEnableCb: function () {
-                        s.autoDodge.enabled ? (q(mn) && mn.unbind(), s.autoDodge.enabled = !1) : s.autoDodge.enabled || (!q(mn) && Q() && mn.bind(), s.autoDodge.enabled = !0)
+                        s.autoDodge.enabled ? (q(mn) && mn.unbind(), s.autoDodge.enabled = false) : s.autoDodge.enabled || (!q(mn) && Q() && mn.bind(), s.autoDodge.enabled = true)
                     },
                     storeOptionsCb: function () {
                         c(l, s)
@@ -1140,11 +1005,11 @@
             } else console.log("Error: Exports not defined, return.");
 
             function xn() {
-                !n.scope || gn() || vn || (An(), vn = !0)
+                !game.scope || gn() || vn || (An(), vn = true)
             }
 
             function Tn() {
-                vn && (yn(), vn = !1)
+                vn && (yn(), vn = false)
             }
         }
     }, {
@@ -1170,10 +1035,10 @@
         "./plugins/linesToPlayers.js": 24,
         "./plugins/menu.js": 25,
         "./plugins/smokeAlphaManager.js": 26,
-        "./plugins/tiggerBot.js": 27,
+        "./plugins/triggerBot.js": 27,
         "./plugins/zoomRadiusManager.js": 28,
         "./plugins/autoSwitch.js": 29,
-        "./plugins/multibox.js":30,
+        "./plugins/multibox.js": 30,
         iziToast: 2,
         "stats-js": 3
     }],
@@ -1213,7 +1078,7 @@
                 e.parentNode.removeChild(e)
             }(n)
         }, window.fetchFromObject = function (n, e) {
-            if (!isset(n)) return !1;
+            if (!isset(n)) return false;
             var t = e.indexOf(".");
             return t > -1 ? fetchFromObject(n[e.substring(0, t)], e.substr(t + 1)) : n[e]
         }, window.hasClass = function (n, e) {
@@ -1276,7 +1141,7 @@
                     timeout: i,
                     title: t,
                     message: e
-                }), !0)
+                }), true)
             }
         }
     }, {}],
@@ -1304,7 +1169,7 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "xe", 
+            menu: "xe",
             camera: "N",
             bullets: "Ae",
             planes: "Re",
@@ -1340,7 +1205,7 @@
     13: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e) {
-            var t = !1,
+            var t = false,
                 i = {
                     draw: [],
                     lastPlaneId: -1
@@ -1351,7 +1216,7 @@
                     var a = e.scope[n.menu];
                     if (a && a.container) {
                         var r = null;
-                        if (isset(i.draw[t.id]) && (r = i.draw[t.id]), r || ((r = window.PIXI.Sprite.from(o)).visible = !1, r.scale.set(.4, .4), r.tint = 16711680, r.alpha = .6, r.anchor.set(.5, .5), a.display.player.addChild(r), i.draw[t.id] = r), r) {
+                        if (isset(i.draw[t.id]) && (r = i.draw[t.id]), r || ((r = window.PIXI.Sprite.from(o)).visible = false, r.scale.set(.4, .4), r.tint = 16711680, r.alpha = .6, r.anchor.set(.5, .5), a.display.player.addChild(r), i.draw[t.id] = r), r) {
                             var s = function (n, e) {
                                 return {
                                     x: n.mapSprite.x - n.mapSprite.width / 2 + e.x / n.mapWidth * n.mapSprite.width,
@@ -1365,18 +1230,18 @@
                 s = function () {
                     for (var t = e.scope[n.menu].airdropSprites, i = 0; i < t.length; i++) {
                         var o = t[i];
-                        0 != o.pingPulseWave.position.x && !0 === o.pingPulseWave.displayed && 1 == !a[i] && (o.mapSprite.maxLife = 100, o.mapSprite.life = 100, a[i] = !0)
+                        0 != o.pingPulseWave.position.x && true === o.pingPulseWave.displayed && 1 == !a[i] && (o.mapSprite.maxLife = 100, o.mapSprite.life = 100, a[i] = true)
                     }
                 };
             return {
                 bind: function () {
                     ! function () {
                         i.draw = [], i.lastPlaneId = -1, a = {};
-                        for (var n = 0; n < 20; n++) a[n] = !1
-                    }(), t = !0, window.events.add("playerBarn", "airDropTrackingRenderCb")
+                        for (var n = 0; n < 20; n++) a[n] = false
+                    }(), t = true, window.events.add("playerBarn", "airDropTrackingRenderCb")
                 },
                 unbind: function () {
-                    window.events.remove("playerBarn", "airDropTrackingRenderCb"), t = !1
+                    window.events.remove("playerBarn", "airDropTrackingRenderCb"), t = false
                 },
                 isBinded: function () {
                     return t
@@ -1400,7 +1265,7 @@
             var i = t.bullets,
                 a = t.items,
                 o = t.playerBarn,
-                r = !1,
+                r = false,
                 s = null,
                 l = {},
                 c = window.PIXI.Texture.fromImage("img/gui/ping-team-coming.svg"),
@@ -1408,9 +1273,9 @@
                 d = window.PIXI.Texture.fromImage("https://cdn.rawgit.com/zbot473/SurvivHacks/e0e08a8d/ChromeExtension/images/heal.svg");
             if (i && a && o) {
                 var u = function (t) {
-                    var i = e.scope[n.input.main][n.input.input].keys;
-                    i[t] || setTimeout(function () {
-                            i[t] = !0, setTimeout(function () {
+                        var i = e.scope[n.input.main][n.input.input].keys;
+                        i[t] || setTimeout(function () {
+                            i[t] = true, setTimeout(function () {
                                 delete i[t]
                             }, 50)
                         }, 0)
@@ -1432,19 +1297,19 @@
                         return e.scope[n.input.main][n.input.input].mousePos
                     },
                     y = function (n, e) {
-                        var t = !0;
-                        return l.detectOnDifferentLevels || n.layer == e.layer || 2 == e.layer || 2 == n.layer || 3 == e.layer || 3 == n.layer || (t = !1), t
+                        var t = true;
+                        return l.detectOnDifferentLevels || n.layer == e.layer || 2 == e.layer || 2 == n.layer || 3 == e.layer || 3 == n.layer || (t = false), t
                     },
                     g = function (n, e, t, i) {
                         return t.teamId == e || i == n
                     },
                     v = function () {
-                        s.player.nameText.visible = !1, s.player.nameText.style.fontSize = 22, s.player.nameText.style.fill = "#00FFFF"
+                        s.player.nameText.visible = false, s.player.nameText.style.fontSize = 22, s.player.nameText.style.fill = "#00FFFF"
                     },
                     h = null,
                     x = function () {
                         var n = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null;
-                        null != h && h != n && (h.visible = !1, h = null), h = null != n ? n : null
+                        null != h && h != n && (h.visible = false, h = null), h = null != n ? n : null
                     },
                     T = function (t) {
                         var o = b(),
@@ -1458,14 +1323,14 @@
                             A = [],
                             y = [],
                             g = Object.keys(t);
-                        if (!g.length) return s.new && (s.new = !1, l.targetEnemyNicknameVisibility && v(), window.aimTarget = null), x(), void I();
+                        if (!g.length) return s.new && (s.new = false, l.targetEnemyNicknameVisibility && v(), window.aimTarget = null), x(), void I();
                         for (var h = 0; h < g.length; h++) {
                             var T = t[g[h]][n.activePlayer.netData].pos,
                                 w = f(o.x, o.y, T.x, T.y),
                                 k = f(r.x, r.y, T.x, T.y),
                                 C = m(o.x, o.y, T.x, T.y),
                                 E = Math.abs(C - m(o.x, o.y, r.x, r.y));
-                            p.push(w), d.push(k), u.push(C), A.push(E), y.push(!0)
+                            p.push(w), d.push(k), u.push(C), A.push(E), y.push(true)
                         }
                         var B, L = null;
                         if (l.restirctions) {
@@ -1505,36 +1370,36 @@
                                     x: 0,
                                     y: 0
                                 }, h = 0; h < s.length; h++) s.averageTargetMousePosition.x += s[h].targetMousePosition.x, s.averageTargetMousePosition.y += s[h].targetMousePosition.y;
-                            s.averageTargetMousePosition.x /= s.length, s.averageTargetMousePosition.y /= s.length, l.targetEnemyNicknameVisibility && v(), s.player = t[g[L]], l.targetEnemyNicknameVisibility && (s.player.nameText.visible = !0, s.player.nameText.style.fontSize = 100, s.player.nameText.style.fill = "#D50000"), window.aimTarget = s.player,
+                            s.averageTargetMousePosition.x /= s.length, s.averageTargetMousePosition.y /= s.length, l.targetEnemyNicknameVisibility && v(), s.player = t[g[L]], l.targetEnemyNicknameVisibility && (s.player.nameText.visible = true, s.player.nameText.style.fontSize = 100, s.player.nameText.style.fill = "#D50000"), window.aimTarget = s.player,
                                 function () {
                                     var e = s.player,
                                         t = e[n.activePlayer.netData].dir;
                                     if (e && e[n.activePlayer.netData].dir) {
                                         var i = e.targetIndicator;
-                                        if (i || ((i = window.PIXI.Sprite.from(c)).visible = !1, i.scale.set(.6, .6), i.tint = 16711680, i.alpha = .5, e.container.addChild(i), e.targetIndicator = i), i) {
+                                        if (i || ((i = window.PIXI.Sprite.from(c)).visible = false, i.scale.set(.6, .6), i.tint = 16711680, i.alpha = .5, e.container.addChild(i), e.targetIndicator = i), i) {
                                             var a = {
                                                 x: -.5 * i.width + t.x,
                                                 y: -.5 * i.height + t.y
                                             };
-                                            i.position.set(a.x, a.y), i.visible = !0, x(i)
+                                            i.position.set(a.x, a.y), i.visible = true, x(i)
                                         }
                                     }
-                                }(), l.enemyExtendedInfo && z(), s.new = !0
-                        } else s.new = !1, window.aimTarget = null, x()
+                                }(), l.enemyExtendedInfo && z(), s.new = true
+                        } else s.new = false, window.aimTarget = null, x()
                     },
                     w = function (n) {
                         var e = Object.keys(a),
-                            t = !0,
-                            i = !1,
+                            t = true,
+                            i = false,
                             o = void 0;
                         try {
-                            for (var r, s = e[Symbol.iterator](); !(t = (r = s.next()).done); t = !0) {
+                            for (var r, s = e[Symbol.iterator](); !(t = (r = s.next()).done); t = true) {
                                 var l = r.value,
                                     c = a[l];
                                 if (l === n) return c
                             }
                         } catch (n) {
-                            i = !0, o = n
+                            i = true, o = n
                         } finally {
                             try {
                                 !t && s.return && s.return()
@@ -1550,11 +1415,11 @@
                         k(), e = t.nameText._text, t[n.activePlayer.netData].curWeapType, document.getElementById("ui-cheat-info").getElementsByClassName("ui-cheat-team-member-name")[0].innerHTML = e,
                             function (n) {
                                 var e = document.getElementById("ui-cheat-armor-container"),
-                                    t = !0,
-                                    i = !1,
+                                    t = true,
+                                    i = false,
                                     a = void 0;
                                 try {
-                                    for (var o, r = ["helmet", "chest", "backpack", "curWeapType"][Symbol.iterator](); !(t = (o = r.next()).done); t = !0) {
+                                    for (var o, r = ["helmet", "chest", "backpack", "curWeapType"][Symbol.iterator](); !(t = (o = r.next()).done); t = true) {
                                         var s = o.value,
                                             l = e.getElementsByClassName(s)[0],
                                             c = (l.getElementsByClassName("ui-armor-counter-inner")[0], l.getElementsByClassName("ui-armor-level")[0]),
@@ -1572,7 +1437,7 @@
                                         } else p.style.display = "none"
                                     }
                                 } catch (n) {
-                                    i = !0, a = n
+                                    i = true, a = n
                                 } finally {
                                     try {
                                         !t && r.return && r.return()
@@ -1594,11 +1459,11 @@
                             }()), e.appendChild(function () {
                                 var n = document.createElement("div");
                                 n.id = "ui-cheat-armor-container", n.className = "ui-armor-container";
-                                var e = !0,
-                                    t = !1,
+                                var e = true,
+                                    t = false,
                                     i = void 0;
                                 try {
-                                    for (var a, o = ["helmet", "chest", "backpack", "curWeapType"][Symbol.iterator](); !(e = (a = o.next()).done); e = !0) {
+                                    for (var a, o = ["helmet", "chest", "backpack", "curWeapType"][Symbol.iterator](); !(e = (a = o.next()).done); e = true) {
                                         var r = a.value,
                                             s = document.createElement("div");
                                         s.id = r, s.className = "ui-armor-counter ui-cheat-armor-counter ui-outline-hover " + r;
@@ -1610,7 +1475,7 @@
                                         p.className = "ui-armor-image ui-cheat-armor-image ui-loot-image", s.appendChild(l), s.appendChild(c), s.appendChild(p), n.appendChild(s)
                                     }
                                 } catch (n) {
-                                    t = !0, i = n
+                                    t = true, i = n
                                 } finally {
                                     try {
                                         !e && o.return && o.return()
@@ -1631,7 +1496,7 @@
                             i = e.curAction.type;
                         if (e && e[n.activePlayer.netData].dir) {
                             var a = e.targetAction;
-                            if (a || ((a = window.PIXI.Sprite.from(p)).visible = !1, a.scale.set(.15, .15), a.tint = 16711680, a.alpha = .5, e.container.addChild(a), e.targetAction = a, a.actionType = 1), a) {
+                            if (a || ((a = window.PIXI.Sprite.from(p)).visible = false, a.scale.set(.15, .15), a.tint = 16711680, a.alpha = .5, e.container.addChild(a), e.targetAction = a, a.actionType = 1), a) {
                                 1 === i && a.actionType !== i ? a.texture = p : 2 === i && a.actionType !== i && (a.texture = d), a.actionType = i;
                                 var o = {
                                     x: -.5 * a.width + t.x,
@@ -1645,8 +1510,8 @@
                     B = function (n) {},
                     L = function () {
                         for (var t = e.scope[n.input.main].binds, i = t.length, a = 0; a < i; a++)
-                            if (null != t[a] && 2 == t[a].type && 2 == t[a].code) return !0;
-                        return !1
+                            if (null != t[a] && 2 == t[a].type && 2 == t[a].code) return true;
+                        return false
                     },
                     M = function (t) {
                         if (2 === t.button && !L()) {
@@ -1657,7 +1522,7 @@
                         if ((0 === t.button || 2 === t.button && !L()) && s.new) {
                             var a = e.scope[n.input.main][n.input.input],
                                 o = t.button;
-                            a.mousePos = s.averageTargetMousePosition, a.mouseButtonsOld[o] = !1, a.mouseButtons[o] = !0
+                            a.mousePos = s.averageTargetMousePosition, a.mouseButtonsOld[o] = false, a.mouseButtons[o] = true
                         } else E(t)
                     },
                     D = function (t) {
@@ -1676,11 +1541,11 @@
                     },
                     O = function (t) {
                         var i = e.scope[n.input.main][n.input.input].mouseButtons;
-                        32 == t.which && (i[0] = !0)
+                        32 == t.which && (i[0] = true)
                     },
                     R = function (t) {
                         var i = e.scope[n.input.main][n.input.input].mouseButtons;
-                        32 == t.which && (i[0] = !1)
+                        32 == t.which && (i[0] = false)
                     },
                     S = function () {
                         window.removeEventListener("keydown", O), window.removeEventListener("keyup", R)
@@ -1698,7 +1563,7 @@
                             });
                             return n.new = null, n.player = {
                                 nameText: {
-                                    visible: !1,
+                                    visible: false,
                                     style: {
                                         fontSize: 22,
                                         fill: "#00FFFF"
@@ -1708,10 +1573,10 @@
                                 x: 0,
                                 y: 0
                             }, n
-                        }(), E = c.bOnMouseDown, B = c.bOnMouseMove, window.removeEventListener("mousedown", c.bOnMouseDown), window.removeEventListener("mousemove", c.bOnMouseMove), P(), S(), window.addEventListener("mousedown", M), window.addEventListener("mousemove", D), window.addEventListener("keydown", O), window.addEventListener("keyup", R), a = e.scope[n.input.main].binds, o = e.scope[n.input.main].boundKeys, null != a[31] && 2 === a[31].code && 2 === a[31].type && (a[31].type = 1, a[31].code = 66, o[66] = !0), r = !0, window.events.add("playerBarn", "autoAimRenderCb")
+                        }(), E = c.bOnMouseDown, B = c.bOnMouseMove, window.removeEventListener("mousedown", c.bOnMouseDown), window.removeEventListener("mousemove", c.bOnMouseMove), P(), S(), window.addEventListener("mousedown", M), window.addEventListener("mousemove", D), window.addEventListener("keydown", O), window.addEventListener("keyup", R), a = e.scope[n.input.main].binds, o = e.scope[n.input.main].boundKeys, null != a[31] && 2 === a[31].code && 2 === a[31].type && (a[31].type = 1, a[31].code = 66, o[66] = true), r = true, window.events.add("playerBarn", "autoAimRenderCb")
                     },
                     unbind: function () {
-                        window.events.remove("playerBarn", "autoAimRenderCb"), P(), S(), window.removeEventListener("mousedown", E), window.removeEventListener("mousemove", B), window.addEventListener("mousedown", E), window.addEventListener("mousemove", B), x(), I(), window.aimTarget = null, r = !1
+                        window.events.remove("playerBarn", "autoAimRenderCb"), P(), S(), window.removeEventListener("mousedown", E), window.removeEventListener("mousemove", B), window.addEventListener("mousedown", E), window.addEventListener("mousemove", B), x(), I(), window.aimTarget = null, r = false
                     },
                     isBinded: function () {
                         return r
@@ -1764,12 +1629,12 @@
             var i = t.bulletBarn,
                 a = t.player,
                 o = t.key,
-                r = !1;
+                r = false;
             if (i && a) {
                 var s = function (t) {
-                    var i = e.scope[n.input.main][n.input.input].keys;
-                    i[t] || setTimeout(function () {
-                            i[t] = !0, setTimeout(function () {
+                        var i = e.scope[n.input.main][n.input.input].keys;
+                        i[t] || setTimeout(function () {
+                            i[t] = true, setTimeout(function () {
                                 delete i[t]
                             }, 50)
                         }, 0)
@@ -1819,10 +1684,10 @@
                                         })
                                     } return s
                             }()), d.call(this, t)
-                        }, r = !0
+                        }, r = true
                     },
                     unbind: function () {
-                        i.prototype.render = d, r = !1
+                        i.prototype.render = d, r = false
                     },
                     isBinded: function () {
                         return r
@@ -1836,42 +1701,50 @@
         "use strict";
         e.exports = function (n, e, t) {
             window.autoFire = false
-                var mousedown = false,
+            var mousedown = false,
                 binded = false,
-                spamMouse = function(){
-                if (mousedown || window.autoFire && e.scope[n.input.main][n.input.input].mouseButtons){
-                    e.scope[n.input.main][n.input.input].mouseButtons["0"] = !e.scope[n.input.main][n.input.input].mouseButtons["0"]
-                }   
-                }
-                return {
-                    bind: function () {
-                        setInterval(spamMouse,50)
-                        window.addEventListener("mousedown",function(){mousedown = true})
-                        window.addEventListener("mouseup",function(){mousedown = false})
-                        binded = true
-                    },
-                    unbind: function () {
-                        clearInterval(spamMouse,50)
-                        window.removeEventListener("mousedown",function(){mousedown = true})
-                        window.removeEventListener("mouseup",function(){mousedown = false})
-                        binded = false
-                    },
-                    isBinded: function () {
-                        return binded
+                spamMouse = function () {
+                    if (mousedown || window.autoFire && e.scope[n.input.main][n.input.input].mouseButtons) {
+                        e.scope[n.input.main][n.input.input].mouseButtons["0"] = !e.scope[n.input.main][n.input.input].mouseButtons["0"]
                     }
                 }
+            return {
+                bind: function () {
+                    setInterval(spamMouse, 50)
+                    window.addEventListener("mousedown", function () {
+                        mousedown = true
+                    })
+                    window.addEventListener("mouseup", function () {
+                        mousedown = false
+                    })
+                    binded = true
+                },
+                unbind: function () {
+                    clearInterval(spamMouse, 50)
+                    window.removeEventListener("mousedown", function () {
+                        mousedown = true
+                    })
+                    window.removeEventListener("mouseup", function () {
+                        mousedown = false
+                    })
+                    binded = false
+                },
+                isBinded: function () {
+                    return binded
+                }
+            }
         }
     }, {}],
     17: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t) {
             var i = t.key,
-                a = !1,
+                a = false,
                 o = null,
                 r = function (t) {
                     var i = e.scope[n.input.main][n.input.input].keys;
                     i[t] || setTimeout(function () {
-                        i[t] = !0, setTimeout(function () {
+                        i[t] = true, setTimeout(function () {
                             delete i[t]
                         }, 90)
                     }, 0)
@@ -1879,14 +1752,14 @@
                 s = function () {
                     if (function () {
                             var t = e.scope[n.playerBarn.main][n.playerBarn.players];
-                            if (!t[e.scope[n.activeId]]) return !1;
+                            if (!t[e.scope[n.activeId]]) return false;
                             for (var i = t[e.scope[n.activeId]].teamId, a = Object.keys(t), o = e.scope[n.objectCreator].idToObj, r = 0; r < a.length; r++) {
                                 var s = a[r];
-                                if (o[s] && !o[s][n.activePlayer.netData].dead && !o[s][n.activePlayer.netData].downed && t[s].teamId != i) return !1
+                                if (o[s] && !o[s][n.activePlayer.netData].dead && !o[s][n.activePlayer.netData].downed && t[s].teamId != i) return false
                             }
-                            return !0
+                            return true
                         }() && !((o = e.scope[n.input.main][n.input.input].keys)[i.W] || o[i.D] || o[i.S] || o[i.A]) && ("Reloading" != (a = e.scope[n.menu].pieTimer).clientData.label || !a.active)) {
-                            var t = e.scope[n.activePlayer.main][n.activePlayer.localData];
+                        var t = e.scope[n.activePlayer.main][n.activePlayer.localData];
                         if (t.health < 30 && t.inventory.healthkit > 0) return void r(i.Eight);
                         if (t.health < 70 && t.boost < 40 && t.inventory.bandage > 0) return void r(i.Seven);
                         if (t.boost < 50 && t.inventory.painkiller > 0) return void r(i.Zero);
@@ -1898,10 +1771,10 @@
                 bind: function () {
                     ! function n() {
                         s(), o = setTimeout(n, 1e3)
-                    }(), a = !0
+                    }(), a = true
                 },
                 unbind: function () {
-                    clearTimeout(o), o = null, a = !1
+                    clearTimeout(o), o = null, a = false
                 },
                 isBinded: function () {
                     return a
@@ -1916,37 +1789,37 @@
                 a = t.bagSizes,
                 o = t.items,
                 r = t.uiModule,
-                s = !1,
+                s = false,
                 l = {},
                 c = window.performance.now();
             if (i && a && o && r) {
                 var p = function (t) {
-                    var i = e.scope[n.input.main][n.input.input].keys;
-                    i[t] || setTimeout(function () {
-                            i[t] = !0, setTimeout(function () {
+                        var i = e.scope[n.input.main][n.input.input].keys;
+                        i[t] || setTimeout(function () {
+                            i[t] = true, setTimeout(function () {
                                 delete i[t]
                             }, 90)
                         }, 0)
                     },
                     d = function (n, e) {
                         var t = Object.keys(o),
-                            i = !0,
-                            a = !1,
+                            i = true,
+                            a = false,
                             r = void 0;
                         try {
-                            for (var s, l = t[Symbol.iterator](); !(i = (s = l.next()).done); i = !0) {
+                            for (var s, l = t[Symbol.iterator](); !(i = (s = l.next()).done); i = true) {
                                 var c = s.value,
                                     p = o[c],
-                                    d = !0,
-                                    u = !1,
+                                    d = true,
+                                    u = false,
                                     m = void 0;
                                 try {
-                                    for (var f, b = e[Symbol.iterator](); !(d = (f = b.next()).done); d = !0) {
+                                    for (var f, b = e[Symbol.iterator](); !(d = (f = b.next()).done); d = true) {
                                         var A = f.value;
                                         if (p.type === A && c === n) return c
                                     }
                                 } catch (n) {
-                                    u = !0, m = n
+                                    u = true, m = n
                                 } finally {
                                     try {
                                         !d && b.return && b.return()
@@ -1956,7 +1829,7 @@
                                 }
                             }
                         } catch (n) {
-                            a = !0, r = n
+                            a = true, r = n
                         } finally {
                             try {
                                 !i && l.return && l.return()
@@ -1983,44 +1856,44 @@
                                     if (null !== d(n.name, ["ammo", "heal", "boost", "throwable"])) {
                                         var i = t ? parseInt(t.slice(-2), 10) : 0,
                                             o = a[n.name][i];
-                                        return e[n.name] !== o && p("70"), !0
+                                        return e[n.name] !== o && p("70"), true
                                     }
-                                    return !1
+                                    return false
                                 }(o, s.inventory, r.backpack)) return;
                             if (function (n, e) {
-                                    return !!/scope/.test(n.name) && (parseInt(n.name.slice(0, -6), 10), e[n.name] || p("70"), !0)
+                                    return !!/scope/.test(n.name) && (parseInt(n.name.slice(0, -6), 10), e[n.name] || p("70"), true)
                                 }(o, s.inventory)) return;
                             if (function (t, i, a) {
                                     if (/helmet/.test(t.name) || /chest/.test(t.name) || /backpack/.test(t.name)) {
                                         var o = t.name.slice(0, -2),
                                             r = parseInt(t.name.slice(-2), 10);
-                                        return e.scope[n.activePlayer.main][n.activePlayer.netData][o] ? (parseInt(a[o].slice(-2), 10) < r && p("70"), !0) : (p("70"), !0)
+                                        return e.scope[n.activePlayer.main][n.activePlayer.netData][o] ? (parseInt(a[o].slice(-2), 10) < r && p("70"), true) : (p("70"), true)
                                     }
-                                    return !1
+                                    return false
                                 }(o, r.backpack, r)) return;
                             if (l.autoPickUp.allow = function () {
                                     var t = e.scope[n.playerBarn.main][n.playerBarn.players];
-                                    if (!t[e.scope[n.activeId]]) return !1;
+                                    if (!t[e.scope[n.activeId]]) return false;
                                     for (var i = t[e.scope[n.activeId]].teamId, a = Object.keys(t), o = e.scope[n.objectCreator].idToObj, r = 0; r < a.length; r++) {
                                         var s = a[r];
-                                        if (o[s] && !o[s][n.activePlayer.netData].dead && !o[s][n.activePlayer.netData].downed && t[s].teamId != i) return !1
+                                        if (o[s] && !o[s][n.activePlayer.netData].dead && !o[s][n.activePlayer.netData].downed && t[s].teamId != i) return false
                                     }
-                                    return !0
+                                    return true
                                 }() && ("Reloading" != (t = e.scope[n.menu].pieTimer).clientData.label || !t.active), function (n, e) {
                                     var t = d(n.name, ["gun"]);
                                     if (l.autoPickUp.allow) {
-                                        if (l.autoPickUp.weapon1 === t && e[0].name !== t) return p("49"), p("70"), !0;
-                                        if (l.autoPickUp.weapon2 === t && e[1].name !== t) return p("50"), p("70"), !0
+                                        if (l.autoPickUp.weapon1 === t && e[0].name !== t) return p("49"), p("70"), true;
+                                        if (l.autoPickUp.weapon2 === t && e[1].name !== t) return p("50"), p("70"), true
                                     }
-                                    return ("" === e[0].name || "" === e[1].name) && null !== t && (p("70"), !0)
+                                    return ("" === e[0].name || "" === e[1].name) && null !== t && (p("70"), true)
                                 }(o, s.weapons)) return;
                             if (function (n, e) {
                                     var t = d(n.name, ["melee"]);
-                                    return l.autoPickUp.allow && l.autoPickUp.weapon3 === t && e[2].name !== t ? (p("51"), p("70"), !0) : "fists" === e[2].name && null !== t && (p("70"), !0)
+                                    return l.autoPickUp.allow && l.autoPickUp.weapon3 === t && e[2].name !== t ? (p("51"), p("70"), true) : "fists" === e[2].name && null !== t && (p("70"), true)
                                 }(o, s.weapons)) return;
                             if (function (n, e) {
                                     var t = d(n.name, ["skin"]);
-                                    return l.autoPickUp.skin === t && e.skin !== t ? (p("70"), !0) : "outfitBase" === e.skin && "outfitBase" !== l.autoPickUp.skin && t !== e.skin && "outfitBase" !== t && null !== t && (p("70"), !0)
+                                    return l.autoPickUp.skin === t && e.skin !== t ? (p("70"), true) : "outfitBase" === e.skin && "outfitBase" !== l.autoPickUp.skin && t !== e.skin && "outfitBase" !== t && null !== t && (p("70"), true)
                                 }(o, r)) return
                         }
                     },
@@ -2036,10 +1909,10 @@
                             ! function (n) {
                                 "drop" === n.action && (c = window.performance.now())
                             }(n), A.call(this, n)
-                        }, s = !0
+                        }, s = true
                     },
                     unbind: function () {
-                        i.prototype.l = f, r.prototype.pushAction = A, s = !1
+                        i.prototype.l = f, r.prototype.pushAction = A, s = false
                     },
                     isBinded: function () {
                         return s
@@ -2050,11 +1923,11 @@
                             function (n) {
                                 var e = [],
                                     t = Object.keys(o),
-                                    i = !0,
-                                    a = !1,
+                                    i = true,
+                                    a = false,
                                     r = void 0;
                                 try {
-                                    for (var s, l = t[Symbol.iterator](); !(i = (s = l.next()).done); i = !0) {
+                                    for (var s, l = t[Symbol.iterator](); !(i = (s = l.next()).done); i = true) {
                                         var c = s.value;
                                         o[c].type === n && e.push({
                                             name: o[c].name,
@@ -2062,7 +1935,7 @@
                                         })
                                     }
                                 } catch (n) {
-                                    a = !0, r = n
+                                    a = true, r = n
                                 } finally {
                                     try {
                                         !i && l.return && l.return()
@@ -2092,24 +1965,24 @@
     19: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t, i) {
-            var a = !1,
+            var a = false,
                 o = 2;
             return {
                 bind: function () {
                     t.scope = function () {
                         if (i.scope) switch (i.scope.__type) {
                             case o:
-                            i.scope.hasOwnProperty("door") && !i.scope.door.open && (t = "70", (a = e.scope[n.input.main][n.input.input].keys)[t] || setTimeout(function () {
-                                a[t] = !0, setTimeout(function () {
+                                i.scope.hasOwnProperty("door") && !i.scope.door.open && (t = "70", (a = e.scope[n.input.main][n.input.input].keys)[t] || setTimeout(function () {
+                                    a[t] = true, setTimeout(function () {
                                         delete a[t]
                                     }, 50)
                                 }, 50))
                         }
                         var t, a
-                    }, a = !0
+                    }, a = true
                 },
                 unbind: function () {
-                    t.scope = function () {}, a = !1
+                    t.scope = function () {}, a = false
                 },
                 isBinded: function () {
                     return a
@@ -2120,16 +1993,16 @@
     20: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e) {
-            var t = !1,
+            var t = false,
                 i = function (t) {
                     e.scope[n.menu].container.alpha = t
                 };
             return {
                 bind: function (n) {
-                    i(n), t = !0
+                    i(n), t = true
                 },
                 unbind: function () {
-                    t = !1
+                    t = false
                 },
                 isBinded: function () {
                     return t
@@ -2141,14 +2014,14 @@
     21: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e) {
-            var t = !1,
-                i = !1,
+            var t = false,
+                i = false,
                 a = function n() {
                     i && i.update(), t && requestAnimationFrame(n)
                 };
             return {
                 bind: function () {
-                    t = !0, i = new Stats,
+                    t = true, i = new Stats,
                         function () {
                             if (i) {
                                 var n = i.domElement.style;
@@ -2157,7 +2030,7 @@
                         }(), requestAnimationFrame(a)
                 },
                 unbind: function () {
-                    t = !1, i.domElement.remove(), i = !1
+                    t = false, i.domElement.remove(), i = false
                 },
                 isBinded: function () {
                     return t
@@ -2168,19 +2041,19 @@
     22: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e) {
-            var t = !1,
-                i = !0,
+            var t = false,
+                i = true,
                 a = function () {
                     e.scope[n.pieTimer].a(function () {
-                        o()
-                        }, 4.2, "Grenade", !0), i = !1,
+                            o()
+                        }, 4.2, "Grenade", true), i = false,
                         function t() {
                             var a = e.scope[n.activePlayer.main];
                             3 !== a.curWeapIdx || "frag" !== a.weapType || i ? o() : setTimeout(t, 100)
                         }()
                 },
                 o = function () {
-                    e.scope[n.pieTimer] && e.scope[n.pieTimer].o(!0), i = !0
+                    e.scope[n.pieTimer] && e.scope[n.pieTimer].o(true), i = true
                 },
                 r = function (t) {
                     var o = e.scope[n.activePlayer.main];
@@ -2191,10 +2064,10 @@
                 };
             return {
                 bind: function (n) {
-                    window.addEventListener("mousedown", r), window.addEventListener("mouseup", s), t = !0
+                    window.addEventListener("mousedown", r), window.addEventListener("mouseup", s), t = true
                 },
                 unbind: function () {
-                    window.removeEventListener("mousedown", r), window.addEventListener("mouseup", s), t = !1
+                    window.removeEventListener("mousedown", r), window.addEventListener("mouseup", s), t = false
                 },
                 isBinded: function () {
                     return t
@@ -2207,7 +2080,7 @@
         e.exports = function (n, e, t) {
             var i = t.bullets,
                 a = t.items,
-                o = !1,
+                o = false,
                 r = {
                     draw: null,
                     range: 0,
@@ -2243,10 +2116,10 @@
                     };
                 return {
                     bind: function () {
-                        o = !0, r.draw = null, c(), window.events.add("playerBarn", "laserPointerRenderCb")
+                        o = true, r.draw = null, c(), window.events.add("playerBarn", "laserPointerRenderCb")
                     },
                     unbind: function () {
-                        window.events.remove("playerBarn", "laserPointerRenderCb"), o = !1, c()
+                        window.events.remove("playerBarn", "laserPointerRenderCb"), o = false, c()
                     },
                     isBinded: function () {
                         return o
@@ -2278,7 +2151,7 @@
     24: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e) {
-            var t = !1,
+            var t = false,
                 i = {
                     draw: null,
                     points: null
@@ -2305,10 +2178,10 @@
                 };
             return {
                 bind: function () {
-                    t = !0, i.draw = null, o(), window.events.add("playerBarn", "linesToPlayersRenderCb")
+                    t = true, i.draw = null, o(), window.events.add("playerBarn", "linesToPlayersRenderCb")
                 },
                 unbind: function () {
-                    window.events.remove("playerBarn", "linesToPlayersRenderCb"), t = !1, o()
+                    window.events.remove("playerBarn", "linesToPlayersRenderCb"), t = false, o()
                 },
                 isBinded: function () {
                     return t
@@ -2332,11 +2205,11 @@
     25: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t, i) {
-            var a = !1,
-                o = !1,
-                r = !1,
+            var a = false,
+                o = false,
+                r = false,
                 s = null,
-                l = !1,
+                l = false,
                 c = [{
                     name: "Modules"
                 }, {
@@ -2382,7 +2255,7 @@
                         value: "autoSwitchEnableCb"
                     },
                     tabId: 0
-                },{
+                }, {
                     type: "checkbox",
                     description: "Multiboxing enabled",
                     inputProps: {
@@ -2486,10 +2359,10 @@
                     type: "checkbox",
                     description: "TriggerBot enabled",
                     inputProps: {
-                        value: "tiggerBot.enabled"
+                        value: "triggerBot.enabled"
                     },
                     callbacks: {
-                        value: "tiggerBotEnableCb"
+                        value: "triggerBotEnableCb"
                     },
                     tabId: 0
                 }, {
@@ -2817,11 +2690,11 @@
                             return n.className = "btn-game-tabs btns-game-double-row", n.style = "display: flex", n
                         }(),
                         e = 0,
-                        t = !0,
-                        i = !1,
+                        t = true,
+                        i = false,
                         a = void 0;
                     try {
-                        for (var o, r = c[Symbol.iterator](); !(t = (o = r.next()).done); t = !0) {
+                        for (var o, r = c[Symbol.iterator](); !(t = (o = r.next()).done); t = true) {
                             var s = o.value,
                                 l = !!isset(s.name) && s.name,
                                 p = !!isset(s.name) && s.icon,
@@ -2829,7 +2702,7 @@
                             n.appendChild(d), e++
                         }
                     } catch (n) {
-                        i = !0, a = n
+                        i = true, a = n
                     } finally {
                         try {
                             !t && r.return && r.return()
@@ -2858,7 +2731,7 @@
                 y = function (n) {
                     var e, a, o, r, s = null;
                     if ("slider" === n.type) {
-                        var l = !1;
+                        var l = false;
                         isset(n.options) && (l = n.options), s = function (n, e, a) {
                             var o = arguments.length > 3 && void 0 !== arguments[3] && arguments[3],
                                 r = document.createElement("div");
@@ -2878,11 +2751,11 @@
                                         i[a.value].call(this, e, o)
                                     } else i[a.value].call(this, this.value);
                                     c.innerHTML = this.value, d()
-                                }, !1), r.appendChild(s), r.appendChild(c), r.appendChild(p)
+                                }, false), r.appendChild(s), r.appendChild(c), r.appendChild(p)
                             }
                             return r
                         }(n.description, n.inputProps, n.callbacks, l)
-                    } else "checkbox" === n.type ? (l = !1, isset(n.options) && (l = n.options), s = function (n, e, a) {
+                    } else "checkbox" === n.type ? (l = false, isset(n.options) && (l = n.options), s = function (n, e, a) {
                         var o = arguments.length > 3 && void 0 !== arguments[3] && arguments[3],
                             r = document.createElement("div");
                         if (i[a]) {
@@ -2891,17 +2764,17 @@
                                 i[a].call();
                                 var n = fetchFromObject(t, e.value);
                                 if (u(this, n), d(), isset(o.showOrHide)) {
-                                    var r = !0,
-                                        s = !1,
+                                    var r = true,
+                                        s = false,
                                         l = void 0;
                                     try {
-                                        for (var c, p = o.showOrHide[Symbol.iterator](); !(r = (c = p.next()).done); r = !0) {
+                                        for (var c, p = o.showOrHide[Symbol.iterator](); !(r = (c = p.next()).done); r = true) {
                                             var m = c.value,
                                                 f = document.getElementById(m);
                                             f.style.display = n ? "block" : "none"
                                         }
                                     } catch (n) {
-                                        s = !0, l = n
+                                        s = true, l = n
                                     } finally {
                                         try {
                                             !r && p.return && p.return()
@@ -2910,14 +2783,14 @@
                                         }
                                     }
                                 }
-                            }, !1), r.appendChild(s)
+                            }, false), r.appendChild(s)
                         }
                         return r
                     }(n.description, n.inputProps, n.callbacks.value, l)) : "resetButton" === n.type ? (e = n.description, a = n.callbacks.value, o = n.tabId, r = document.createElement("div"), i[a] && (r.className = "menu-option btn-darken", r.innerHTML = e, r.addEventListener("click", function () {
                         i[a].call(), setTimeout(function () {
                             v(), g(), b(o), d()
                         })
-                    }, !1)), s = r) : "select" === n.type ? s = function (n, e, a) {
+                    }, false)), s = r) : "select" === n.type ? s = function (n, e, a) {
                         var o = document.createElement("div");
                         if (i[a.value]) {
                             var r = document.createElement("p");
@@ -2936,7 +2809,7 @@
                             });
                             for (var p = 0; p < l.length; p++) {
                                 var u = document.createElement("option");
-                                u.value = l[p].key, u.text = l[p].name, fetchFromObject(t, e.selected) === l[p].key && (u.selected = !0), s.appendChild(u)
+                                u.value = l[p].key, u.text = l[p].name, fetchFromObject(t, e.selected) === l[p].key && (u.selected = true), s.appendChild(u)
                             }
                             s.addEventListener("change", function () {
                                 if (isset(a.functionValue)) {
@@ -2946,7 +2819,7 @@
                                     i[a.value].call(this, e, t)
                                 } else i[a.value].call(this);
                                 d()
-                            }, !1), o.appendChild(r), o.appendChild(s)
+                            }, false), o.appendChild(r), o.appendChild(s)
                         }
                         return o
                     }(n.description, n.inputProps, n.callbacks) : "info" === n.type && (s = function (n) {
@@ -2976,16 +2849,16 @@
                             }
                             return n
                         }(),
-                        a = !0,
-                        o = !1,
+                        a = true,
+                        o = false,
                         l = void 0;
                     try {
-                        for (var d, u = i[Symbol.iterator](); !(a = (d = u.next()).done); a = !0) {
+                        for (var d, u = i[Symbol.iterator](); !(a = (d = u.next()).done); a = true) {
                             var m = d.value;
                             e.appendChild(m)
                         }
                     } catch (n) {
-                        o = !0, l = n
+                        o = true, l = n
                     } finally {
                         try {
                             !a && u.return && u.return()
@@ -2996,24 +2869,24 @@
                     document.getElementById("ui-center").appendChild(e), document.getElementById("btn-game-resume").addEventListener("click", v), document.getElementById("btn-game-quit").addEventListener("click", v), s = null, b(0)
                 },
                 v = function n() {
-                    removeHTMLElement("ui-cheat-menu"), l && document.getElementById("btn-game-resume").removeEventListener("click", n, !1), l && document.getElementById("btn-game-quit").removeEventListener("click", n, !1), o = !1, l = !1
+                    removeHTMLElement("ui-cheat-menu"), l && document.getElementById("btn-game-resume").removeEventListener("click", n, false), l && document.getElementById("btn-game-quit").removeEventListener("click", n, false), o = false, l = false
                 },
                 h = function (n) {
-                    27 == event.which && (T(!0), (o = !o) ? g() : v())
+                    27 == event.which && (T(true), (o = !o) ? g() : v())
                 },
                 x = function () {
                     window.removeEventListener("keyup", h)
                 },
                 T = function () {
                     var t, i = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-                    t = !(r = !(isset(e.scope) && !0 === e.scope.initialized)) && i ? !e.scope[n.menu].escMenuDisplayed : r ? o : e.scope[n.menu].escMenuDisplayed, o = t
+                    t = !(r = !(isset(e.scope) && true === e.scope.initialized)) && i ? !e.scope[n.menu].escMenuDisplayed : r ? o : e.scope[n.menu].escMenuDisplayed, o = t
                 };
             return {
                 bind: function () {
-                    removeHTMLElement("ui-cheat-menu"), T(), x(), window.addEventListener("keyup", h), a = !0
+                    removeHTMLElement("ui-cheat-menu"), T(), x(), window.addEventListener("keyup", h), a = true
                 },
                 unbind: function () {
-                    o && (v(), o = !1), x(), a = !1
+                    o && (v(), o = false), x(), a = false
                 },
                 isBinded: function () {
                     return a
@@ -3024,13 +2897,13 @@
     26: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t) {
-            var i = !1;
+            var i = false;
             return {
                 bind: function (n) {
-                    t.scope = n.smokeAlpha, i = !0
+                    t.scope = n.smokeAlpha, i = true
                 },
                 unbind: function () {
-                    t.scope = 1, i = !1
+                    t.scope = 1, i = false
                 },
                 isBinded: function () {
                     return i
@@ -3046,7 +2919,7 @@
         e.exports = function (n, e, t) {
             var i = t.bullets,
                 a = t.items,
-                o = !1;
+                o = false;
             if (a) {
                 var calculateDistance = function (x1, y1, x2, y2) {
                         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
@@ -3063,10 +2936,10 @@
                             }, ),
                             p = [];
                         p.A = [], p.B = [], p.C = [], p.D = [], p.A.x = pos.x, p.A.y = pos.y, p.B.x = t.x, p.B.y = t.y;
-                        var d = !0;
+                        var d = true;
                         collidableObjects.forEach(function (n, e, t) {
                             var i;
-                            objects[n].layer !== u.layer || objects[n].dead || void 0 !== (i = objects[n]).img && i.img.indexOf("window") > -1 || (void 0 !== objects[n].collider && void 0 !== objects[n].collider.min && void 0 !== objects[n].collider.max ? (p.C.x = objects[n].collider.min.x, p.C.y = objects[n].collider.min.y, p.D.x = objects[n].collider.max.x, p.D.y = objects[n].collider.min.y, l(p) && (d = !1), p.C.x = objects[n].collider.max.x, p.C.y = objects[n].collider.min.y, p.D.x = objects[n].collider.max.x, p.D.y = objects[n].collider.max.y, l(p) && (d = !1), p.C.x = objects[n].collider.max.x, p.C.y = objects[n].collider.max.y, p.D.x = objects[n].collider.min.x, p.D.y = objects[n].collider.max.y, l(p) && (d = !1), p.C.x = objects[n].collider.min.x, p.C.y = objects[n].collider.max.y, p.D.x = objects[n].collider.min.x, p.D.y = objects[n].collider.max.y, l(p) && (d = !1)) : function (n, e, t, i, a, o) {
+                            objects[n].layer !== u.layer || objects[n].dead || void 0 !== (i = objects[n]).img && i.img.indexOf("window") > -1 || (void 0 !== objects[n].collider && void 0 !== objects[n].collider.min && void 0 !== objects[n].collider.max ? (p.C.x = objects[n].collider.min.x, p.C.y = objects[n].collider.min.y, p.D.x = objects[n].collider.max.x, p.D.y = objects[n].collider.min.y, l(p) && (d = false), p.C.x = objects[n].collider.max.x, p.C.y = objects[n].collider.min.y, p.D.x = objects[n].collider.max.x, p.D.y = objects[n].collider.max.y, l(p) && (d = false), p.C.x = objects[n].collider.max.x, p.C.y = objects[n].collider.max.y, p.D.x = objects[n].collider.min.x, p.D.y = objects[n].collider.max.y, l(p) && (d = false), p.C.x = objects[n].collider.min.x, p.C.y = objects[n].collider.max.y, p.D.x = objects[n].collider.min.x, p.D.y = objects[n].collider.max.y, l(p) && (d = false)) : function (n, e, t, i, a, o) {
                                 var r, s, l = a - t,
                                     c = o - i,
                                     p = l * l + c * c,
@@ -3075,7 +2948,7 @@
                                 var u = n - r,
                                     m = e - s;
                                 return Math.sqrt(u * u + m * m)
-                            }(objects[n].collider.pos.x, objects[n].collider.pos.y, p.A.x, p.A.y, p.B.x, p.B.y) <= objects[n].collider.rad && (d = !1))
+                            }(objects[n].collider.pos.x, objects[n].collider.pos.y, p.A.x, p.A.y, p.B.x, p.B.y) <= objects[n].collider.rad && (d = false))
                         });
                         var u = e.scope[n.activePlayer.main];
                         d && !e.scope[n.menu].pieTimer.active && 3 !== u.curWeapIdx && function (n, e) {
@@ -3084,21 +2957,21 @@
                                 var o = a[n.weapType];
                                 if (isset(o.bulletType)) return t < i[o.bulletType].distance
                             }
-                            return !0
-                        }(u, window.aimTarget) ? window.autoFire = !0 : window.autoFire = !1
+                            return true
+                        }(u, window.aimTarget) ? window.autoFire = true : window.autoFire = false
                     };
                 return {
                     bind: function () {
-                        window.events.add("playerBarn", "tiggerBotRenderCb"), o = !0
+                        window.events.add("playerBarn", "triggerBotRenderCb"), o = true
                     },
                     unbind: function () {
-                        window.events.remove("playerBarn", "tiggerBotRenderCb"), o = !1, window.autoFire = !1
+                        window.events.remove("playerBarn", "triggerBotRenderCb"), o = false, window.autoFire = false
                     },
                     isBinded: function () {
                         return o
                     },
                     render: function () {
-                        void 0 !== window.aimTarget && null != window.aimTarget ? s(window.aimTarget.pos) : window.autoFire = !1
+                        void 0 !== window.aimTarget && null != window.aimTarget ? s(window.aimTarget.pos) : window.autoFire = false
                     }
                 }
             }
@@ -3124,7 +2997,7 @@
         e.exports = function (n, e, t) {
             var i = t.scopeZoomRadius,
                 a = Object.assign({}, i),
-                o = !1;
+                o = false;
             if (i) {
                 var r = function (n) {
                         i ? Object.keys(i).map(function (e) {
@@ -3145,12 +3018,12 @@
                 return {
                     bind: function () {
                         var t = e.scope[n.input.main][n.input.input];
-                        l = t.bOnMouseWheel, window.removeEventListener("wheel", t.bOnMouseWheel), p(), window.addEventListener("wheel", c), r(s), o = !0
+                        l = t.bOnMouseWheel, window.removeEventListener("wheel", t.bOnMouseWheel), p(), window.addEventListener("wheel", c), r(s), o = true
                     },
                     unbind: function () {
                         p(), window.removeEventListener("wheel", l), window.addEventListener("wheel", l), i ? Object.keys(i).map(function (n) {
                             "scope" === n.replace(/[0-9]/g, "").slice(1) && (i[n] = a[n])
-                        }) : console.log("Scope zoom and radius not patched"), o = !1
+                        }) : console.log("Scope zoom and radius not patched"), o = false
                     },
                     isBinded: function () {
                         return o
@@ -3180,7 +3053,8 @@
                     for (var i = 0; i < playerIds.length; i++) {
                         var enemyObject = e.scope[n.objectCreator].idToObj[playerIds[i]]
                         if (enemyObject && enemyObject.__id != e.scope[n.activeId] && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.localData].dead && !e.scope[n.objectCreator].idToObj[playerIds[i]][n.activePlayer.netData].downed && e.scope[n.playerBarn.main][n.playerBarn.players][playerIds[i]].teamId != curTeamId) {
-                            result[playerIds[i]] = e.scope[n.objectCreator].idToObj[playerIds[i]];}
+                            result[playerIds[i]] = e.scope[n.objectCreator].idToObj[playerIds[i]];
+                        }
                     }
                     return result
 
@@ -3197,7 +3071,7 @@
                 pressKey = function (key) {
                     var keys = e.scope[n.input.main][n.input.input].keys;
                     keys[key] || setTimeout(function () {
-                        keys[key] = !0, setTimeout(function () {
+                        keys[key] = true, setTimeout(function () {
                             delete keys[key]
                         }, 90)
                     }, 0)
@@ -3236,7 +3110,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                        curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
+                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
                         window.onmousedown = function () {
                             mouseDown = true
                         }
@@ -3314,49 +3188,51 @@
             }
         }
     }, {}],
-    30:[function(n,e,t){
+    30: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t) {
             var isBinded = false,
-            keys = t.key,
-            broadcastchannel = new BroadcastChannel("multibox"),
-            sendKeys = function(event){
-                broadcastchannel.postMessage(JSON.stringify({"keypressed":event.key}))
-            },
-            pressKey = function (key) {
-            console.log(key)
-            var keyboardEvent = document.createEvent("KeyboardEvent"),
-            initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
-            keyboardEvent[initMethod](
-                "keypress", 
-                 true, 
-                 true, 
-                 window, 
-                 false, 
-                 false, 
-                 false, 
-                 false, 
-                 key, 
-                 0 
-            );
-            document.dispatchEvent(keyboardEvent)
-            }
-            return{
+                keys = t.key,
+                broadcastchannel = new BroadcastChannel("multibox"),
+                sendKeys = function (event) {
+                    broadcastchannel.postMessage(JSON.stringify({
+                        "keypressed": event.key
+                    }))
+                },
+                pressKey = function (key) {
+                    console.log(key)
+                    var keyboardEvent = document.createEvent("KeyboardEvent"),
+                        initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+                    keyboardEvent[initMethod](
+                        "keypress",
+                        true,
+                        true,
+                        window,
+                        false,
+                        false,
+                        false,
+                        false,
+                        key,
+                        0
+                    );
+                    document.dispatchEvent(keyboardEvent)
+                }
+            return {
                 bind: function () {
-                    broadcastchannel.onmessage = function(input){
+                    broadcastchannel.onmessage = function (input) {
                         var json = JSON.parse(input.data)
                         pressKey(keys[json.keypressed.toUpperCase()])
                     }
-                    window.addEventListener("keypress",sendKeys)
+                    window.addEventListener("keypress", sendKeys)
                     window.onbeforeunload = function () {
                         broadcastchannel.close()
                     };
                 },
                 unbind: function () {
-                    window.removeEventListener("keypress",sendKeys)
+                    window.removeEventListener("keypress", sendKeys)
                     clearTimeout(o), o = null, isBinded = false
                 },
-                
+
                 isBinded: function () {
                     return isBinded
                 }

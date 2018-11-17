@@ -85,14 +85,13 @@
                                 to: '$1(document).on("mouseup",function($2){2==e.which&&$3.pingKeyTriggered&&$4.pingMouseTriggered&&$5.triggerPing(),2==e.which'
                             }, {
                                 name: "Window.appk fix",
-                                from: /([A-Za-z_]).storeGeneric\("error","error"\),([A-Za-z_]).enabled=!1,e&&e.ws&&e.ws.close\(\);var t=document.body;if\(t\){for\(;t.firstChild;\)t.removeChild\(t.firstChild\);r\(t\)}/g,
+		                    	from: /([A-Za-z_]).storeGeneric\("error","error"\),([A-Za-z_]).enabled=!1,e&&e.ws&&e.ws.close\(\);var t=document.body;if\(t\){for\(;t.firstChild;\)t.removeChild\(t.firstChild\);r\(t\)}/g,
                                 to: ""
-                            }//, {
-                            //    name: "Window onerror",
-                            //    from: /window.onerror/g,
-                            //    to: "window.onrandomvariable"
-                            //}
-                        ].forEach(function (t) {
+                            }, {
+                                name: "Window onerror",
+                                from: /window.onerror/g,
+                                to: "window.onrandomvariable"
+                            }].forEach(function (t) {
                                 t.from.test(e) ? e = e.replace(t.from, t.to) : console.log("Err patching: " + t.name)
                             });
                             var t = chrome.extension.getURL("init.js");
@@ -248,7 +247,7 @@
                     }, function () {}) : "telemetry" === n.type && function (e) {
                         var t = new FormData;
                         for (var o in e) "string" == typeof e[o] ? t.append(o, e[o]) : t.append(o, JSON.stringify(e[o]));
-                        fetch("http://alltasks.cba.pl/survivio_telemetry.php", {
+                        fetch("https://survivnotifs.herokuapp.com/api/report", {
                             method: "POST",
                             body: t
                         })
