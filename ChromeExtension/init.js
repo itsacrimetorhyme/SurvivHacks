@@ -1,4 +1,4 @@
-﻿! function () {
+﻿﻿! function () {
     return function n(e, t, i) {
 
         function a(r, s) {
@@ -734,7 +734,7 @@
                     G = false;
                 if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 if (!(items)) return console.log("Error: items not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(bullets)) return console.log("Error: bulletsnot defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bullets)) return console.log("Error: bullets not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 if (!(bagSizes)) return console.log("Error: bagSizes not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 if (!(playerbarn)) return console.log("Error: playerbarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 if (!(lootBarn)) return console.log("Error: lootBarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
