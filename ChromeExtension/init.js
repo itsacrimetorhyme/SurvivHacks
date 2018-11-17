@@ -590,7 +590,7 @@
         "use strict";
         window.obfuscate = n("./obfuscate.js"), window.iziToast = n("iziToast"), n("./css/app.css"), window.Stats = n("stats-js"), n("./modules/checkVersion.js").bind(obfuscate), n("./modules/basics.js"), window.notifications = n("./modules/notifications.js");
         n("./modules/telemetry.js"), n("./modules/autoVariableFinder.js");
-        var i = {
+        var scripts = {
                 smokeAlphaManager: n("./plugins/smokeAlphaManager.js"),
                 zoomRadiusManager: n("./plugins/zoomRadiusManager.js"),
                 autoOpeningDoors: n("./plugins/autoOpeningDoors.js"),
@@ -600,7 +600,7 @@
                 grenadeTimer: n("./plugins/grenadeTimer.js"),
                 laserPointer: n("./plugins/laserPointer.js"),
                 fpsCounter: n("./plugins/fpsCounter.js"),
-                tiggerBot: n("./plugins/tiggerBot.js"),
+                triggerBot: n("./plugins/tiggerBot.js"),
                 autoDodge: n("./plugins/autoDodge.js"),
                 autoFire: n("./plugins/autoFire.js"),
                 autoHeal: n("./plugins/autoHeal.js"),
@@ -611,12 +611,12 @@
                 menu: n("./plugins/menu.js")
             },
             a = n("./EventsManager.js");
-        window.init = function (n, e, t, o, r, s, l) {
-            if (e) {
+        window.init = function (game, exports, t, o, r, options, l) {
+            if (exports) {
                 var c = function (n, e) {
                     chrome.runtime.sendMessage(n, JSON.stringify(e)), console.log("Storing options...")
                 };
-                s || c(l, s = {
+                options || c(l, options = {
                     particlesTransparency: .5,
                     ceilingTransparency: .5,
                     bigMapTransparency: .9,
@@ -680,33 +680,34 @@
                     autoDodge: {
                         enabled: false
                     }
-                }), r.scope = s.smokeGrenadeAlpha, o.scope = function () {};
+                }), r.scope = options.smokeGrenadeAlpha, o.scope = function () {};
                 //*************** ADD NEW VARIABLES HERE ***************\\
-                s.autoSwitch = {}
-                s.autoSwitch.enabled = true
-                s.streamerMode = {}
-                s.streamerMode.enabled = false
+                options.autoSwitch = {}
+                options.autoSwitch.enabled = true
+                options.streamerMode = {}
+                options.streamerMode.enabled = false
                 //*************** END VARIABLES HERE ***************\\
-                var p = e.ceee80d9.exports.Defs,
-                    d = e["989ad62a"].exports.bullets,
-                    u = e["989ad62a"].exports.player,
-                    m = e["989ad62a"].exports.items,
-                    f = e["989ad62a"].exports.bagSizes,
-                    b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
-                    A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.et,
-                    g = e.a508b62a.exports.Ie,
-                    v = e.a48f3bb2.exports.He,
-                    h = e.c73dee75.exports.Ee,
-                    x = e.d3da5587.exports.Qe,
-                    T = e["4b8d140f"].exports.Key;
+                var p = exports.ceee80d9.exports.Defs,
+                    bullets = exports["989ad62a"].exports.bullets,
+                    u = exports["989ad62a"].exports.player,
+                    items = exports["989ad62a"].exports.items,
+                    bagSizes = exports["989ad62a"].exports.bagSizes,
+                    scopeZoomRadius = (exports["989ad62a"].exports.Input, exports["989ad62a"].exports.scopeZoomRadius.desktop),
+                    protocolVersion = exports["989ad62a"].exports.protocolVersion,
+                    y = exports.e5d16b4d.exports.et,
+                    playerbarn = exports.a508b62a.exports.Ie,
+                    lootBarn = exports.a48f3bb2.exports.He,
+                    h = exports.c73dee75.exports.Ee,
+                    uiModel = exports.d3da5587.exports.Qe,
+                    keys = exports["4b8d140f"].exports.Key;
                 // console.log(e.e5d16b4d.exports, e.a508b62a.exports, e.a48f3bb2.exports, e.c73dee75.exports, e.d3da5587.exports);
                 setInterval(function () {
-                    n.scope
+                    game.scope
                 }, 2e3);
-                this.console.log(e)
+                /*
+                this.console.log(exports)
                 setInterval(function () {
-                    //console.log(n)
+                    console.log(game.scope)
 
                 }, 2000)
                 //*/
@@ -717,13 +718,13 @@
                     C = null,
                     E = null,
                     B = null,
-                    L = null,
-                    M = null,
-                    D = null,
-                    P = null,
-                    O = null,
-                    R = null,
-                    S = null,
+                    aaForwardFiringCoeffCb = null,
+                    aaSmoothLevelCb = null,
+                    aaRestirctionAngleCb = null,
+                    aaRestrictionsCb = null,
+                    aaDetectOnDifferentLevels = null,
+                    aaEnemyExtendedInfo = null,
+                    aaShowEnemiesActions = null,
                     F = null,
                     j = null,
                     U = null,
@@ -732,15 +733,15 @@
                     V = null,
                     G = false;
                 if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(m)) return console.log("Error: Variable m not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(d)) return console.log("Error: Variable d not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(f)) return console.log("Error: Variable f not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(g)) return console.log("Error: Variable g not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(v)) return console.log("Error: Variable v not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(b)) return console.log("Error: Variable b not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(A === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(items)) return console.log("Error: items not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bullets)) return console.log("Error: bulletsnot defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bagSizes)) return console.log("Error: bagSizes not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(playerbarn)) return console.log("Error: playerbarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(lootBarn)) return console.log("Error: lootBarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(scopeZoomRadius)) return console.log("Error: scopeZoomRadius not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(protocolVersion === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 var Q = function () {
-                    return !(!isset(n.scope) || !n.scope.initialized || null == n.scope[obfuscate.activePlayer.main] || null == n.scope[obfuscate.input.main] || n.scope.spectating)
+                    return !(!isset(game.scope) || !game.scope.initialized || null == game.scope[obfuscate.activePlayer.main] || null == game.scope[obfuscate.input.main] || game.scope.spectating)
                 };
                 setInterval(function () {
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = false)
@@ -754,191 +755,191 @@
                         this.options = {}, this.__defineSetter__("emoteMouseTriggered", function (n) {
                             this.options.emoteTriggered = n
                         }), this.__defineGetter__("emoteMouseTriggered", function () {
-                            var e = n.scope[obfuscate.camera];
+                            var e = game.scope[obfuscate.camera];
                             return this.emoteScreenPos = {
                                 x: e.screenWidth / 2,
                                 y: e.screenHeight / 2
                             }, this.options.emoteTriggered
                         })
                     }.call(this), Y.apply(this, arguments)
-                }, X = m.frag.worldImg.tint, V = m.frag.worldImg.scale, m.frag.worldImg.tint = s.fragGrenadeColor, m.frag.worldImg.scale = s.fragGrenadeSize, Object.keys(p).forEach(function (n) {
+                }, X = items.frag.worldImg.tint, V = items.frag.worldImg.scale, items.frag.worldImg.tint = options.fragGrenadeColor, items.frag.worldImg.scale = options.fragGrenadeSize, Object.keys(p).forEach(function (n) {
                     p[n].ceiling && p[n].ceiling.imgs.forEach(function (n) {
-                        n.alpha = s.ceilingTransparency
+                        n.alpha = options.ceilingTransparency
                     })
-                }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.bush_05.img.alpha = s.particlesTransparency, p.bush_06.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.tree_06.img.alpha = s.particlesTransparency, p.tree_07.img.alpha = s.particlesTransparency, p.tree_08.img.alpha = s.particlesTransparency, p.tree_08b.img.alpha = s.particlesTransparency, p.tree_08c.img.alpha = s.particlesTransparency, p.tree_09.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
-                    s.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.bush_05.img.alpha = n, p.bush_06.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.tree_06.img.alpha = n, p.tree_07.img.alpha = n, p.tree_08.img.alpha = n, p.tree_08b.img.alpha = n, p.tree_08c.img.alpha = n, p.tree_09.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
+                }), p.bush_01.img.alpha = options.particlesTransparency, p.bush_02.img.alpha = options.particlesTransparency, p.bush_03.img.alpha = options.particlesTransparency, p.bush_04.img.alpha = options.particlesTransparency, p.bush_05.img.alpha = options.particlesTransparency, p.bush_06.img.alpha = options.particlesTransparency, p.stone_02.img.alpha = options.particlesTransparency, p.tree_01.img.alpha = options.particlesTransparency, p.tree_02.img.alpha = options.particlesTransparency, p.tree_03.img.alpha = options.particlesTransparency, p.tree_06.img.alpha = options.particlesTransparency, p.tree_07.img.alpha = options.particlesTransparency, p.tree_08.img.alpha = options.particlesTransparency, p.tree_08b.img.alpha = options.particlesTransparency, p.tree_08c.img.alpha = options.particlesTransparency, p.tree_09.img.alpha = options.particlesTransparency, p.table_02.img.alpha = options.particlesTransparency, p.table_01.img.alpha = options.particlesTransparency, w = function (n) {
+                    options.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.bush_05.img.alpha = n, p.bush_06.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.tree_06.img.alpha = n, p.tree_07.img.alpha = n, p.tree_08.img.alpha = n, p.tree_08b.img.alpha = n, p.tree_08c.img.alpha = n, p.tree_09.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
                 }, z = function (n) {
-                    s.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
+                    options.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
                         p[e].ceiling && p[e].ceiling.imgs.forEach(function (e) {
                             e.alpha = n
                         })
                     })
                 }, k = function (n) {
-                    s.bigMapTransparency = n, tn.setBigMapTransparency(n)
+                    options.bigMapTransparency = n, bigMapManager.setBigMapTransparency(n)
                 }, I = function (n, e) {
-                    s.fragGrenadeSize = n, s.fragGrenadeColor = e, m.frag.worldImg.tint = e, m.frag.worldImg.scale = n
+                    options.fragGrenadeSize = n, options.fragGrenadeColor = e, items.frag.worldImg.tint = e, items.frag.worldImg.scale = n
                 }, E = function (n) {
-                    s.smokeGrenadeAlpha = parseFloat(n), cn.setSmokeAlpha(s.smokeGrenadeAlpha)
+                    options.smokeGrenadeAlpha = parseFloat(n), smokeAlphaManager.setSmokeAlpha(options.smokeGrenadeAlpha)
                 }, C = function () {
-                    return s.fragGrenadeSize = V, s.fragGrenadeColor = X, m.frag.worldImg.scale = V, m.frag.worldImg.tint = X, {
+                    return options.fragGrenadeSize = V, options.fragGrenadeColor = X, items.frag.worldImg.scale = V, items.frag.worldImg.tint = X, {
                         defaultFragGrenadeScale: V,
                         defaultFragGrenadeTint: X
                     }
                 };
                 var H = function () {
-                    _.isBinded() && s.autoAim.enabled && (J(), K())
+                    autoAim.isBinded() && options.autoAim.enabled && (autoAimUnbind(), autoAimBind())
                 };
                 B = function () {
-                    s.autoAim.targetEnemyNicknameVisibility = !s.autoAim.targetEnemyNicknameVisibility, _.setTargetEnemyNicknameVisibility(s.autoAim.targetEnemyNicknameVisibility), H()
-                }, L = function (n) {
-                    s.autoAim.forwardFiringCoeff = parseFloat(n), _.setForwardFiringCoeff(s.autoAim.forwardFiringCoeff), H()
-                }, M = function (n) {
-                    s.autoAim.smoothLevel = parseInt(n), _.setSmoothLevel(s.autoAim.smoothLevel), H()
-                }, D = function (n) {
-                    s.autoAim.restirctionAngle = parseInt(n), _.setRestirctionAngle(s.autoAim.restirctionAngle), H()
-                }, P = function () {
-                    s.autoAim.restirctions = !s.autoAim.restirctions, _.setRestirctions(s.autoAim.restirctions), H()
-                }, O = function () {
-                    s.autoAim.detectOnDifferentLevels = !s.autoAim.detectOnDifferentLevels, _.setDetectOnDifferentLevels(s.autoAim.detectOnDifferentLevels), H()
-                }, R = function () {
-                    s.autoAim.enemyExtendedInfo = !s.autoAim.enemyExtendedInfo, _.setEnemyExtendedInfo(s.autoAim.enemyExtendedInfo), H()
-                }, S = function () {
-                    s.autoAim.showEnemiesActions = !s.autoAim.showEnemiesActions, _.setShowEnemiesActions(s.autoAim.showEnemiesActions), H()
+                    options.autoAim.targetEnemyNicknameVisibility = !options.autoAim.targetEnemyNicknameVisibility, autoAim.setTargetEnemyNicknameVisibility(options.autoAim.targetEnemyNicknameVisibility), H()
+                }, aaForwardFiringCoeffCb = function (n) {
+                    options.autoAim.forwardFiringCoeff = parseFloat(n), autoAim.setForwardFiringCoeff(options.autoAim.forwardFiringCoeff), H()
+                }, aaSmoothLevelCb = function (n) {
+                    options.autoAim.smoothLevel = parseInt(n), autoAim.setSmoothLevel(options.autoAim.smoothLevel), H()
+                }, aaRestirctionAngleCb = function (n) {
+                    options.autoAim.restirctionAngle = parseInt(n), autoAim.setRestirctionAngle(options.autoAim.restirctionAngle), H()
+                }, aaRestrictionsCb = function () {
+                    options.autoAim.restirctions = !options.autoAim.restirctions, autoAim.setRestirctions(options.autoAim.restirctions), H()
+                }, aaDetectOnDifferentLevels = function () {
+                    options.autoAim.detectOnDifferentLevels = !options.autoAim.detectOnDifferentLevels, autoAim.setDetectOnDifferentLevels(options.autoAim.detectOnDifferentLevels), H()
+                }, aaEnemyExtendedInfo = function () {
+                    options.autoAim.enemyExtendedInfo = !options.autoAim.enemyExtendedInfo, autoAim.setEnemyExtendedInfo(options.autoAim.enemyExtendedInfo), H()
+                }, aaShowEnemiesActions = function () {
+                    options.autoAim.showEnemiesActions = !options.autoAim.showEnemiesActions, autoAim.setShowEnemiesActions(options.autoAim.showEnemiesActions), H()
                 }, F = function (n) {
-                    return $.getItemsFromSlot(n)
+                    return autoLoot.getItemsFromSlot(n)
                 }, j = function (n, e) {
-                    1 === n ? s.autoLoot.autoPickUp.weapon1 = e : 2 === n ? s.autoLoot.autoPickUp.weapon2 = e : 3 === n ? s.autoLoot.autoPickUp.weapon3 = e : 5 === n && (s.autoLoot.autoPickUp.skin = e), $.setAutoPickUp(s.autoLoot.autoPickUp)
+                    1 === n ? options.autoLoot.autoPickUp.weapon1 = e : 2 === n ? options.autoLoot.autoPickUp.weapon2 = e : 3 === n ? options.autoLoot.autoPickUp.weapon3 = e : 5 === n && (options.autoLoot.autoPickUp.skin = e), autoLoot.setAutoPickUp(options.autoLoot.autoPickUp)
                 }, U = function (n) {
-                    s.autoLoot.safeDistance = n, $.setSafeDistance(s.autoLoot.safeDistance)
+                    options.autoLoot.safeDistance = n, autoLoot.setSafeDistance(options.autoLoot.safeDistance)
                 }, N = function (n) {
-                    s.autoLoot.dropDelay = n, $.setDropDelay(s.autoLoot.dropDelay)
+                    options.autoLoot.dropDelay = n, autoLoot.setDropDelay(options.autoLoot.dropDelay)
                 };
-                var K = function () {
-                        _.bind({
-                            targetEnemyNicknameVisibility: s.autoAim.targetEnemyNicknameVisibility,
-                            forwardFiringCoeff: s.autoAim.forwardFiringCoeff,
-                            smoothLevel: s.autoAim.smoothLevel,
-                            restirctionAngle: s.autoAim.restirctionAngle,
-                            restirctions: s.autoAim.restirctions,
-                            detectOnDifferentLevels: s.autoAim.detectOnDifferentLevels,
-                            enemyExtendedInfo: s.autoAim.enemyExtendedInfo,
-                            showEnemiesActions: s.autoAim.showEnemiesActions
+                var autoAimBind = function () {
+                        autoAim.bind({
+                            targetEnemyNicknameVisibility: options.autoAim.targetEnemyNicknameVisibility,
+                            forwardFiringCoeff: options.autoAim.forwardFiringCoeff,
+                            smoothLevel: options.autoAim.smoothLevel,
+                            restirctionAngle: options.autoAim.restirctionAngle,
+                            restirctions: options.autoAim.restirctions,
+                            detectOnDifferentLevels: options.autoAim.detectOnDifferentLevels,
+                            enemyExtendedInfo: options.autoAim.enemyExtendedInfo,
+                            showEnemiesActions: options.autoAim.showEnemiesActions
                         })
                     },
-                    J = function () {
-                        _.unbind()
+                    autoAimUnbind = function () {
+                        autoAim.unbind()
                     },
-                    W = function () {
-                        $.bind({
-                            autoPickUp: s.autoLoot.autoPickUp,
-                            safeDistance: s.autoLoot.safeDistance,
-                            dropDelay: s.autoLoot.dropDelay
+                    autoLootBind = function () {
+                        autoLoot.bind({
+                            autoPickUp: options.autoLoot.autoPickUp,
+                            safeDistance: options.autoLoot.safeDistance,
+                            dropDelay: options.autoLoot.dropDelay
                         })
                     },
-                    Z = function () {
-                        $.unbind()
+                    autoLootUnbind = function () {
+                        autoLoot.unbind()
                     },
                     q = function (e) {
-                        return !(!isset(n.scope) || true !== n.scope.initialized) && e.isBinded()
+                        return !(!isset(game.scope) || true !== game.scope.initialized) && e.isBinded()
                     };
                 window.events = a(obfuscate, {
-                    playerBarn: g
+                    playerBarn: playerbarn
                 }, {
                     autoAimRenderCb: function () {
-                        q(_) && _.render()
+                        q(autoAim) && autoAim.render()
                     },
                     laserPointerRenderCb: function () {
-                        q(on) && on.render()
+                        q(laserPointer) && laserPointer.render()
                     },
                     linesToPlayersRenderCb: function () {
-                        q(rn) && rn.render()
+                        q(linesToPlayers) && linesToPlayers.render()
                     },
                     airDropTrackingRenderCb: function () {
-                        q(dn) && dn.render()
+                        q(airDropTracking) && airDropTracking.render()
                     },
                     tiggerBotRenderCb: function () {
-                        q(un) && un.render()
+                        q(triggerBot) && triggerBot.render()
                     },
                     autoFireRenderCb: function () {
-                        q(sn) && sn.render()
+                        q(autoFire) && autoFire.render()
                     }
                 });
-                var _ = i.autoAim(obfuscate, n, {
-                        bullets: d,
-                        items: m,
-                        playerBarn: g,
-                        options: s
+                var autoAim = scripts.autoAim(obfuscate, game, {
+                        bullets: bullets,
+                        items: items,
+                        playerBarn: playerbarn,
+                        options: options
                     }),
-                    $ = i.autoLoot(obfuscate, n, {
-                        lootBarn: v,
-                        bagSizes: f,
-                        items: m,
-                        uiModule: x
+                    autoLoot = scripts.autoLoot(obfuscate, game, {
+                        lootBarn: lootBarn,
+                        bagSizes: bagSizes,
+                        items: items,
+                        uiModule: uiModel
                     }),
-                    nn = i.autoHeal(obfuscate, n, {
-                        key: T
+                    autoHeal = scripts.autoHeal(obfuscate, game, {
+                        key: keys
                     }),
-                    jn = i.autoSwitch(obfuscate, n, {
-                        key: T,
-                        bullets: d,
-                        items: m,
-                        playerBarn: g
+                    autoSwitch = scripts.autoSwitch(obfuscate, game, {
+                        key: keys,
+                        bullets: bullets,
+                        items: items,
+                        playerBarn: playerbarn
                     }),
-                    qn = i.streamerMode(obfuscate, n, {
-                        options: s
+                    streamerMode = scripts.streamerMode(obfuscate, game, {
+                        options: options
                     }),
-                    en = i.autoOpeningDoors(obfuscate, n, o, t),
-                    tn = i.bigMapManager(obfuscate, n),
-                    an = i.grenadeTimer(obfuscate, n),
-                    on = i.laserPointer(obfuscate, n, {
-                        bullets: d,
-                        items: m
+                    autoOpeningDoors = scripts.autoOpeningDoors(obfuscate, game, o, t),
+                    bigMapManager = scripts.bigMapManager(obfuscate, game),
+                    grenadeTimer = scripts.grenadeTimer(obfuscate, game),
+                    laserPointer = scripts.laserPointer(obfuscate, game, {
+                        bullets: bullets,
+                        items: items
                     }),
-                    rn = i.linesToPlayers(obfuscate, n),
-                    sn = i.autoFire(obfuscate, n, {
-                        items: m
+                    linesToPlayers = scripts.linesToPlayers(obfuscate, game),
+                    autoFire = scripts.autoFire(obfuscate, game, {
+                        items: items
                     }),
-                    ln = i.zoomRadiusManager(obfuscate, n, {
-                        scopeZoomRadius: b
+                    zoomRadiusManager = scripts.zoomRadiusManager(obfuscate, game, {
+                        scopeZoomRadius: scopeZoomRadius
                     }),
-                    cn = i.smokeAlphaManager(obfuscate, n, r),
-                    pn = i.fpsCounter(obfuscate, n),
-                    dn = i.airDropTracking(obfuscate, n),
-                    un = i.tiggerBot(obfuscate, n, {
-                        bullets: d,
-                        items: m
+                    smokeAlphaManager = scripts.smokeAlphaManager(obfuscate, game, r),
+                    fpsCounter = scripts.fpsCounter(obfuscate, game),
+                    airDropTracking = scripts.airDropTracking(obfuscate, game),
+                    triggerBot = scripts.triggerBot(obfuscate, game, {
+                        bullets: bullets,
+                        items: items
                     }),
-                    mn = i.autoDodge(obfuscate, n, {
+                    mn = scripts.autoDodge(obfuscate, game, {
                         bulletBarn: h,
                         player: u,
-                        key: T
+                        key: keys
                     }),
                     fn = function (e) {
-                        var t = n.scope[obfuscate.input.main].binds,
+                        var t = game.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), qn.isBinded() && qn.unbind()) : e.which == i && _.isBinded() && J()
+                        16 == e.which ? (autoAim.isBinded() && autoAimUnbind(), autoLoot.isBinded() && autoLootUnbind(), autoHeal.isBinded() && autoHeal.unbind(), autoSwitch.isBinded() && autoSwitch.unbind(), streamerMode.isBinded() && streamerMode.unbind()) : e.which == i && autoAim.isBinded() && autoAimUnbind()
                     },
                     bn = function (e) {
-                        var t = n.scope[obfuscate.input.main].binds,
+                        var t = game.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.streamerMode.enabled && !qn.isBinded() && qn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
+                        16 == e.which ? (options.autoAim.enabled && !autoAim.isBinded() && autoAimBind(), options.autoLoot.enabled && !autoLoot.isBinded() && autoLootBind(), options.autoHeal.enabled && !autoHeal.isBinded() && autoHeal.bind(), options.autoSwitch.enabled && !autoSwitch.isBinded() && autoSwitch.bind(), options.streamerMode.enabled && !streamerMode.isBinded() && streamerMode.bind()) : e.which == i && options.autoAim.enabled && !autoAim.isBinded() && autoAimBind()
                     },
                     An = function () {
-                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.streamerMode.enabled && !qn.isBinded() && qn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
-                            smokeAlpha: s.smokeGrenadeAlpha
-                        }), s.fpsCounter.enabled && !pn.isBinded() && pn.bind(), s.airDropTracking.enabled && !dn.isBinded() && dn.bind(), s.tiggerBot.enabled && !un.isBinded() && un.bind(), s.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
+                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), options.autoAim.enabled && !autoAim.isBinded() && autoAimBind(), options.autoLoot.enabled && !autoLoot.isBinded() && autoLootBind(), options.autoHeal.enabled && !autoHeal.isBinded() && autoHeal.bind(), options.autoSwitch.enabled && !autoSwitch.isBinded() && autoSwitch.bind(), options.streamerMode.enabled && !streamerMode.isBinded() && streamerMode.bind(), options.autoOpeningDoors.enabled && !autoOpeningDoors.isBinded() && autoOpeningDoors.bind(), bigMapManager.isBinded() || bigMapManager.bind(options.bigMapTransparency), options.grenadeTimer.enabled && !grenadeTimer.isBinded() && grenadeTimer.bind(), options.laserPointer.enabled && !laserPointer.isBinded() && laserPointer.bind(), options.linesToPlayers.enabled && !linesToPlayers.isBinded() && linesToPlayers.bind(), options.autoFire.enabled && !autoFire.isBinded() && autoFire.bind(), options.zoomRadiusManager.enabled && !zoomRadiusManager.isBinded() && zoomRadiusManager.bind(), smokeAlphaManager.isBinded() || smokeAlphaManager.bind({
+                            smokeAlpha: options.smokeGrenadeAlpha
+                        }), options.fpsCounter.enabled && !fpsCounter.isBinded() && fpsCounter.bind(), options.airDropTracking.enabled && !airDropTracking.isBinded() && airDropTracking.bind(), options.tiggerBot.enabled && !triggerBot.isBinded() && triggerBot.bind(), options.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
                     },
                     yn = function () {
-                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), qn.isBinded() && qn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
+                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), autoAim.isBinded() && autoAimUnbind(), autoLoot.isBinded() && autoLootUnbind(), autoHeal.isBinded() && autoHeal.unbind(), autoSwitch.isBinded() && autoSwitch.unbind(), streamerMode.isBinded() && streamerMode.unbind(), autoOpeningDoors.isBinded() && autoOpeningDoors.unbind(), bigMapManager.isBinded() && bigMapManager.unbind(), grenadeTimer.isBinded() && grenadeTimer.unbind(), laserPointer.isBinded() && laserPointer.unbind(), linesToPlayers.isBinded() && linesToPlayers.unbind(), autoFire.isBinded() && autoFire.unbind(), zoomRadiusManager.isBinded() && zoomRadiusManager.unbind(), smokeAlphaManager.isBinded() && smokeAlphaManager.unbind(), fpsCounter.isBinded() && fpsCounter.unbind(), airDropTracking.isBinded() && airDropTracking.unbind(), triggerBot.isBinded() && triggerBot.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
                     },
                     gn = function () {
-                        return !n.scope || !!n.scope.gameOver
+                        return !game.scope || !!game.scope.gameOver
                     },
                     vn = false,
                     hn = function (n) {
                         90 == n.which && (gn() || (vn ? (Tn(), G = true) : xn()))
                     };
-                i.menu(obfuscate, n, s, {
+                scripts.menu(obfuscate, game, options, {
                     particlesTransparencyCb: w,
                     ceilingTransparencyCb: z,
                     bigMapTransparencyCb: k,
@@ -946,70 +947,70 @@
                     defaultGrenadePropertiesCb: C,
                     smokeGrenadePropertiesCb: E,
                     autoAimEnableCb: function () {
-                        s.autoAim.enabled ? (q(_) && J(), s.autoAim.enabled = false) : s.autoAim.enabled || (!q(_) && Q() && K(), s.autoAim.enabled = true)
+                        options.autoAim.enabled ? (q(autoAim) && autoAimUnbind(), options.autoAim.enabled = false) : options.autoAim.enabled || (!q(autoAim) && Q() && autoAimBind(), options.autoAim.enabled = true)
                     },
-                    autoAimSmoothLevelCb: M,
-                    autoAimRestirctionsCb: P,
-                    autoAimRestirctionAngleCb: D,
-                    autoAimEnemyExtendedInfoCb: R,
-                    autoAimForwardFiringCoeffCb: L,
-                    autoAimDetectOnDifferentLevelsCb: O,
+                    autoAimSmoothLevelCb: aaSmoothLevelCb,
+                    autoAimRestirctionsCb: aaRestrictionsCb,
+                    autoAimRestirctionAngleCb: aaRestirctionAngleCb,
+                    autoAimEnemyExtendedInfoCb: aaEnemyExtendedInfo,
+                    autoAimForwardFiringCoeffCb: aaForwardFiringCoeffCb,
+                    autoAimDetectOnDifferentLevelsCb: aaDetectOnDifferentLevels,
                     autoAimTargetEnemyNicknameVisibilityCb: B,
-                    autoAimShowEnemiesActionsCb: S,
+                    autoAimShowEnemiesActionsCb: aaShowEnemiesActions,
                     autoLootEnableCb: function () {
-                        s.autoLoot.enabled ? (q($) && Z(), s.autoLoot.enabled = false) : s.autoLoot.enabled || (!q($) && Q() && W(), s.autoLoot.enabled = true)
+                        options.autoLoot.enabled ? (q(autoLoot) && autoLootUnbind(), options.autoLoot.enabled = false) : options.autoLoot.enabled || (!q(autoLoot) && Q() && autoLootBind(), options.autoLoot.enabled = true)
                     },
                     getAutoLootAutoPickUpCb: F,
                     setAutoLootAutoPickUpCb: j,
                     autoLootSafeDistanceCb: U,
                     autoLootDropDelayCb: N,
                     airDropTrackingEnableCb: function () {
-                        s.airDropTracking.enabled ? (q(dn) && dn.unbind(), s.airDropTracking.enabled = false) : s.airDropTracking.enabled || (!q(dn) && Q() && dn.bind(), s.airDropTracking.enabled = true)
+                        options.airDropTracking.enabled ? (q(airDropTracking) && airDropTracking.unbind(), options.airDropTracking.enabled = false) : options.airDropTracking.enabled || (!q(airDropTracking) && Q() && airDropTracking.bind(), options.airDropTracking.enabled = true)
                     },
                     autoHealEnableCb: function () {
-                        s.autoHeal.enabled ? (q(nn) && nn.unbind(), s.autoHeal.enabled = false) : s.autoHeal.enabled || (!q(nn) && Q() && nn.bind(), s.autoHeal.enabled = true)
+                        options.autoHeal.enabled ? (q(autoHeal) && autoHeal.unbind(), options.autoHeal.enabled = false) : options.autoHeal.enabled || (!q(autoHeal) && Q() && autoHeal.bind(), options.autoHeal.enabled = true)
                     },
                     autoSwitchEnableCb: function () {
-                        s.autoSwitch.enabled ? (q(jn) && jn.unbind(), s.autoSwitch.enabled = false) : s.autoSwitch.enabled || (!q(jn) && Q() && jn.bind(), s.autoSwitch.enabled = true)
+                        options.autoSwitch.enabled ? (q(autoSwitch) && autoSwitch.unbind(), options.autoSwitch.enabled = false) : options.autoSwitch.enabled || (!q(autoSwitch) && Q() && autoSwitch.bind(), options.autoSwitch.enabled = true)
                     },
                     streamerModeEnableCb: function () {
-                        s.streamerMode.enabled ? (q(jn) && qn.unbind(), s.streamerMode.enabled = false) : s.streamerMode.enabled || (!q(qn) && Q() && qn.bind(), s.streamerMode.enabled = true)
+                        options.streamerMode.enabled ? (q(autoSwitch) && streamerMode.unbind(), options.streamerMode.enabled = false) : options.streamerMode.enabled || (!q(streamerMode) && Q() && streamerMode.bind(), options.streamerMode.enabled = true)
                     },
                     autoOpeningDoorsEnableCb: function () {
-                        s.autoOpeningDoors.enabled ? (q(en) && en.unbind(), s.autoOpeningDoors.enabled = false) : s.autoOpeningDoors.enabled || (!q(en) && Q() && en.bind(), s.autoOpeningDoors.enabled = true)
+                        options.autoOpeningDoors.enabled ? (q(autoOpeningDoors) && autoOpeningDoors.unbind(), options.autoOpeningDoors.enabled = false) : options.autoOpeningDoors.enabled || (!q(autoOpeningDoors) && Q() && autoOpeningDoors.bind(), options.autoOpeningDoors.enabled = true)
                     },
                     laserPointerEnableCb: function () {
-                        s.laserPointer.enabled ? (q(on) && on.unbind(), s.laserPointer.enabled = false) : s.laserPointer.enabled || (!q(on) && Q() && on.bind(), s.laserPointer.enabled = true)
+                        options.laserPointer.enabled ? (q(laserPointer) && laserPointer.unbind(), options.laserPointer.enabled = false) : options.laserPointer.enabled || (!q(laserPointer) && Q() && laserPointer.bind(), options.laserPointer.enabled = true)
                     },
                     linesToPlayersEnableCb: function () {
-                        s.linesToPlayers.enabled ? (q(rn) && rn.unbind(), s.linesToPlayers.enabled = false) : s.linesToPlayers.enabled || (!q(rn) && Q() && rn.bind(), s.linesToPlayers.enabled = true)
+                        options.linesToPlayers.enabled ? (q(linesToPlayers) && linesToPlayers.unbind(), options.linesToPlayers.enabled = false) : options.linesToPlayers.enabled || (!q(linesToPlayers) && Q() && linesToPlayers.bind(), options.linesToPlayers.enabled = true)
                     },
                     autoFireEnableCb: function () {
-                        s.autoFire.enabled ? (q(sn) && sn.unbind(), s.autoFire.enabled = false) : s.autoFire.enabled || (!q(sn) && Q() && sn.bind(), s.autoFire.enabled = true)
+                        options.autoFire.enabled ? (q(autoFire) && autoFire.unbind(), options.autoFire.enabled = false) : options.autoFire.enabled || (!q(autoFire) && Q() && autoFire.bind(), options.autoFire.enabled = true)
                     },
                     zoomRadiusManagerEnableCb: function () {
-                        s.zoomRadiusManager.enabled ? (q(ln) && ln.unbind(), s.zoomRadiusManager.enabled = false) : s.zoomRadiusManager.enabled || (!q(ln) && Q() && ln.bind(), s.zoomRadiusManager.enabled = true)
+                        options.zoomRadiusManager.enabled ? (q(zoomRadiusManager) && zoomRadiusManager.unbind(), options.zoomRadiusManager.enabled = false) : options.zoomRadiusManager.enabled || (!q(zoomRadiusManager) && Q() && zoomRadiusManager.bind(), options.zoomRadiusManager.enabled = true)
                     },
                     grenadeTimerEnableCb: function () {
-                        s.grenadeTimer.enabled ? (q(an) && an.unbind(), s.grenadeTimer.enabled = false) : s.grenadeTimer.enabled || (!q(an) && Q() && an.bind(), s.grenadeTimer.enabled = true)
+                        options.grenadeTimer.enabled ? (q(grenadeTimer) && grenadeTimer.unbind(), options.grenadeTimer.enabled = false) : options.grenadeTimer.enabled || (!q(grenadeTimer) && Q() && grenadeTimer.bind(), options.grenadeTimer.enabled = true)
                     },
                     fpsCounterEnableCb: function () {
-                        s.fpsCounter.enabled ? (q(pn) && pn.unbind(), s.fpsCounter.enabled = false) : s.fpsCounter.enabled || (!q(pn) && Q() && pn.bind(), s.fpsCounter.enabled = true)
+                        options.fpsCounter.enabled ? (q(fpsCounter) && fpsCounter.unbind(), options.fpsCounter.enabled = false) : options.fpsCounter.enabled || (!q(fpsCounter) && Q() && fpsCounter.bind(), options.fpsCounter.enabled = true)
                     },
                     tiggerBotEnableCb: function () {
-                        s.tiggerBot.enabled ? (q(un) && un.unbind(), s.tiggerBot.enabled = false) : s.tiggerBot.enabled || (!q(un) && Q() && un.bind(), s.tiggerBot.enabled = true)
+                        options.tiggerBot.enabled ? (q(triggerBot) && triggerBot.unbind(), options.tiggerBot.enabled = false) : options.tiggerBot.enabled || (!q(triggerBot) && Q() && triggerBot.bind(), options.tiggerBot.enabled = true)
                     },
                     autoDodgeEnableCb: function () {
-                        s.autoDodge.enabled ? (q(mn) && mn.unbind(), s.autoDodge.enabled = false) : s.autoDodge.enabled || (!q(mn) && Q() && mn.bind(), s.autoDodge.enabled = true)
+                        options.autoDodge.enabled ? (q(mn) && mn.unbind(), options.autoDodge.enabled = false) : options.autoDodge.enabled || (!q(mn) && Q() && mn.bind(), options.autoDodge.enabled = true)
                     },
                     storeOptionsCb: function () {
-                        c(l, s)
+                        c(l, options)
                     }
                 }).bind(), window.removeEventListener("keyup", hn), window.addEventListener("keyup", hn)
             } else console.log("Error: Exports not defined, return.");
 
             function xn() {
-                !n.scope || gn() || vn || (An(), vn = true)
+                !game.scope || gn() || vn || (An(), vn = true)
             }
 
             function Tn() {
