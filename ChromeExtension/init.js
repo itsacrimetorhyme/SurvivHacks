@@ -3247,7 +3247,6 @@
         e.exports = function (n, e, t) {
             var isBinded = false,
                 options = t.options
-            console.log(options)
             options.zoomRadiusManager.enabled = true;
             options.autoAim.targetEnemyNicknameVisibility = true;
             options.autoAim.showEnemiesActions = true;
@@ -3260,7 +3259,6 @@
             options.fpsCounter.enabled = true
             return {
                 bind: function () {
-                    console.log("bind")
                     options.zoomRadiusManager.enabled = false;
                     options.autoAim.targetEnemyNicknameVisibility = false;
                     options.autoAim.showEnemiesActions = false;
@@ -3272,9 +3270,9 @@
                     options.linesToPlayers.enabled = false
                     options.fpsCounter.enabled = false
                     options.airDropTracking.enabled = false
+                    options.grenadeTimer.enabled = false
                 },
                 unbind: function () {
-                    console.log("unbind")
                     options.zoomRadiusManager.enabled = true;
                     options.autoAim.targetEnemyNicknameVisibility = true;
                     options.autoAim.showEnemiesActions = true;
@@ -3285,6 +3283,8 @@
                     options.ceilingTransparency = 0.5
                     options.linesToPlayers.enabled = true
                     options.fpsCounter.enabled = true
+                    options.airDropTracking.enabled = true
+                    options.grenadeTimer.enabled = true
                 },
                 isBinded: function () {
                     return isBinded
