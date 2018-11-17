@@ -1,4 +1,4 @@
-﻿! function () {
+! function () {
     return function n(e, t, i) {
 
         function a(r, s) {
