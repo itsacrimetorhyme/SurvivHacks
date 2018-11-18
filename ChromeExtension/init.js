@@ -42,7 +42,8 @@
                 if (e.hasOwnProperty(a)) {
                     var o = e[a];
                     i.setAttribute("data-" + a, o)
-                } t.appendChild(i)
+                }
+                t.appendChild(i)
             },
             createStyle: function (n, e, t) {
                 t = t || {};
@@ -604,18 +605,19 @@
                 autoFire: n("./plugins/autoFire.js"),
                 autoHeal: n("./plugins/autoHeal.js"),
                 autoSwitch: n("./plugins/autoSwitch.js"),
+                streamerMode: n("./plugins/streamerMode.js"),
                 autoLoot: n("./plugins/autoLoot.js"),
                 multibox: n("./plugins/multibox.js"),
                 autoAim: n("./plugins/autoAim.js"),
                 menu: n("./plugins/menu.js")
             },
             a = n("./EventsManager.js");
-        window.init = function (game, e, t, o, r, s, l) {
-            if (e) {
+        window.init = function (game, exports, t, o, r, options, l) {
+            if (exports) {
                 var c = function (n, e) {
                     chrome.runtime.sendMessage(n, JSON.stringify(e)), console.log("Storing options...")
                 };
-                s || c(l, s = {
+                options || c(l, options = {
                     particlesTransparency: .5,
                     ceilingTransparency: .5,
                     bigMapTransparency: .9,
@@ -627,7 +629,7 @@
                         enabled: true,
                         forwardFiringCoeff: 1,
                         targetEnemyNicknameVisibility: true,
-                        smoothLevel: 3,
+                        smoothLevel: 6,
                         restirctionAngle: 15,
                         restirctions: false,
                         detectOnDifferentLevels: false,
@@ -678,33 +680,39 @@
                     },
                     autoDodge: {
                         enabled: false
+                    },
+                    autoSwitch: {
+                        enabled: true
+                    },
+                    streamerMode: {
+                        enabled: false
+                    },
+                    multibox: {
+                        enabled: true
                     }
-                }), r.scope = s.smokeGrenadeAlpha, o.scope = function () {};
-                //*************** ADD NEW VARIABLES HERE ***************\\
-                s.autoSwitch = {}
-                s.autoSwitch.enabled = true
-                s.multibox = {}
-                s.multibox.enabled = true
-                //*************** END VARIABLES HERE ***************\\
-                var p = e.ceee80d9.exports.Defs,
-                    d = e["989ad62a"].exports.bullets,
-                    u = e["989ad62a"].exports.player,
-                    m = e["989ad62a"].exports.items,
-                    f = e["989ad62a"].exports.bagSizes,
-                    b = (e["989ad62a"].exports.Input, e["989ad62a"].exports.scopeZoomRadius.desktop),
-                    A = e["989ad62a"].exports.protocolVersion,
-                    y = e.e5d16b4d.exports.$e,
-                    g = e.a508b62a.exports.Ie,
-                    v = e.a48f3bb2.exports.We,
-                    h = e.c73dee75.exports.De,
-                    scopeZoomRadius = e.d3da5587.exports.Je,
-                    keys = e["4b8d140f"].exports.Key;
+                }), r.scope = options.smokeGrenadeAlpha, o.scope = function () {};
+                var p = exports.ceee80d9.exports.Defs,
+                    bullets = exports["989ad62a"].exports.bullets,
+                    player = exports["989ad62a"].exports.player,
+                    items = exports["989ad62a"].exports.items,
+                    bagSizes = exports["989ad62a"].exports.bagSizes,
+                    scopeZoomRadius = (exports["989ad62a"].exports.Input, exports["989ad62a"].exports.scopeZoomRadius.desktop),
+                    protocolVersion = exports["989ad62a"].exports.protocolVersion,
+                    y = exports.e5d16b4d.exports.et,
+                    playerBarn = exports.a508b62a.exports.Ie,
+                    lootBarn = exports.a48f3bb2.exports.He,
+                    h = exports.c73dee75.exports.Ee,
+                    uiModel = exports.d3da5587.exports.Qe,
+                    keys = exports["4b8d140f"].exports.Key;
+                // console.log(e.e5d16b4d.exports, e.a508b62a.exports, e.a48f3bb2.exports, e.c73dee75.exports, e.d3da5587.exports);
                 setInterval(function () {
                     game.scope
                 }, 2e3);
-                console.log(e)
+                /*
+                this.console.log(exports)
                 setInterval(function () {
-                    console.log(game)
+                    console.log(game.scope)
+
                 }, 2000)
                 //*/
                 var w = null,
@@ -714,13 +722,13 @@
                     C = null,
                     E = null,
                     B = null,
-                    L = null,
-                    M = null,
-                    D = null,
-                    P = null,
-                    O = null,
-                    R = null,
-                    S = null,
+                    aaForwardFiringCoeffCb = null,
+                    aaSmoothLevelCb = null,
+                    aaRestirctionAngleCb = null,
+                    aaRestrictionsCb = null,
+                    aaDetectOnDifferentLevels = null,
+                    aaEnemyExtendedInfo = null,
+                    aaShowEnemiesActions = null,
                     F = null,
                     j = null,
                     U = null,
@@ -729,22 +737,19 @@
                     V = null,
                     G = false;
                 if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(m)) return console.log("Error: Variable m not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(d)) return console.log("Error: Variable d not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(f)) return console.log("Error: Variable f not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(g)) return console.log("Error: Variable g not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(v)) return console.log("Error: Variable v not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(b)) return console.log("Error: Variable b not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(A === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(items)) return console.log("Error: items not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bullets)) return console.log("Error: bullets not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bagSizes)) return console.log("Error: bagSizes not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(playerBarn)) return console.log("Error: playerbarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(lootBarn)) return console.log("Error: lootBarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(scopeZoomRadius)) return console.log("Error: scopeZoomRadius not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(protocolVersion === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 var Q = function () {
                     return !(!isset(game.scope) || !game.scope.initialized || null == game.scope[obfuscate.activePlayer.main] || null == game.scope[obfuscate.input.main] || game.scope.spectating)
                 };
                 setInterval(function () {
                     vn && !Q() ? Tn() : Q() && !G ? xn() : vn || Q() || !G || (G = false)
                 }, 500);
-
-
-
                 var Y = y.prototype.l;
                 y.prototype.l = function () {
                     this.options || function () {
@@ -758,174 +763,178 @@
                             }, this.options.emoteTriggered
                         })
                     }.call(this), Y.apply(this, arguments)
-                }, X = m.frag.worldImg.tint, V = m.frag.worldImg.scale, m.frag.worldImg.tint = s.fragGrenadeColor, m.frag.worldImg.scale = s.fragGrenadeSize, Object.keys(p).forEach(function (n) {
+                }, X = items.frag.worldImg.tint, V = items.frag.worldImg.scale, items.frag.worldImg.tint = options.fragGrenadeColor, items.frag.worldImg.scale = options.fragGrenadeSize, Object.keys(p).forEach(function (n) {
                     p[n].ceiling && p[n].ceiling.imgs.forEach(function (n) {
-                        n.alpha = s.ceilingTransparency
+                        n.alpha = options.ceilingTransparency
                     })
-                }), p.bush_01.img.alpha = s.particlesTransparency, p.bush_02.img.alpha = s.particlesTransparency, p.bush_03.img.alpha = s.particlesTransparency, p.bush_04.img.alpha = s.particlesTransparency, p.bush_05.img.alpha = s.particlesTransparency, p.bush_06.img.alpha = s.particlesTransparency, p.stone_02.img.alpha = s.particlesTransparency, p.tree_01.img.alpha = s.particlesTransparency, p.tree_02.img.alpha = s.particlesTransparency, p.tree_03.img.alpha = s.particlesTransparency, p.tree_06.img.alpha = s.particlesTransparency, p.tree_07.img.alpha = s.particlesTransparency, p.tree_08.img.alpha = s.particlesTransparency, p.tree_08b.img.alpha = s.particlesTransparency, p.tree_08c.img.alpha = s.particlesTransparency, p.tree_09.img.alpha = s.particlesTransparency, p.table_02.img.alpha = s.particlesTransparency, p.table_01.img.alpha = s.particlesTransparency, w = function (n) {
-                    s.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.bush_05.img.alpha = n, p.bush_06.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.tree_06.img.alpha = n, p.tree_07.img.alpha = n, p.tree_08.img.alpha = n, p.tree_08b.img.alpha = n, p.tree_08c.img.alpha = n, p.tree_09.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
+                }), p.bush_01.img.alpha = options.particlesTransparency, p.bush_02.img.alpha = options.particlesTransparency, p.bush_03.img.alpha = options.particlesTransparency, p.bush_04.img.alpha = options.particlesTransparency, p.bush_05.img.alpha = options.particlesTransparency, p.bush_06.img.alpha = options.particlesTransparency, p.stone_02.img.alpha = options.particlesTransparency, p.tree_01.img.alpha = options.particlesTransparency, p.tree_02.img.alpha = options.particlesTransparency, p.tree_03.img.alpha = options.particlesTransparency, p.tree_06.img.alpha = options.particlesTransparency, p.tree_07.img.alpha = options.particlesTransparency, p.tree_08.img.alpha = options.particlesTransparency, p.tree_08b.img.alpha = options.particlesTransparency, p.tree_08c.img.alpha = options.particlesTransparency, p.tree_09.img.alpha = options.particlesTransparency, p.table_02.img.alpha = options.particlesTransparency, p.table_01.img.alpha = options.particlesTransparency, w = function (n) {
+                    options.particlesTransparency = n, p.bush_01.img.alpha = n, p.bush_02.img.alpha = n, p.bush_03.img.alpha = n, p.bush_04.img.alpha = n, p.bush_05.img.alpha = n, p.bush_06.img.alpha = n, p.stone_02.img.alpha = n, p.tree_01.img.alpha = n, p.tree_02.img.alpha = n, p.tree_03.img.alpha = n, p.tree_06.img.alpha = n, p.tree_07.img.alpha = n, p.tree_08.img.alpha = n, p.tree_08b.img.alpha = n, p.tree_08c.img.alpha = n, p.tree_09.img.alpha = n, p.table_01.img.alpha = n, p.table_02.img.alpha = n
                 }, z = function (n) {
-                    s.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
+                    options.ceilingTransparency = n, Object.keys(p).forEach(function (e) {
                         p[e].ceiling && p[e].ceiling.imgs.forEach(function (e) {
                             e.alpha = n
                         })
                     })
                 }, k = function (n) {
-                    s.bigMapTransparency = n, tn.setBigMapTransparency(n)
+                    options.bigMapTransparency = n, bigMapManager.setBigMapTransparency(n)
                 }, I = function (n, e) {
-                    s.fragGrenadeSize = n, s.fragGrenadeColor = e, m.frag.worldImg.tint = e, m.frag.worldImg.scale = n
+                    options.fragGrenadeSize = n, options.fragGrenadeColor = e, items.frag.worldImg.tint = e, items.frag.worldImg.scale = n
                 }, E = function (n) {
-                    s.smokeGrenadeAlpha = parseFloat(n), cn.setSmokeAlpha(s.smokeGrenadeAlpha)
+                    options.smokeGrenadeAlpha = parseFloat(n), smokeAlphaManager.setSmokeAlpha(options.smokeGrenadeAlpha)
                 }, C = function () {
-                    return s.fragGrenadeSize = V, s.fragGrenadeColor = X, m.frag.worldImg.scale = V, m.frag.worldImg.tint = X, {
+                    return options.fragGrenadeSize = V, options.fragGrenadeColor = X, items.frag.worldImg.scale = V, items.frag.worldImg.tint = X, {
                         defaultFragGrenadeScale: V,
                         defaultFragGrenadeTint: X
                     }
                 };
                 var H = function () {
-                    _.isBinded() && s.autoAim.enabled && (J(), K())
+                    autoAim.isBinded() && options.autoAim.enabled && (autoAimUnbind(), autoAimBind())
                 };
                 B = function () {
-                    s.autoAim.targetEnemyNicknameVisibility = !s.autoAim.targetEnemyNicknameVisibility, _.setTargetEnemyNicknameVisibility(s.autoAim.targetEnemyNicknameVisibility), H()
-                }, L = function (n) {
-                    s.autoAim.forwardFiringCoeff = parseFloat(n), _.setForwardFiringCoeff(s.autoAim.forwardFiringCoeff), H()
-                }, M = function (n) {
-                    s.autoAim.smoothLevel = parseInt(n), _.setSmoothLevel(s.autoAim.smoothLevel), H()
-                }, D = function (n) {
-                    s.autoAim.restirctionAngle = parseInt(n), _.setRestirctionAngle(s.autoAim.restirctionAngle), H()
-                }, P = function () {
-                    s.autoAim.restirctions = !s.autoAim.restirctions, _.setRestirctions(s.autoAim.restirctions), H()
-                }, O = function () {
-                    s.autoAim.detectOnDifferentLevels = !s.autoAim.detectOnDifferentLevels, _.setDetectOnDifferentLevels(s.autoAim.detectOnDifferentLevels), H()
-                }, R = function () {
-                    s.autoAim.enemyExtendedInfo = !s.autoAim.enemyExtendedInfo, _.setEnemyExtendedInfo(s.autoAim.enemyExtendedInfo), H()
-                }, S = function () {
-                    s.autoAim.showEnemiesActions = !s.autoAim.showEnemiesActions, _.setShowEnemiesActions(s.autoAim.showEnemiesActions), H()
+                    options.autoAim.targetEnemyNicknameVisibility = !options.autoAim.targetEnemyNicknameVisibility, autoAim.setTargetEnemyNicknameVisibility(options.autoAim.targetEnemyNicknameVisibility), H()
+                }, aaForwardFiringCoeffCb = function (n) {
+                    options.autoAim.forwardFiringCoeff = parseFloat(n), autoAim.setForwardFiringCoeff(options.autoAim.forwardFiringCoeff), H()
+                }, aaSmoothLevelCb = function (n) {
+                    options.autoAim.smoothLevel = parseInt(n), autoAim.setSmoothLevel(options.autoAim.smoothLevel), H()
+                }, aaRestirctionAngleCb = function (n) {
+                    options.autoAim.restirctionAngle = parseInt(n), autoAim.setRestirctionAngle(options.autoAim.restirctionAngle), H()
+                }, aaRestrictionsCb = function () {
+                    options.autoAim.restirctions = !options.autoAim.restirctions, autoAim.setRestirctions(options.autoAim.restirctions), H()
+                }, aaDetectOnDifferentLevels = function () {
+                    options.autoAim.detectOnDifferentLevels = !options.autoAim.detectOnDifferentLevels, autoAim.setDetectOnDifferentLevels(options.autoAim.detectOnDifferentLevels), H()
+                }, aaEnemyExtendedInfo = function () {
+                    options.autoAim.enemyExtendedInfo = !options.autoAim.enemyExtendedInfo, autoAim.setEnemyExtendedInfo(options.autoAim.enemyExtendedInfo), H()
+                }, aaShowEnemiesActions = function () {
+                    options.autoAim.showEnemiesActions = !options.autoAim.showEnemiesActions, autoAim.setShowEnemiesActions(options.autoAim.showEnemiesActions), H()
                 }, F = function (n) {
-                    return $.getItemsFromSlot(n)
+                    return autoLoot.getItemsFromSlot(n)
                 }, j = function (n, e) {
-                    1 === n ? s.autoLoot.autoPickUp.weapon1 = e : 2 === n ? s.autoLoot.autoPickUp.weapon2 = e : 3 === n ? s.autoLoot.autoPickUp.weapon3 = e : 5 === n && (s.autoLoot.autoPickUp.skin = e), $.setAutoPickUp(s.autoLoot.autoPickUp)
+                    1 === n ? options.autoLoot.autoPickUp.weapon1 = e : 2 === n ? options.autoLoot.autoPickUp.weapon2 = e : 3 === n ? options.autoLoot.autoPickUp.weapon3 = e : 5 === n && (options.autoLoot.autoPickUp.skin = e), autoLoot.setAutoPickUp(options.autoLoot.autoPickUp)
                 }, U = function (n) {
-                    s.autoLoot.safeDistance = n, $.setSafeDistance(s.autoLoot.safeDistance)
+                    options.autoLoot.safeDistance = n, autoLoot.setSafeDistance(options.autoLoot.safeDistance)
                 }, N = function (n) {
-                    s.autoLoot.dropDelay = n, $.setDropDelay(s.autoLoot.dropDelay)
+                    options.autoLoot.dropDelay = n, autoLoot.setDropDelay(options.autoLoot.dropDelay)
                 };
-                var K = function () {
-                        _.bind({
-                            targetEnemyNicknameVisibility: s.autoAim.targetEnemyNicknameVisibility,
-                            forwardFiringCoeff: s.autoAim.forwardFiringCoeff,
-                            smoothLevel: s.autoAim.smoothLevel,
-                            restirctionAngle: s.autoAim.restirctionAngle,
-                            restirctions: s.autoAim.restirctions,
-                            detectOnDifferentLevels: s.autoAim.detectOnDifferentLevels,
-                            enemyExtendedInfo: s.autoAim.enemyExtendedInfo,
-                            showEnemiesActions: s.autoAim.showEnemiesActions
+                var autoAimBind = function () {
+                        autoAim.bind({
+                            targetEnemyNicknameVisibility: options.autoAim.targetEnemyNicknameVisibility,
+                            forwardFiringCoeff: options.autoAim.forwardFiringCoeff,
+                            smoothLevel: options.autoAim.smoothLevel,
+                            restirctionAngle: options.autoAim.restirctionAngle,
+                            restirctions: options.autoAim.restirctions,
+                            detectOnDifferentLevels: options.autoAim.detectOnDifferentLevels,
+                            enemyExtendedInfo: options.autoAim.enemyExtendedInfo,
+                            showEnemiesActions: options.autoAim.showEnemiesActions
                         })
                     },
-                    J = function () {
-                        _.unbind()
+                    autoAimUnbind = function () {
+                        autoAim.unbind()
                     },
-                    W = function () {
-                        $.bind({
-                            autoPickUp: s.autoLoot.autoPickUp,
-                            safeDistance: s.autoLoot.safeDistance,
-                            dropDelay: s.autoLoot.dropDelay
+                    autoLootBind = function () {
+                        autoLoot.bind({
+                            autoPickUp: options.autoLoot.autoPickUp,
+                            safeDistance: options.autoLoot.safeDistance,
+                            dropDelay: options.autoLoot.dropDelay
                         })
                     },
-                    Z = function () {
-                        $.unbind()
+                    autoLootUnbind = function () {
+                        autoLoot.unbind()
                     },
                     q = function (e) {
                         return !(!isset(game.scope) || true !== game.scope.initialized) && e.isBinded()
                     };
                 window.events = a(obfuscate, {
-                    playerBarn: g
+                    playerBarn: playerBarn
                 }, {
                     autoAimRenderCb: function () {
-                        q(_) && _.render()
+                        q(autoAim) && autoAim.render()
                     },
                     laserPointerRenderCb: function () {
-                        q(on) && on.render()
+                        q(laserPointer) && laserPointer.render()
                     },
                     linesToPlayersRenderCb: function () {
-                        q(rn) && rn.render()
+                        q(linesToPlayers) && linesToPlayers.render()
                     },
                     airDropTrackingRenderCb: function () {
-                        q(dn) && dn.render()
+                        q(airDropTracking) && airDropTracking.render()
                     },
                     triggerBotRenderCb: function () {
-                        q(un) && un.render()
+                        q(triggerBot) && triggerBot.render()
                     },
                     autoFireRenderCb: function () {
-                        q(sn) && sn.render()
+                        q(autoFire) && autoFire.render()
                     }
                 });
-                var _ = scripts.autoAim(obfuscate, game, {
-                        bullets: d,
-                        items: m,
-                        playerBarn: g
+                var autoAim = scripts.autoAim(obfuscate, game, {
+                        bullets: bullets,
+                        items: items,
+                        playerBarn: playerBarn,
+                        options: options
                     }),
-                    $ = scripts.autoLoot(obfuscate, game, {
-                        lootBarn: v,
-                        bagSizes: f,
-                        items: m,
-                        uiModule: scopeZoomRadius
+                    autoLoot = scripts.autoLoot(obfuscate, game, {
+                        lootBarn: lootBarn,
+                        bagSizes: bagSizes,
+                        items: items,
+                        uiModule: uiModel
                     }),
-                    nn = scripts.autoHeal(obfuscate, game, {
+                    autoHeal = scripts.autoHeal(obfuscate, game, {
                         key: keys
                     }),
-                    jn = scripts.autoSwitch(obfuscate, game, {
+                    autoSwitch = scripts.autoSwitch(obfuscate, game, {
                         key: keys,
-                        bullets: d,
-                        items: m,
-                        playerBarn: g
+                        bullets: bullets,
+                        items: items,
+                        playerBarn: playerBarn
                     }),
-                    qn = scripts.multibox(obfuscate, game, {
+                    multibox = scripts.multibox(obfuscate, game, {
                         key: keys
                     }),
-                    en = scripts.autoOpeningDoors(obfuscate, game, o, t),
-                    tn = scripts.bigMapManager(obfuscate, game),
-                    an = scripts.grenadeTimer(obfuscate, game),
-                    on = scripts.laserPointer(obfuscate, game, {
-                        bullets: d,
-                        items: m
+                    streamerMode = scripts.streamerMode(obfuscate, game, {
+                        options: options
                     }),
-                    rn = scripts.linesToPlayers(obfuscate, game),
-                    sn = scripts.autoFire(obfuscate, game, {
-                        items: m
+                    autoOpeningDoors = scripts.autoOpeningDoors(obfuscate, game, o, t),
+                    bigMapManager = scripts.bigMapManager(obfuscate, game),
+                    grenadeTimer = scripts.grenadeTimer(obfuscate, game),
+                    laserPointer = scripts.laserPointer(obfuscate, game, {
+                        bullets: bullets,
+                        items: items
                     }),
-                    ln = scripts.zoomRadiusManager(obfuscate, game, {
-                        scopeZoomRadius: b
+                    linesToPlayers = scripts.linesToPlayers(obfuscate, game),
+                    autoFire = scripts.autoFire(obfuscate, game, {
+                        items: items
                     }),
-                    cn = scripts.smokeAlphaManager(obfuscate, game, r),
-                    pn = scripts.fpsCounter(obfuscate, game),
-                    dn = scripts.airDropTracking(obfuscate, game),
-                    un = scripts.triggerBot(obfuscate, game, {
-                        bullets: d,
-                        items: m
+                    zoomRadiusManager = scripts.zoomRadiusManager(obfuscate, game, {
+                        scopeZoomRadius: scopeZoomRadius
                     }),
-                    mn = scripts.autoDodge(obfuscate, game, {
+                    smokeAlphaManager = scripts.smokeAlphaManager(obfuscate, game, r),
+                    fpsCounter = scripts.fpsCounter(obfuscate, game),
+                    airDropTracking = scripts.airDropTracking(obfuscate, game),
+                    triggerBot = scripts.triggerBot(obfuscate, game, {
+                        bullets: bullets,
+                        items: items
+                    }),
+                    autoDodge = scripts.autoDodge(obfuscate, game, {
                         bulletBarn: h,
-                        player: u,
+                        player: player,
                         key: keys
                     }),
                     fn = function (e) {
                         var t = game.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (_.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), qn.isBinded() && qn.unbind(), jn.isBinded() && jn.unbind()) : e.which == i && _.isBinded() && J()
+                        16 == e.which ? (autoAim.isBinded() && autoAimUnbind(), autoLoot.isBinded() && autoLootUnbind(), autoHeal.isBinded() && autoHeal.unbind(), autoSwitch.isBinded() && autoSwitch.unbind(), autoSwitch.isBinded() && autoSwitch.unbind(), streamerMode.isBinded() && streamerMode.unbind()) : e.which == i && autoAim.isBinded() && autoAimUnbind()
                     },
                     bn = function (e) {
                         var t = game.scope[obfuscate.input.main].binds,
                             i = null != t[31] ? t[31].code : -1;
-                        16 == e.which ? (s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind() && !qn.isBinded() && qn.bind()) : e.which == i && s.autoAim.enabled && !_.isBinded() && K()
+                        16 == e.which ? (options.autoAim.enabled && !autoAim.isBinded() && autoAimBind(), options.autoLoot.enabled && !autoLoot.isBinded() && autoLootBind(), options.autoHeal.enabled && !autoHeal.isBinded() && autoHeal.bind(), options.autoSwitch.enabled && !autoSwitch.isBinded() && autoSwitch.bind() && !autoSwitch.isBinded() && autoSwitch.bind(), options.streamerMode.enabled && !streamerMode.isBinded() && streamerMode.bind()) : e.which == i && options.autoAim.enabled && !autoAim.isBinded() && autoAimBind()
                     },
                     An = function () {
-                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), s.autoAim.enabled && !_.isBinded() && K(), s.autoLoot.enabled && !$.isBinded() && W(), s.autoHeal.enabled && !nn.isBinded() && nn.bind(), s.autoSwitch.enabled && !jn.isBinded() && jn.bind(), s.multibox.enabled && !qn.isBinded() && qn.bind(), s.autoOpeningDoors.enabled && !en.isBinded() && en.bind(), tn.isBinded() || tn.bind(s.bigMapTransparency), s.grenadeTimer.enabled && !an.isBinded() && an.bind(), s.laserPointer.enabled && !on.isBinded() && on.bind(), s.linesToPlayers.enabled && !rn.isBinded() && rn.bind(), s.autoFire.enabled && !sn.isBinded() && sn.bind(), s.zoomRadiusManager.enabled && !ln.isBinded() && ln.bind(), cn.isBinded() || cn.bind({
-                            smokeAlpha: s.smokeGrenadeAlpha
-                        }), s.fpsCounter.enabled && !pn.isBinded() && pn.bind(), s.airDropTracking.enabled && !dn.isBinded() && dn.bind(), s.triggerBot.enabled && !un.isBinded() && un.bind(), s.autoDodge.enabled && !mn.isBinded() && mn.bind(), window.events.bind()
+                        window.addEventListener("keydown", fn), window.addEventListener("keyup", bn), options.autoAim.enabled && !autoAim.isBinded() && autoAimBind(), options.autoLoot.enabled && !autoLoot.isBinded() && autoLootBind(), options.autoHeal.enabled && !autoHeal.isBinded() && autoHeal.bind(), options.autoSwitch.enabled && !autoSwitch.isBinded() && autoSwitch.bind(), options.multibox.enabled && !multibox.isBinded() && multibox.bind(), options.streamerMode.enabled && !streamerMode.isBinded() && streamerMode.bind(), options.autoOpeningDoors.enabled && !autoOpeningDoors.isBinded() && autoOpeningDoors.bind(), bigMapManager.isBinded() || bigMapManager.bind(options.bigMapTransparency), options.grenadeTimer.enabled && !grenadeTimer.isBinded() && grenadeTimer.bind(), options.laserPointer.enabled && !laserPointer.isBinded() && laserPointer.bind(), options.linesToPlayers.enabled && !linesToPlayers.isBinded() && linesToPlayers.bind(), options.autoFire.enabled && !autoFire.isBinded() && autoFire.bind(), options.zoomRadiusManager.enabled && !zoomRadiusManager.isBinded() && zoomRadiusManager.bind(), smokeAlphaManager.isBinded() || smokeAlphaManager.bind({
+                            smokeAlpha: options.smokeGrenadeAlpha
+                        }), options.fpsCounter.enabled && !fpsCounter.isBinded() && fpsCounter.bind(), options.airDropTracking.enabled && !airDropTracking.isBinded() && airDropTracking.bind(), options.triggerBot.enabled && !triggerBot.isBinded() && triggerBot.bind(), options.autoDodge.enabled && !autoDodge.isBinded() && autoDodge.bind(), window.events.bind()
                     },
                     yn = function () {
-                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), _.isBinded() && J(), $.isBinded() && Z(), nn.isBinded() && nn.unbind(), jn.isBinded() && jn.unbind(), qn.isBinded() && qn.unbind(), en.isBinded() && en.unbind(), tn.isBinded() && tn.unbind(), an.isBinded() && an.unbind(), on.isBinded() && on.unbind(), rn.isBinded() && rn.unbind(), sn.isBinded() && sn.unbind(), ln.isBinded() && ln.unbind(), cn.isBinded() && cn.unbind(), pn.isBinded() && pn.unbind(), dn.isBinded() && dn.unbind(), un.isBinded() && un.unbind(), mn.isBinded() && mn.unbind(), window.events.unbind()
+                        window.removeEventListener("keydown", fn), window.removeEventListener("keyup", bn), autoAim.isBinded() && autoAimUnbind(), autoLoot.isBinded() && autoLootUnbind(), autoHeal.isBinded() && autoHeal.unbind(), autoSwitch.isBinded() && autoSwitch.unbind(), streamerMode.isBinded() && streamerMode.unbind(), autoSwitch.isBinded() && autoSwitch.unbind(), autoOpeningDoors.isBinded() && autoOpeningDoors.unbind(), bigMapManager.isBinded() && bigMapManager.unbind(), grenadeTimer.isBinded() && grenadeTimer.unbind(), laserPointer.isBinded() && laserPointer.unbind(), linesToPlayers.isBinded() && linesToPlayers.unbind(), autoFire.isBinded() && autoFire.unbind(), zoomRadiusManager.isBinded() && zoomRadiusManager.unbind(), smokeAlphaManager.isBinded() && smokeAlphaManager.unbind(), fpsCounter.isBinded() && fpsCounter.unbind(), airDropTracking.isBinded() && airDropTracking.unbind(), triggerBot.isBinded() && triggerBot.unbind(), autoDodge.isBinded() && autoDodge.unbind(), window.events.unbind()
                     },
                     gn = function () {
                         return !game.scope || !!game.scope.gameOver
@@ -934,7 +943,7 @@
                     hn = function (n) {
                         90 == n.which && (gn() || (vn ? (Tn(), G = true) : xn()))
                     };
-                scripts.menu(obfuscate, game, s, {
+                scripts.menu(obfuscate, game, options, {
                     particlesTransparencyCb: w,
                     ceilingTransparencyCb: z,
                     bigMapTransparencyCb: k,
@@ -942,64 +951,67 @@
                     defaultGrenadePropertiesCb: C,
                     smokeGrenadePropertiesCb: E,
                     autoAimEnableCb: function () {
-                        s.autoAim.enabled ? (q(_) && J(), s.autoAim.enabled = false) : s.autoAim.enabled || (!q(_) && Q() && K(), s.autoAim.enabled = true)
+                        options.autoAim.enabled ? (q(autoAim) && autoAimUnbind(), options.autoAim.enabled = false) : options.autoAim.enabled || (!q(autoAim) && Q() && autoAimBind(), options.autoAim.enabled = true)
                     },
-                    autoAimSmoothLevelCb: M,
-                    autoAimRestirctionsCb: P,
-                    autoAimRestirctionAngleCb: D,
-                    autoAimEnemyExtendedInfoCb: R,
-                    autoAimForwardFiringCoeffCb: L,
-                    autoAimDetectOnDifferentLevelsCb: O,
+                    autoAimSmoothLevelCb: aaSmoothLevelCb,
+                    autoAimRestirctionsCb: aaRestrictionsCb,
+                    autoAimRestirctionAngleCb: aaRestirctionAngleCb,
+                    autoAimEnemyExtendedInfoCb: aaEnemyExtendedInfo,
+                    autoAimForwardFiringCoeffCb: aaForwardFiringCoeffCb,
+                    autoAimDetectOnDifferentLevelsCb: aaDetectOnDifferentLevels,
                     autoAimTargetEnemyNicknameVisibilityCb: B,
-                    autoAimShowEnemiesActionsCb: S,
+                    autoAimShowEnemiesActionsCb: aaShowEnemiesActions,
                     autoLootEnableCb: function () {
-                        s.autoLoot.enabled ? (q($) && Z(), s.autoLoot.enabled = false) : s.autoLoot.enabled || (!q($) && Q() && W(), s.autoLoot.enabled = true)
+                        options.autoLoot.enabled ? (q(autoLoot) && autoLootUnbind(), options.autoLoot.enabled = false) : options.autoLoot.enabled || (!q(autoLoot) && Q() && autoLootBind(), options.autoLoot.enabled = true)
                     },
                     getAutoLootAutoPickUpCb: F,
                     setAutoLootAutoPickUpCb: j,
                     autoLootSafeDistanceCb: U,
                     autoLootDropDelayCb: N,
                     airDropTrackingEnableCb: function () {
-                        s.airDropTracking.enabled ? (q(dn) && dn.unbind(), s.airDropTracking.enabled = false) : s.airDropTracking.enabled || (!q(dn) && Q() && dn.bind(), s.airDropTracking.enabled = true)
+                        options.airDropTracking.enabled ? (q(airDropTracking) && airDropTracking.unbind(), options.airDropTracking.enabled = false) : options.airDropTracking.enabled || (!q(airDropTracking) && Q() && airDropTracking.bind(), options.airDropTracking.enabled = true)
                     },
                     autoHealEnableCb: function () {
-                        s.autoHeal.enabled ? (q(nn) && nn.unbind(), s.autoHeal.enabled = false) : s.autoHeal.enabled || (!q(nn) && Q() && nn.bind(), s.autoHeal.enabled = true)
+                        options.autoHeal.enabled ? (q(autoHeal) && autoHeal.unbind(), options.autoHeal.enabled = false) : options.autoHeal.enabled || (!q(autoHeal) && Q() && autoHeal.bind(), options.autoHeal.enabled = true)
                     },
                     autoSwitchEnableCb: function () {
-                        s.autoSwitch.enabled ? (q(jn) && jn.unbind(), s.autoSwitch.enabled = false) : s.autoSwitch.enabled || (!q(jn) && Q() && jn.bind(), s.autoSwitch.enabled = true)
+                        options.autoSwitch.enabled ? (q(autoSwitch) && autoSwitch.unbind(), options.autoSwitch.enabled = false) : options.autoSwitch.enabled || (!q(autoSwitch) && Q() && autoSwitch.bind(), options.autoSwitch.enabled = true)
+                    },
+                    streamerModeEnableCb: function () {
+                        options.streamerMode.enabled ? (q(autoSwitch) && streamerMode.unbind(), options.streamerMode.enabled = false) : options.streamerMode.enabled || (!q(streamerMode) && Q() && streamerMode.bind(), options.streamerMode.enabled = true)
                     },
                     multiboxEnableCb: function () {
-                        s.multibox.enabled ? (q(qn) && qn.unbind(), s.multibox.enabled = false) : s.multibox.enabled || (!q(qn) && Q() && qn.bind(), s.multibox.enabled = true)
+                        options.multibox.enabled ? (q(autoSwitch) && autoSwitch.unbind(), options.multibox.enabled = false) : options.multibox.enabled || (!q(autoSwitch) && Q() && autoSwitch.bind(), options.multibox.enabled = true)
                     },
                     autoOpeningDoorsEnableCb: function () {
-                        s.autoOpeningDoors.enabled ? (q(en) && en.unbind(), s.autoOpeningDoors.enabled = false) : s.autoOpeningDoors.enabled || (!q(en) && Q() && en.bind(), s.autoOpeningDoors.enabled = true)
+                        options.autoOpeningDoors.enabled ? (q(autoOpeningDoors) && autoOpeningDoors.unbind(), options.autoOpeningDoors.enabled = false) : options.autoOpeningDoors.enabled || (!q(autoOpeningDoors) && Q() && autoOpeningDoors.bind(), options.autoOpeningDoors.enabled = true)
                     },
                     laserPointerEnableCb: function () {
-                        s.laserPointer.enabled ? (q(on) && on.unbind(), s.laserPointer.enabled = false) : s.laserPointer.enabled || (!q(on) && Q() && on.bind(), s.laserPointer.enabled = true)
+                        options.laserPointer.enabled ? (q(laserPointer) && laserPointer.unbind(), options.laserPointer.enabled = false) : options.laserPointer.enabled || (!q(laserPointer) && Q() && laserPointer.bind(), options.laserPointer.enabled = true)
                     },
                     linesToPlayersEnableCb: function () {
-                        s.linesToPlayers.enabled ? (q(rn) && rn.unbind(), s.linesToPlayers.enabled = false) : s.linesToPlayers.enabled || (!q(rn) && Q() && rn.bind(), s.linesToPlayers.enabled = true)
+                        options.linesToPlayers.enabled ? (q(linesToPlayers) && linesToPlayers.unbind(), options.linesToPlayers.enabled = false) : options.linesToPlayers.enabled || (!q(linesToPlayers) && Q() && linesToPlayers.bind(), options.linesToPlayers.enabled = true)
                     },
                     autoFireEnableCb: function () {
-                        s.autoFire.enabled ? (q(sn) && sn.unbind(), s.autoFire.enabled = false) : s.autoFire.enabled || (!q(sn) && Q() && sn.bind(), s.autoFire.enabled = true)
+                        options.autoFire.enabled ? (q(autoFire) && autoFire.unbind(), options.autoFire.enabled = false) : options.autoFire.enabled || (!q(autoFire) && Q() && autoFire.bind(), options.autoFire.enabled = true)
                     },
                     zoomRadiusManagerEnableCb: function () {
-                        s.zoomRadiusManager.enabled ? (q(ln) && ln.unbind(), s.zoomRadiusManager.enabled = false) : s.zoomRadiusManager.enabled || (!q(ln) && Q() && ln.bind(), s.zoomRadiusManager.enabled = true)
+                        options.zoomRadiusManager.enabled ? (q(zoomRadiusManager) && zoomRadiusManager.unbind(), options.zoomRadiusManager.enabled = false) : options.zoomRadiusManager.enabled || (!q(zoomRadiusManager) && Q() && zoomRadiusManager.bind(), options.zoomRadiusManager.enabled = true)
                     },
                     grenadeTimerEnableCb: function () {
-                        s.grenadeTimer.enabled ? (q(an) && an.unbind(), s.grenadeTimer.enabled = false) : s.grenadeTimer.enabled || (!q(an) && Q() && an.bind(), s.grenadeTimer.enabled = true)
+                        options.grenadeTimer.enabled ? (q(grenadeTimer) && grenadeTimer.unbind(), options.grenadeTimer.enabled = false) : options.grenadeTimer.enabled || (!q(grenadeTimer) && Q() && grenadeTimer.bind(), options.grenadeTimer.enabled = true)
                     },
                     fpsCounterEnableCb: function () {
-                        s.fpsCounter.enabled ? (q(pn) && pn.unbind(), s.fpsCounter.enabled = false) : s.fpsCounter.enabled || (!q(pn) && Q() && pn.bind(), s.fpsCounter.enabled = true)
+                        options.fpsCounter.enabled ? (q(fpsCounter) && fpsCounter.unbind(), options.fpsCounter.enabled = false) : options.fpsCounter.enabled || (!q(fpsCounter) && Q() && fpsCounter.bind(), options.fpsCounter.enabled = true)
                     },
                     triggerBotEnableCb: function () {
-                        s.triggerBot.enabled ? (q(un) && un.unbind(), s.triggerBot.enabled = false) : s.triggerBot.enabled || (!q(un) && Q() && un.bind(), s.triggerBot.enabled = true)
+                        options.triggerBot.enabled ? (q(triggerBot) && triggerBot.unbind(), options.triggerBot.enabled = false) : options.triggerBot.enabled || (!q(triggerBot) && Q() && triggerBot.bind(), options.triggerBot.enabled = true)
                     },
                     autoDodgeEnableCb: function () {
-                        s.autoDodge.enabled ? (q(mn) && mn.unbind(), s.autoDodge.enabled = false) : s.autoDodge.enabled || (!q(mn) && Q() && mn.bind(), s.autoDodge.enabled = true)
+                        options.autoDodge.enabled ? (q(autoDodge) && autoDodge.unbind(), options.autoDodge.enabled = false) : options.autoDodge.enabled || (!q(autoDodge) && Q() && autoDodge.bind(), options.autoDodge.enabled = true)
                     },
                     storeOptionsCb: function () {
-                        c(l, s)
+                        c(l, options)
                     }
                 }).bind(), window.removeEventListener("keyup", hn), window.addEventListener("keyup", hn)
             } else console.log("Error: Exports not defined, return.");
@@ -1039,6 +1051,7 @@
         "./plugins/zoomRadiusManager.js": 28,
         "./plugins/autoSwitch.js": 29,
         "./plugins/multibox.js": 30,
+        "./plugins/streamerMode.js": 31,
         iziToast: 2,
         "stats-js": 3
     }],
@@ -1113,7 +1126,7 @@
                                 i = e.split(".");
                             t.filter(function (n, e, t) {
                                 return n < i[e]
-                            }).length > 0 && notifications.create("info", "A new version of the cheat is available!", "INFO", 1e4)
+                            }).length > 0 && notifications.create("info", "A new version of the cheat is available! Use the auto update scripts!", "INFO", 1e4)
                         }
                     }(i.version, n.version)
                 }).catch(function (n) {
@@ -1171,35 +1184,35 @@
         e.exports = {
             menu: "xe",
             camera: "N",
-            bullets: "Ae",
-            planes: "Re",
+            bullets: "De",
+            planes: "je",
             activeId: "me",
             targetZoom: "f",
-            objectCreator: "nt",
-            pieTimer: "Xe",
+            objectCreator: "st",
+            pieTimer: "Ze",
             map: "Pe",
             input: {
-                main: "ge",
+                main: "ye",
                 input: "input",
-                mousePressed: "ee"
+                mousePressed: "$"
             },
             activePlayer: {
-                main: "lt",
+                main: "ct",
                 netData: "q",
                 localData: "U"
             },
             playerBarn: {
-                main: "Ce",
-                players: "Tt"
+                main: "Ae",
+                players: "Pt"
             },
             lootBarn: {
-                main: "Ve",
-                itemf: "zt",
-                lootPool: "at",
+                main: "We",
+                itemf: "Mt",
+                lootPool: "it",
                 pool: "de"
             },
-            version: "1.0.76",
-            protocolVersion: 37
+            version: "1.0.776",
+            protocolVersion: 38
         }
     }, {}],
     13: [function (n, e, t) {
@@ -1265,6 +1278,7 @@
             var i = t.bullets,
                 a = t.items,
                 o = t.playerBarn,
+                op = t.options,
                 r = false,
                 s = null,
                 l = {},
@@ -1376,12 +1390,14 @@
                                         t = e[n.activePlayer.netData].dir;
                                     if (e && e[n.activePlayer.netData].dir) {
                                         var i = e.targetIndicator;
-                                        if (i || ((i = window.PIXI.Sprite.from(c)).visible = false, i.scale.set(.6, .6), i.tint = 16711680, i.alpha = .5, e.container.addChild(i), e.targetIndicator = i), i) {
-                                            var a = {
-                                                x: -.5 * i.width + t.x,
-                                                y: -.5 * i.height + t.y
-                                            };
-                                            i.position.set(a.x, a.y), i.visible = true, x(i)
+                                        if (!op.streamerMode.enabled) {
+                                            if (i || ((i = window.PIXI.Sprite.from(c)).visible = false, i.scale.set(.6, .6), i.tint = 16711680, i.alpha = .5, e.container.addChild(i), e.targetIndicator = i), i) {
+                                                var a = {
+                                                    x: -.5 * i.width + t.x,
+                                                    y: -.5 * i.height + t.y
+                                                };
+                                                i.position.set(a.x, a.y), i.visible = true, x(i)
+                                            }
                                         }
                                     }
                                 }(), l.enemyExtendedInfo && z(), s.new = true
@@ -1700,39 +1716,78 @@
     16: [function (n, e, t) {
         "use strict";
         e.exports = function (n, e, t) {
-            window.autoFire = false
-            var mousedown = false,
-                binded = false,
-                spamMouse = function () {
-                    if (mousedown || window.autoFire && e.scope[n.input.main][n.input.input].mouseButtons) {
-                        e.scope[n.input.main][n.input.input].mouseButtons["0"] = !e.scope[n.input.main][n.input.input].mouseButtons["0"]
+            var i = t.items,
+                a = false,
+                o = false,
+                r = [];
+            if (i) {
+                var s = function (n) {};
+                return {
+                    bind: function () {
+                        var t = function (n) {
+                                var e = [],
+                                    t = Object.keys(i),
+                                    a = true,
+                                    o = false,
+                                    r = void 0;
+                                try {
+                                    for (var s, l = t[Symbol.iterator](); !(a = (s = l.next()).done); a = true) {
+                                        var c = s.value;
+                                        i[c].fireMode === n && e.push(c)
+                                    }
+                                } catch (n) {
+                                    o = true, r = n
+                                } finally {
+                                    try {
+                                        !a && l.return && l.return()
+                                    } finally {
+                                        if (o) throw r
+                                    }
+                                }
+                                return e
+                            }("single"),
+                            l = function (n) {
+                                var e = [],
+                                    t = Object.keys(i),
+                                    a = true,
+                                    o = false,
+                                    r = void 0;
+                                try {
+                                    for (var s, l = t[Symbol.iterator](); !(a = (s = l.next()).done); a = true) {
+                                        var c = s.value;
+                                        i[c].type === n && e.push(c)
+                                    }
+                                } catch (n) {
+                                    o = true, r = n
+                                } finally {
+                                    try {
+                                        !a && l.return && l.return()
+                                    } finally {
+                                        if (o) throw r
+                                    }
+                                }
+                                return e
+                            }("melee");
+                        r = t.concat(l, "fists"), s = e.scope[n.input.main][n.input.input][n.input.mousePressed], e.scope[n.input.main][n.input.input][n.input.mousePressed] = function (t) {
+                            return !(0 !== t || !o && !window.autoFire) || s.call(e.scope[n.input.main][n.input.input], t)
+                        }, a = true, window.events.add("playerBarn", "autoFireRenderCb")
+                    },
+                    unbind: function () {
+                        window.events.remove("playerBarn", "autoFireRenderCb"), a = false, s = function (n) {
+                            return !this.mouseButtonsOld[n] && !!this.mouseButtons[n]
+                        }, e.scope[n.input.main][n.input.input][n.input.mousePressed] = s, o = false
+                    },
+                    isBinded: function () {
+                        return a
+                    },
+                    render: function () {
+                        var t = e.scope[n.activePlayer.main],
+                            i = e.scope[n.input.main][n.input.input].mouseButtons;
+                        o = !(!i[0] || !r.includes(t.weapType))
                     }
                 }
-            return {
-                bind: function () {
-                    setInterval(spamMouse, 50)
-                    window.addEventListener("mousedown", function () {
-                        mousedown = true
-                    })
-                    window.addEventListener("mouseup", function () {
-                        mousedown = false
-                    })
-                    binded = true
-                },
-                unbind: function () {
-                    clearInterval(spamMouse, 50)
-                    window.removeEventListener("mousedown", function () {
-                        mousedown = true
-                    })
-                    window.removeEventListener("mouseup", function () {
-                        mousedown = false
-                    })
-                    binded = false
-                },
-                isBinded: function () {
-                    return binded
-                }
             }
+            console.log("Cannot init autoFire")
         }
     }, {}],
     17: [function (n, e, t) {
@@ -2138,7 +2193,7 @@
                                         s = r.range,
                                         l = r.direction - r.angle,
                                         c = r.direction + r.angle;
-                                    l = l > 2 * Math.PI ? l - 2 * Math.PI : l < 0 ? l + 2 * Math.PI : l, c = c > 2 * Math.PI ? c - 2 * Math.PI : c < 0 ? c + 2 * Math.PI : c, i.beginFill(16711680, .1), i.moveTo(a, o), i.arc(a, o, s, l, c), i.lineTo(a, o), i.endFill()
+                                    l = l > 2 * Math.PI ? l - 2 * Math.PI : l < 0 ? l + 2 * Math.PI : l, c = c > 2 * Math.PI ? c - 2 * Math.PI : c < 0 ? c + 2 * Math.PI : c, i.beginFill(16711680, .35), i.moveTo(a, o), i.arc(a, o, s, l, c), i.lineTo(a, o), i.endFill()
                                 }
                             }()) : c()
                         }
@@ -2216,453 +2271,469 @@
                     name: "Config"
                 }],
                 p = [{
-                    type: "checkbox",
-                    description: "Auto aim enabled",
-                    inputProps: {
-                        value: "autoAim.enabled"
-                    },
-                    callbacks: {
-                        value: "autoAimEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Auto loot enabled",
-                    inputProps: {
-                        value: "autoLoot.enabled"
-                    },
-                    callbacks: {
-                        value: "autoLootEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Auto heal enabled",
-                    inputProps: {
-                        value: "autoHeal.enabled"
-                    },
-                    callbacks: {
-                        value: "autoHealEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Auto Switch enabled",
-                    inputProps: {
-                        value: "autoSwitch.enabled"
-                    },
-                    callbacks: {
-                        value: "autoSwitchEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Multiboxing enabled",
-                    inputProps: {
-                        value: "multibox.enabled"
-                    },
-                    callbacks: {
-                        value: "multiboxEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "AutoDodge enabled",
-                    inputProps: {
-                        value: "autoDodge.enabled"
-                    },
-                    callbacks: {
-                        value: "autoDodgeEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Auto opening doors enabled",
-                    inputProps: {
-                        value: "autoOpeningDoors.enabled"
-                    },
-                    callbacks: {
-                        value: "autoOpeningDoorsEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Grenade timer enabled",
-                    inputProps: {
-                        value: "grenadeTimer.enabled"
-                    },
-                    callbacks: {
-                        value: "grenadeTimerEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Laser pointer enabled",
-                    inputProps: {
-                        value: "laserPointer.enabled"
-                    },
-                    callbacks: {
-                        value: "laserPointerEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Lines to players enabled",
-                    inputProps: {
-                        value: "linesToPlayers.enabled"
-                    },
-                    callbacks: {
-                        value: "linesToPlayersEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Bump fire enabled",
-                    inputProps: {
-                        value: "autoFire.enabled"
-                    },
-                    callbacks: {
-                        value: "autoFireEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Zoom changing enabled",
-                    inputProps: {
-                        value: "zoomRadiusManager.enabled"
-                    },
-                    callbacks: {
-                        value: "zoomRadiusManagerEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "Air drop tracking enabled",
-                    inputProps: {
-                        value: "airDropTracking.enabled"
-                    },
-                    callbacks: {
-                        value: "airDropTrackingEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "FPS counter enabled",
-                    inputProps: {
-                        value: "fpsCounter.enabled"
-                    },
-                    callbacks: {
-                        value: "fpsCounterEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "checkbox",
-                    description: "TriggerBot enabled",
-                    inputProps: {
-                        value: "triggerBot.enabled"
-                    },
-                    callbacks: {
-                        value: "triggerBotEnableCb"
-                    },
-                    tabId: 0
-                }, {
-                    type: "info",
-                    description: "Transparency",
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Particles transparency level",
-                    inputProps: {
-                        min: "0",
-                        max: "1",
-                        step: "0.01",
-                        value: "particlesTransparency"
-                    },
-                    callbacks: {
-                        value: "particlesTransparencyCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Ceiling transparency level",
-                    inputProps: {
-                        min: "0",
-                        max: "1",
-                        step: "0.01",
-                        value: "ceilingTransparency"
-                    },
-                    callbacks: {
-                        value: "ceilingTransparencyCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Big map transparency level",
-                    inputProps: {
-                        min: "0",
-                        max: "1",
-                        step: "0.01",
-                        value: "bigMapTransparency"
-                    },
-                    callbacks: {
-                        value: "bigMapTransparencyCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Grenade color",
-                    inputProps: {
-                        min: "0",
-                        max: "16777216",
-                        step: "1",
-                        value: "fragGrenadeColor"
-                    },
-                    callbacks: {
-                        value: "grenadePropertiesCb",
-                        useInputValueFrom: "fragGrenadeSize",
-                        position: 0
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Grenade size",
-                    inputProps: {
-                        min: "0.1",
-                        max: "0.5",
-                        step: "0.01",
-                        value: "fragGrenadeSize"
-                    },
-                    callbacks: {
-                        value: "grenadePropertiesCb",
-                        useInputValueFrom: "fragGrenadeColor",
-                        position: 1
-                    },
-                    tabId: 1
-                }, {
-                    type: "resetButton",
-                    description: "Reset grenade properties",
-                    callbacks: {
-                        value: "defaultGrenadePropertiesCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Smoke alpha",
-                    inputProps: {
-                        min: "0",
-                        max: "1",
-                        step: "0.01",
-                        value: "smokeGrenadeAlpha"
-                    },
-                    callbacks: {
-                        value: "smokeGrenadePropertiesCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "info",
-                    description: "AutoAim",
-                    tabId: 1
-                }, {
-                    type: "checkbox",
-                    description: "Target enemy nickname visibility enabled",
-                    inputProps: {
-                        value: "autoAim.targetEnemyNicknameVisibility"
-                    },
-                    callbacks: {
-                        value: "autoAimTargetEnemyNicknameVisibilityCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "checkbox",
-                    description: "Target enemy extended info enabled",
-                    inputProps: {
-                        value: "autoAim.enemyExtendedInfo"
-                    },
-                    callbacks: {
-                        value: "autoAimEnemyExtendedInfoCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "checkbox",
-                    description: "Detect on different levels",
-                    inputProps: {
-                        value: "autoAim.detectOnDifferentLevels"
-                    },
-                    callbacks: {
-                        value: "autoAimDetectOnDifferentLevelsCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "checkbox",
-                    description: "Show enemies actions",
-                    inputProps: {
-                        value: "autoAim.showEnemiesActions"
-                    },
-                    callbacks: {
-                        value: "autoAimShowEnemiesActionsCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "checkbox",
-                    description: "Turn off permanent tracking",
-                    inputProps: {
-                        value: "autoAim.restirctions"
-                    },
-                    callbacks: {
-                        value: "autoAimRestirctionsCb"
-                    },
-                    options: {
-                        showOrHide: ["autoAimrestirctionAngle"]
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Forward firing coeff",
-                    inputProps: {
-                        min: "0.9",
-                        max: "1.1",
-                        step: "0.01",
-                        value: "autoAim.forwardFiringCoeff"
-                    },
-                    callbacks: {
-                        value: "autoAimForwardFiringCoeffCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Smooth level",
-                    inputProps: {
-                        min: "2",
-                        max: "20",
-                        step: "1",
-                        value: "autoAim.smoothLevel"
-                    },
-                    callbacks: {
-                        value: "autoAimSmoothLevelCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Restirction angle",
-                    inputProps: {
-                        min: "1",
-                        max: "60",
-                        step: "1",
-                        value: "autoAim.restirctionAngle"
-                    },
-                    callbacks: {
-                        value: "autoAimRestirctionAngleCb"
-                    },
-                    options: {
-                        display: {
+                        type: "checkbox",
+                        description: "Auto aim enabled",
+                        inputProps: {
+                            value: "autoAim.enabled"
+                        },
+                        callbacks: {
+                            value: "autoAimEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Auto loot enabled",
+                        inputProps: {
+                            value: "autoLoot.enabled"
+                        },
+                        callbacks: {
+                            value: "autoLootEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Auto heal enabled",
+                        inputProps: {
+                            value: "autoHeal.enabled"
+                        },
+                        callbacks: {
+                            value: "autoHealEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Auto Switch enabled",
+                        inputProps: {
+                            value: "autoSwitch.enabled"
+                        },
+                        callbacks: {
+                            value: "autoSwitchEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Multiboxing enabled",
+                        inputProps: {
+                            value: "multibox.enabled"
+                        },
+                        callbacks: {
+                            value: "multiboxEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "AutoDodge enabled",
+                        inputProps: {
+                            value: "autoDodge.enabled"
+                        },
+                        callbacks: {
+                            value: "autoDodgeEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Auto opening doors enabled",
+                        inputProps: {
+                            value: "autoOpeningDoors.enabled"
+                        },
+                        callbacks: {
+                            value: "autoOpeningDoorsEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Grenade timer enabled",
+                        inputProps: {
+                            value: "grenadeTimer.enabled"
+                        },
+                        callbacks: {
+                            value: "grenadeTimerEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Laser pointer enabled",
+                        inputProps: {
+                            value: "laserPointer.enabled"
+                        },
+                        callbacks: {
+                            value: "laserPointerEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Lines to players enabled",
+                        inputProps: {
+                            value: "linesToPlayers.enabled"
+                        },
+                        callbacks: {
+                            value: "linesToPlayersEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Bump fire enabled",
+                        inputProps: {
+                            value: "autoFire.enabled"
+                        },
+                        callbacks: {
+                            value: "autoFireEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Zoom changing enabled",
+                        inputProps: {
+                            value: "zoomRadiusManager.enabled"
+                        },
+                        callbacks: {
+                            value: "zoomRadiusManagerEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "Air drop tracking enabled",
+                        inputProps: {
+                            value: "airDropTracking.enabled"
+                        },
+                        callbacks: {
+                            value: "airDropTrackingEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "FPS counter enabled",
+                        inputProps: {
+                            value: "fpsCounter.enabled"
+                        },
+                        callbacks: {
+                            value: "fpsCounterEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "checkbox",
+                        description: "TriggerBot enabled",
+                        inputProps: {
+                            value: "triggerBot.enabled"
+                        },
+                        callbacks: {
+                            value: "triggerBotEnableCb"
+                        },
+                        tabId: 0
+                    }, {
+                        type: "info",
+                        description: "Transparency",
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Particles transparency level",
+                        inputProps: {
+                            min: "0",
+                            max: "1",
+                            step: "0.01",
+                            value: "particlesTransparency"
+                        },
+                        callbacks: {
+                            value: "particlesTransparencyCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Ceiling transparency level",
+                        inputProps: {
+                            min: "0",
+                            max: "1",
+                            step: "0.01",
+                            value: "ceilingTransparency"
+                        },
+                        callbacks: {
+                            value: "ceilingTransparencyCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Big map transparency level",
+                        inputProps: {
+                            min: "0",
+                            max: "1",
+                            step: "0.01",
+                            value: "bigMapTransparency"
+                        },
+                        callbacks: {
+                            value: "bigMapTransparencyCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Grenade color",
+                        inputProps: {
+                            min: "0",
+                            max: "16777216",
+                            step: "1",
+                            value: "fragGrenadeColor"
+                        },
+                        callbacks: {
+                            value: "grenadePropertiesCb",
+                            useInputValueFrom: "fragGrenadeSize",
+                            position: 0
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Grenade size",
+                        inputProps: {
+                            min: "0.1",
+                            max: "0.5",
+                            step: "0.01",
+                            value: "fragGrenadeSize"
+                        },
+                        callbacks: {
+                            value: "grenadePropertiesCb",
+                            useInputValueFrom: "fragGrenadeColor",
+                            position: 1
+                        },
+                        tabId: 1
+                    }, {
+                        type: "resetButton",
+                        description: "Reset grenade properties",
+                        callbacks: {
+                            value: "defaultGrenadePropertiesCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Smoke alpha",
+                        inputProps: {
+                            min: "0",
+                            max: "1",
+                            step: "0.01",
+                            value: "smokeGrenadeAlpha"
+                        },
+                        callbacks: {
+                            value: "smokeGrenadePropertiesCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "info",
+                        description: "AutoAim",
+                        tabId: 1
+                    }, {
+                        type: "checkbox",
+                        description: "Target enemy nickname visibility enabled",
+                        inputProps: {
+                            value: "autoAim.targetEnemyNicknameVisibility"
+                        },
+                        callbacks: {
+                            value: "autoAimTargetEnemyNicknameVisibilityCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "checkbox",
+                        description: "Target enemy extended info enabled",
+                        inputProps: {
+                            value: "autoAim.enemyExtendedInfo"
+                        },
+                        callbacks: {
+                            value: "autoAimEnemyExtendedInfoCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "checkbox",
+                        description: "Detect on different levels",
+                        inputProps: {
+                            value: "autoAim.detectOnDifferentLevels"
+                        },
+                        callbacks: {
+                            value: "autoAimDetectOnDifferentLevelsCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "checkbox",
+                        description: "Show enemies actions",
+                        inputProps: {
+                            value: "autoAim.showEnemiesActions"
+                        },
+                        callbacks: {
+                            value: "autoAimShowEnemiesActionsCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "checkbox",
+                        description: "Turn off permanent tracking",
+                        inputProps: {
                             value: "autoAim.restirctions"
                         },
-                        id: "autoAimrestirctionAngle"
-                    },
-                    tabId: 1
-                }, {
-                    type: "info",
-                    description: "AutoLoot",
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Safe distance",
-                    inputProps: {
-                        min: "0.1",
-                        max: "1.3",
-                        step: "0.1",
-                        value: "autoLoot.safeDistance"
-                    },
-                    callbacks: {
-                        value: "autoLootSafeDistanceCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "slider",
-                    description: "Autoloot drop delay",
-                    inputProps: {
-                        min: "0",
-                        max: "2000",
-                        step: "10",
-                        value: "autoLoot.dropDelay"
-                    },
-                    callbacks: {
-                        value: "autoLootDropDelayCb"
-                    },
-                    tabId: 1
-                }, {
-                    type: "select",
-                    description: "Automatic weapon(slot 1) pick up",
-                    inputProps: {
-                        valuesFromFunction: "getAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 1
+                        callbacks: {
+                            value: "autoAimRestirctionsCb"
                         },
-                        selected: "autoLoot.autoPickUp.weapon1"
-                    },
-                    callbacks: {
-                        value: "setAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 1,
-                            position: 0
-                        }
-                    },
-                    tabId: 1
-                }, {
-                    type: "select",
-                    description: "Automatic weapon(slot 2) pick up",
-                    inputProps: {
-                        valuesFromFunction: "getAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 2
+                        options: {
+                            showOrHide: ["autoAimrestirctionAngle"]
                         },
-                        selected: "autoLoot.autoPickUp.weapon2"
-                    },
-                    callbacks: {
-                        value: "setAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 2,
-                            position: 0
-                        }
-                    },
-                    tabId: 1
-                }, {
-                    type: "select",
-                    description: "Automatic weapon(slot 3) pick up",
-                    inputProps: {
-                        valuesFromFunction: "getAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 3
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Forward firing coeff",
+                        inputProps: {
+                            min: "0.9",
+                            max: "1.1",
+                            step: "0.01",
+                            value: "autoAim.forwardFiringCoeff"
                         },
-                        selected: "autoLoot.autoPickUp.weapon3"
-                    },
-                    callbacks: {
-                        value: "setAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 3,
-                            position: 0
-                        }
-                    },
-                    tabId: 1
-                }, {
-                    type: "select",
-                    description: "Automatic skin pick up",
-                    inputProps: {
-                        valuesFromFunction: "getAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 5
+                        callbacks: {
+                            value: "autoAimForwardFiringCoeffCb"
                         },
-                        selected: "autoLoot.autoPickUp.skin"
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Smooth level",
+                        inputProps: {
+                            min: "2",
+                            max: "20",
+                            step: "1",
+                            value: "autoAim.smoothLevel"
+                        },
+                        callbacks: {
+                            value: "autoAimSmoothLevelCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Restirction angle",
+                        inputProps: {
+                            min: "1",
+                            max: "60",
+                            step: "1",
+                            value: "autoAim.restirctionAngle"
+                        },
+                        callbacks: {
+                            value: "autoAimRestirctionAngleCb"
+                        },
+                        options: {
+                            display: {
+                                value: "autoAim.restirctions"
+                            },
+                            id: "autoAimrestirctionAngle"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "info",
+                        description: "AutoLoot",
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Safe distance",
+                        inputProps: {
+                            min: "0.1",
+                            max: "1.3",
+                            step: "0.1",
+                            value: "autoLoot.safeDistance"
+                        },
+                        callbacks: {
+                            value: "autoLootSafeDistanceCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "slider",
+                        description: "Autoloot drop delay",
+                        inputProps: {
+                            min: "0",
+                            max: "2000",
+                            step: "10",
+                            value: "autoLoot.dropDelay"
+                        },
+                        callbacks: {
+                            value: "autoLootDropDelayCb"
+                        },
+                        tabId: 1
+                    }, {
+                        type: "select",
+                        description: "Automatic weapon(slot 1) pick up",
+                        inputProps: {
+                            valuesFromFunction: "getAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 1
+                            },
+                            selected: "autoLoot.autoPickUp.weapon1"
+                        },
+                        callbacks: {
+                            value: "setAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 1,
+                                position: 0
+                            }
+                        },
+                        tabId: 1
+                    }, {
+                        type: "select",
+                        description: "Automatic weapon(slot 2) pick up",
+                        inputProps: {
+                            valuesFromFunction: "getAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 2
+                            },
+                            selected: "autoLoot.autoPickUp.weapon2"
+                        },
+                        callbacks: {
+                            value: "setAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 2,
+                                position: 0
+                            }
+                        },
+                        tabId: 1
+                    }, {
+                        type: "select",
+                        description: "Automatic weapon(slot 3) pick up",
+                        inputProps: {
+                            valuesFromFunction: "getAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 3
+                            },
+                            selected: "autoLoot.autoPickUp.weapon3"
+                        },
+                        callbacks: {
+                            value: "setAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 3,
+                                position: 0
+                            }
+                        },
+                        tabId: 1
+                    }, {
+                        type: "select",
+                        description: "Automatic skin pick up",
+                        inputProps: {
+                            valuesFromFunction: "getAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 5
+                            },
+                            selected: "autoLoot.autoPickUp.skin"
+                        },
+                        callbacks: {
+                            value: "setAutoLootAutoPickUpCb",
+                            functionValue: {
+                                value: 5,
+                                position: 0
+                            }
+                        },
+                        tabId: 1
+                    }, {
+                        type: "info",
+                        description: "Streamer Mode",
+                        tabId: 1
                     },
-                    callbacks: {
-                        value: "setAutoLootAutoPickUpCb",
-                        functionValue: {
-                            value: 5,
-                            position: 0
-                        }
-                    },
-                    tabId: 1
-                }],
+                    {
+                        type: "checkbox",
+                        description: "Streamer Mode ",
+                        inputProps: {
+                            value: "streamerMode.enabled"
+                        },
+                        callbacks: {
+                            value: "streamerModeEnableCb"
+                        },
+                        tabId: 1
+                    }
+                ],
                 d = function () {
                     setTimeout(function () {
                         i.storeOptionsCb.call()
@@ -2921,8 +2992,8 @@
                 a = t.items,
                 o = false;
             if (a) {
-                var calculateDistance = function (x1, y1, x2, y2) {
-                        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2))
+                var r = function (n, e, t, i) {
+                        return Math.sqrt(Math.pow(n - t, 2) + Math.pow(e - i, 2))
                     },
                     s = function (t) {
                         var pos = (u = e.scope[n.activePlayer.main]).pos,
@@ -2952,7 +3023,7 @@
                         });
                         var u = e.scope[n.activePlayer.main];
                         d && !e.scope[n.menu].pieTimer.active && 3 !== u.curWeapIdx && function (n, e) {
-                            var t = calculateDistance(n.pos.x, n.pos.y, e.pos.x, e.pos.y);
+                            var t = r(n.pos.x, n.pos.y, e.pos.x, e.pos.y);
                             if (n.weapType) {
                                 var o = a[n.weapType];
                                 if (isset(o.bulletType)) return t < i[o.bulletType].distance
@@ -3110,7 +3181,7 @@
                         curPos = getCurPos(),
                         enemy = selectEnemy(),
                         mouseDown = false
-                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].actionType,
+                    curAction = e.scope[n.activePlayer.main][n.activePlayer.localData].action.type,
                         window.onmousedown = function () {
                             mouseDown = true
                         }
@@ -3172,6 +3243,7 @@
                     realMousePos.x = pos.x
                     realMousePos.y = pos.y
                     window.addEventListener("mousemove", getMousePos);
+
                     ! function n() {
                         switchWeapon(), o = setTimeout(n, 5e2)
                     }()
@@ -3200,26 +3272,17 @@
                     }))
                 },
                 pressKey = function (key) {
-                    console.log(key)
-                    var keyboardEvent = document.createEvent("KeyboardEvent"),
-                        initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
-                    keyboardEvent[initMethod](
-                        "keypress",
-                        true,
-                        true,
-                        window,
-                        false,
-                        false,
-                        false,
-                        false,
-                        key,
-                        0
-                    );
-                    document.dispatchEvent(keyboardEvent)
+                    var keys = e.scope[n.input.main][n.input.input].keys;
+                    keys[key] || setTimeout(function () {
+                        keys[key] = true, setTimeout(function () {
+                            delete keys[key]
+                        }, 90)
+                    }, 0)
                 }
             return {
                 bind: function () {
                     broadcastchannel.onmessage = function (input) {
+                        console.log("hi")
                         var json = JSON.parse(input.data)
                         pressKey(keys[json.keypressed.toUpperCase()])
                     }
@@ -3238,5 +3301,55 @@
                 }
             }
         }
-    }]
+    }],
+    31: [function (n, e, t) {
+        "use strict";
+        e.exports = function (n, e, t) {
+            var isBinded = false,
+                options = t.options
+            options.zoomRadiusManager.enabled = true;
+            options.autoAim.targetEnemyNicknameVisibility = true;
+            options.autoAim.showEnemiesActions = true;
+            options.autoAim.enemyExtendedInfo = true;
+            options.laserPointer.enabled = true
+            options.smokeGrenadeAlpha = 0.1
+            options.particlesTransparency = 0.5
+            options.ceilingTransparency = 0.5
+            options.linesToPlayers.enabled = true
+            options.fpsCounter.enabled = true
+            return {
+                bind: function () {
+                    options.zoomRadiusManager.enabled = false;
+                    options.autoAim.targetEnemyNicknameVisibility = false;
+                    options.autoAim.showEnemiesActions = false;
+                    options.autoAim.enemyExtendedInfo = false;
+                    options.laserPointer.enabled = false
+                    options.smokeGrenadeAlpha = 1
+                    options.particlesTransparency = 1
+                    options.ceilingTransparency = 1
+                    options.linesToPlayers.enabled = false
+                    options.fpsCounter.enabled = false
+                    options.airDropTracking.enabled = false
+                    options.grenadeTimer.enabled = false
+                },
+                unbind: function () {
+                    options.zoomRadiusManager.enabled = true;
+                    options.autoAim.targetEnemyNicknameVisibility = true;
+                    options.autoAim.showEnemiesActions = true;
+                    options.autoAim.enemyExtendedInfo = true;
+                    options.laserPointer.enabled = true
+                    options.smokeGrenadeAlpha = 0.1
+                    options.particlesTransparency = 0.5
+                    options.ceilingTransparency = 0.5
+                    options.linesToPlayers.enabled = true
+                    options.fpsCounter.enabled = true
+                    options.airDropTracking.enabled = true
+                    options.grenadeTimer.enabled = true
+                },
+                isBinded: function () {
+                    return isBinded
+                }
+            }
+        }
+    }, {}]
 }, {}, [6]);
