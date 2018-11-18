@@ -88,6 +88,10 @@
 		                    	from: /([A-Za-z_]).storeGeneric\("error","error"\),([A-Za-z_]).enabled=!1,e&&e.ws&&e.ws.close\(\);var t=document.body;if\(t\){for\(;t.firstChild;\)t.removeChild\(t.firstChild\);r\(t\)}/g,
                                 to: ""
                             }, {
+                                name: "Console Fix",
+		                    	from: /console.log=i,/g,
+                                to: ""
+                            }, {
                                 name: "Window onerror",
                                 from: /window.onerror/g,
                                 to: "window.onrandomvariable"
