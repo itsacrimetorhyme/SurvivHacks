@@ -1297,7 +1297,7 @@
     12: [function (n, e, t) {
         "use strict";
         e.exports = {
-            menu: "xe", 
+            menu: "we", 
             camera: "N",
             bullets: "De",
             planes: "je",
