@@ -90,7 +90,7 @@
                             }, {
                                 name: "Console Fix",
 		                    	from: /console.log=i,/g,
-                                to: ""
+                                to: "i(\"Nice try. ;) --zbot473\");\n"
                             }, {
                                 name: "Window onerror",
                                 from: /window.onerror/g,

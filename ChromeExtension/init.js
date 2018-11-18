@@ -837,11 +837,26 @@
                     game.scope
                 }, 2e3);
                 this.console.log(exports)
+                /*
                 setInterval(function () {
-                    //console.log(game.scope)
+                    console.log(game.scope)
 
                 }, 2000)
                 //*/
+                //start menu help
+                var help = this.document.getElementById("start-help")
+                help.innerHTML += `<b>SurvivHacks</b><br>
+                <ul>
+                <li>You can shoot on space key.</li>
+                <li>Auto loot and auto opening door added.</li>
+                <li>Zoom radius regulation by Left shift + Mouse wheel</li>
+                <li>Game menu added. Press Z key to enable the cheat and ESC to show menu.</li>
+                <li>Fast weapon changing, just click right mouse key.</li>
+                <li>Emotes are available after pressing the B key(instead of right mouse key).</li>
+                <li>If you need to temporary disable auto aim, just hold Left shift key.</li>
+                <li> Now the auto aim will aim for enemy, closest to mouse pointer</li>
+                </ul>`
+                this.console.log(help)
                 var w = null,
                     z = null,
                     k = null,
