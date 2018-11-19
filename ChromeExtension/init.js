@@ -845,7 +845,8 @@
                 //*/
                 //start menu help
                 var help = this.document.getElementById("start-help")
-                help.innerHTML += `<b>SurvivHacks</b><br>
+                help.innerHTML += `
+                <b>SurvivHacks</b><br>
                 <ul>
                 <li>You can shoot on space key.</li>
                 <li>Auto loot and auto opening door added.</li>
@@ -855,7 +856,8 @@
                 <li>Emotes are available after pressing the B key(instead of right mouse key).</li>
                 <li>If you need to temporary disable auto aim, just hold Left shift key.</li>
                 <li> Now the auto aim will aim for enemy, closest to mouse pointer</li>
-                </ul>`
+                </ul>
+                `
                 this.console.log(help)
                 var w = null,
                     z = null,
@@ -879,12 +881,12 @@
                     V = null,
                     G = false;
                 if (!(p)) return console.log("Error: Variable p not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(items)) return console.log("Error: Variable m not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(bullets)) return console.log("Error: Variable d not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(bagSizes)) return console.log("Error: Variable f not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(playerbarn)) return console.log("Error: Variable g not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(lootBarn)) return console.log("Error: Variable v not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
-                if (!(scopeZoomRadius)) return console.log("Error: Variable b not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(items)) return console.log("Error: items not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bullets)) return console.log("Error: bullets not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(bagSizes)) return console.log("Error: bagSizes not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(playerbarn)) return console.log("Error: playerbarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(lootBarn)) return console.log("Error: lootBarn not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
+                if (!(scopeZoomRadius)) return console.log("Error: scopeZoomRadius not defined"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 if (!(A === obfuscate.protocolVersion)) return console.log("Error: Protocol mismatch"), notifications.create("error", "This extension can not work with this version of the game!", "error", 2e4), false;
                 var Q = function () {
                     return !(!isset(game.scope) || !game.scope.initialized || null == game.scope[obfuscate.activePlayer.main] || null == game.scope[obfuscate.input.main] || game.scope.spectating)
@@ -3101,7 +3103,7 @@
                             objects = e.scope[n.objectCreator].idToObj,
                             collidableObjects = Object.keys(objects).filter(function (n) {
                                 if (typeof objects[n].img == "string") {
-                                    return void 0 !== objects[n].collidable && objects[n].collidable || objects[n].img.includes("door") || objects[n].img.includes("stair")
+                                    return void 0 !== objects[n].collidable && objects[n].collidable || !objects[n].isDoor || !objects[n].img.includes("stair")
                                 } else {
                                     return void 0 !== objects[n].collidable && objects[n].collidable
                                 }
