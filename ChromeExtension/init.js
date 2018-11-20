@@ -816,9 +816,12 @@
                     }
                 }), r.scope = options.smokeGrenadeAlpha, o.scope = function () {};
                 //*************** ADD NEW VARIABLES HERE ***************\\
+				
                 options.autoSwitch = {}
                 options.autoSwitch.enabled = true
+				
                 //*************** END VARIABLES HERE ***************\\
+
                 var p = exports.ceee80d9.exports.Defs,
                     bullets = exports["989ad62a"].exports.bullets,
                     u = exports["989ad62a"].exports.player,
@@ -826,13 +829,19 @@
                     bagSizes = exports["989ad62a"].exports.bagSizes,
                     scopeZoomRadius = (exports["989ad62a"].exports.Input, exports["989ad62a"].exports.scopeZoomRadius.desktop),
                     A = exports["989ad62a"].exports.protocolVersion,
-                    y = exports.e5d16b4d.exports.et,
-                    playerbarn = exports.a508b62a.exports.Ie,
-                    lootBarn = exports.a48f3bb2.exports.He,
-                    h = exports.c73dee75.exports.Ee,
-                    uiModel = exports.d3da5587.exports.Qe,
+                    y = exports.e5d16b4d.exports.tt,
+                    playerbarn = exports.a508b62a.exports.De,
+                    lootBarn = exports.a48f3bb2.exports.Ke,
+                    h = exports.c73dee75.exports.Oe,
+                    uiModel = exports.d3da5587.exports.$e,
                     keys = exports["4b8d140f"].exports.Key;
-                    // console.log(e.e5d16b4d.exports, e.a508b62a.exports, e.a48f3bb2.exports, e.c73dee75.exports, e.d3da5587.exports);
+					
+                    // console.log(exports.e5d16b4d.exports);
+                    // console.log(exports.a508b62a.exports);
+                    // console.log(exports.a48f3bb2.exports);
+					// console.log(exports.c73dee75.exports);
+                    // console.log(exports.d3da5587.exports);
+
                 setInterval(function () {
                     game.scope
                 }, 2e3);
@@ -1316,35 +1325,35 @@
         e.exports = {
             menu: "we", 
             camera: "N",
-            bullets: "De",
-            planes: "je",
+            bullets: "Ee",
+            planes: "Ne",
             activeId: "me",
             targetZoom: "f",
-            objectCreator: "st",
-            pieTimer: "Ze",
-            map: "Pe",
+            objectCreator: "lt",
+            pieTimer: "Ye",
+            map: "Ce",
             input: {
                 main: "ye",
                 input: "input",
                 mousePressed: "$"
             },
             activePlayer: {
-                main: "ct",
+                main: "mt",
                 netData: "q",
                 localData: "U"
             },
             playerBarn: {
-                main: "Ae",
-                players: "Pt"
+                main: "Ie",
+                players: "At"
             },
             lootBarn: {
-                main: "We",
-                itemf: "Mt",
-                lootPool: "it",
+                main: "He",
+                itemf: "Pt",
+                lootPool: "rt",
                 pool: "de"
             },
-            version: "1.0.777",
-            protocolVersion: 38
+            version: "1.0.8",
+            protocolVersion: 39
         }
     }, {}],
     13: [function (n, e, t) {
