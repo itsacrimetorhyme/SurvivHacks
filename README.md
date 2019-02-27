@@ -56,7 +56,3 @@ Windows:
 
 ## :video_game: Discord
 https://discord.gg/PAePXxY
-
-## Warning!
-All actions you take at your own risk. The author is not responsible for the consequences of your actions.
-Hippity hoppity it's your own responsibility!
